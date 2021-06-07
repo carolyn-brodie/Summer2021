@@ -1,162 +1,142 @@
-# Imports:
 import tkinter as tk
 import speech_recognition as sr
 import random
 
-# Globals:
+WIDTH = 600
+HEIGHT = 600
 
-# Window Globals
-WINDOW_NAME = "Un-named"
-# x,y value of the window height and width
-WINDOW_X = 400
-WINDOW_Y = 400
+# Window Size
+WINDOW_STARTING_SIZE = str(WIDTH) + "x" + str(HEIGHT)
+# Title
+WINDOW_NAME = "Window"
 
-# Should allow for change of the window height and width 
-WINDOW_STARTING_SIZE = str(WINDOW_X) + "x" + str(WINDOW_Y)
-
-# Word Globals
-wordSelected = ""
-wordInputed = ""
-
-# Tally System
-right = 0
-wrong = 0
-
-selection = 0
 
 def main():
-    app = GUI()
-    app.title(WINDOW_NAME)
-    app.geometry(WINDOW_STARTING_SIZE)
+    root = tk.Tk()
+    root.title(WINDOW_NAME)
+    root.geometry(WINDOW_STARTING_SIZE)
 
-    app.mainloop()
-
-
-# Main Gui
-class GUI(tk.Tk):
-    """
-        *args takes any number of positional arguments.
-        **kwargs takes any number of keyword arguments.
-        Important for loading the different frames as they might have many different arguments.
-    """
-    def __init__(self, *args, **kwargs):
-        tk.Tk.__init__(self, *args, **kwargs)
-
-        # Need the container to load frames
-        container = tk.Frame(self)
-
-        container.pack(side="top")
-
-        # set up, but don't use the grid atm
-        container.grid_rowconfigure(0)
-        container.grid_columnconfigure(0)
-
-        """
-            List of all frames to be loaded and switched
-            !test if destroying a frame inside individual frame class causes issues!
-        """
-        self.frames = {}
-
-        """
-            TK loads every single frame from the start
-            Loops through the frame list selecting a frame to put on top
-        """
-        for FrameSelected in (MainMenu, WordTypeSelection,WordShower, ResultsPage, AnalyticResults):
-            frame = FrameSelected(container, self)
-
-            self.frames[FrameSelected] = frame
-
-            # I think this is like the pack() for frames, because nothing loads without it
-            frame.grid(row=0, column=0, sticky="nsew")
-
-        self.show_frame(MainMenu)
-
-    # this is the function that switches the frame
-    def show_frame(self, cont):
-        frame = self.frames[cont]
-        frame.tkraise()
+    app = GUI(root)
+    root.mainloop()
 
 
-# Classes for the Frames
-# Main Menu
-class MainMenu(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
+class GUI(tk.Frame):
+    def __init__(self, master):
+        self.wrongWordSet = []
+        self.rightWordSet = []
+        self.nothingWordSet = []
 
-        # Label for the main menu
-        self.mainMenuLabel = tk.Label(self, text="Main Menu")
-        self.mainMenuLabel.grid(row = 1)
+        self.unsaid = 0
+        self.correct = 0
+        self.wrong = 0
 
-        self.Start = tk.Button(self, text="Start",command = lambda: controller.show_frame(WordTypeSelection))
-        self.Start.grid(row = 2)
+        self.word = ""
+        self.saidWord = ""
 
-        # Button to go to the analytic screen
-        self.analyticButton = tk.Button(self, text="Analytic button",command=lambda: controller.show_frame(AnalyticResults))
-        self.analyticButton.grid(row = 3)
+        self.recognizer = sr.Recognizer()
+        self.mic = sr.Microphone(device_index=1)
 
-        # Exit button
-        self.Quit = tk.Button(self, text="Exit", command=self.master.quit)
-        self.Quit.grid(row = 10)
+        file = open("rWordsBeginning", "r")
+        self.WordList = []
+
+        for line in file:
+            self.WordList.append(line.strip("\n"))
+
+        super(GUI, self).__init__(master)
+        self.pack()
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.startButton = tk.Button(self, text="Start", command=lambda: self.startFunc())
+        self.startButton.grid(row=0, column=0)
+
+        self.recordAudio = tk.Button(self, text="Record Audio", command=lambda: self.audioFunc())
+        self.recordAudio.grid(row=1, column=0)
+
+        self.nextButton = tk.Button(self, text="Next", command=lambda: self.nextFunc())
+        self.nextButton.grid(row=2, column=0)
+
+        self.exit = tk.Button(self, text="Exit", command=lambda :self.finaltest())
+        self.exit.grid(row=10, column=0)
+    def finaltest(self):
+        print(self.wrongWordSet)
+        print(self.rightWordSet)
+        print(self.nothingWordSet)
+        print()
+        print(self.correct)
+        print(self.wrong)
+        print(self.unsaid)
+
+        self.master.quit()
+    def startFunc(self):
+        self.startButton.destroy()
+
+        self.lable1 = tk.Label(self, text="Say the Word:")
+        self.lable1.grid(row=11, column=0)
+
+        self.canvas1 = tk.Canvas(self.master,
+                                 width=WIDTH / 4,
+                                 height=40)
+        self.canvas1.pack(side="top")
+
+        self.canvas2 = tk.Canvas(self.master,
+                                 width=WIDTH / 4,
+                                 height=40)
+        self.canvas2.pack(side="top")
+
+        self.randomWord()
+        self.printWord()
+
+    def randomWord(self):
+        self.word = self.WordList[random.randrange(0, stop=len(self.WordList))]
+        self.WordList.remove(self.word)
+
+    def printWord(self):
+        self.canvas1.create_text(WIDTH / 8, 15, fill="black", font="Times " + str(10) + " italic bold",
+                                 text=self.word)
+
+        self.canvas1.update
+
+    def nextFunc(self):
+        if self.saidWord == "":
+            self.unsaid += 1
+            self.nothingWordSet.append(self.word)
+
+        self.canvas2.delete("all")
+        self.canvas1.delete("all")
+
+        self.randomWord()
+        self.printWord()
+
+        self.saidWord = ""
 
 
-class WordTypeSelection(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+    def audioFunc(self):
+        with self.mic as source:
+            audio = self.recognizer.listen(source)
 
+        try:
+            self.saidWord = self.recognizer.recognize_google(audio)
 
-        self.wordTypeLabel = tk.Label(self,text="Word Types To Select")
-        self.wordTypeLabel.grid(row = 1)
+            self.canvas2.create_text(WIDTH / 8, 15, fill="black", font="Times " + str(10) + " italic bold",
+                                     text=self.saidWord)
+            self.canvas2.update
 
-        self.rWordSelection = tk.Button(self, text="R words",command = lambda: self.chooser(parent,controller,1))
-        self.rWordSelection.grid(row = 2)
+            if self.saidWord == self.word:
+                self.correct += 1
+                self.rightWordSet.append(self.word)
+            else:
+                self.wrong += 1
+                self.wrongWordSet.append(self.word)
+        except:
+            self.unsaid += 1
+            self.nothingWordSet.append(self.word)
 
-        self.sWordSelection = tk.Button(self, text="S words",command = lambda: self.chooser(parent,controller,2))
-        self.sWordSelection.grid(row = 3)
-
-        self.lWordSelection = tk.Button(self, text="L words",command = lambda: self.chooser(parent,controller,3))
-        self.lWordSelection.grid(row = 4)
-
-        self.blendsWordSelection = tk.Button(self, text="blend words",command = lambda: self.chooser(parent,controller,4))
-        self.blendsWordSelection.grid(row = 5)
-
-        self.backButton = tk.Button(self, text="Back", command=lambda: controller.show_frame(MainMenu))
-        self.backButton.grid(row = 10,column = 0,sticky = "e")
-
-        self.quitbutton = tk.Button(self, text="exit", command=self.master.quit)
-        self.quitbutton.grid(row = 10,column = 0,sticky = "w")
-
-    def chooser(self,parent,controller,integer):
-        controller.show_frame(WordShower)
-        global selection
-        self.integer = integer
-
-        if self.integer == 1:
-            selection = 1
-        elif self.integer == 2:
-            selection = 2
-        elif self.integer == 3:
-            selection = 3
-
-class WordShower(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-
-
-        lbl = tk.Label(self,text = "text")
-class ResultsPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-
-
-
-class AnalyticResults(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-
-
-
-
+        print(self.word)
+        print(self.saidWord)
+        print(self.correct)
+        print(self.wrong)
+        print(self.unsaid)
 
 
 main()
