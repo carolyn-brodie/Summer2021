@@ -63,6 +63,7 @@ class GUI(tk.Frame):
         print(self.rightWordSet)
         print(self.nothingWordSet)
         print()
+        print()
         print(self.correct)
         print(self.wrong)
         print(self.unsaid)
