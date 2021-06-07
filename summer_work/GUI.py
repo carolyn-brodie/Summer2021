@@ -58,12 +58,25 @@ class GUI(tk.Frame):
 
         self.exit = tk.Button(self, text="Exit", command=lambda :self.finaltest())
         self.exit.grid(row=10, column=0)
+    def calcPercentages(self):
+        self.percentageOfRight = (len(self.rightWordSet) / (len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
+        self.percentageOfWrong = (len(self.wrongWordSet) / (len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
+        self.percentageOfNothing = (len(self.nothingWordSet) / (len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
+
+    def writeFilePerc(self):
+        self.fileHandle = open("fileForExcel.csv", "a")
+        self.fileHandle.write(str(self.percentageOfRight))
+        self.fileHandle.write(",")
+        self.fileHandle.write(str(self.percentageOfWrong))
+        self.fileHandle.write(",")
+        self.fileHandle.write(str(self.percentageOfNothing))
+        self.fileHandle.write("\n")
+
+        self.fileHandle.close()
+
     def finaltest(self):
-        print(self.wrongWordSet)
-        print(self.rightWordSet)
-        print(self.nothingWordSet)
-
-
+        self.calcPercentages()
+        self.writeFilePerc()
         self.master.quit()
     def startFunc(self):
         self.startButton.destroy()
