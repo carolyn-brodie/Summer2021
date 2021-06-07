@@ -62,10 +62,7 @@ class GUI(tk.Frame):
         print(self.wrongWordSet)
         print(self.rightWordSet)
         print(self.nothingWordSet)
-        print()
-        print(self.correct)
-        print(self.wrong)
-        print(self.unsaid)
+
 
         self.master.quit()
     def startFunc(self):
