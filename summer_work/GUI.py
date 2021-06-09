@@ -23,8 +23,6 @@ def main():
     app = GUI(root)
     root.mainloop()
 
-
-
 class GUI(tk.Frame):
     def __init__(self, master):
         self.wrongWordSet = []
@@ -128,8 +126,19 @@ class GUI(tk.Frame):
         self.randomWord()
         self.printWord()
 
-        self.saidWord = ""
+        if self.saidWord == "":
+            self.unsaid += 1
+            self.nothingWordSet.append(self.word)
+        elif self.saidWord == self.word:
+            self.correct += 1
+            self.rightWordSet.append(self.word)
 
+        else:
+            self.wrong += 1
+            self.readOutCSV()
+            self.wrongWordSet.append(self.word)
+
+        self.saidWord = ""
     def audioFunc(self):
 
         with self.mic as source:
@@ -141,20 +150,24 @@ class GUI(tk.Frame):
             self.canvas2.create_text(WIDTH / 8, 15, fill="black", font="Times " + str(10) + " italic bold",
                                      text=self.saidWord)
             self.canvas2.update
-
-            if self.saidWord == self.word:
-                self.correct += 1
-                self.rightWordSet.append(self.word)
-            else:
-                self.wrong += 1
-                self.wrongWordSet.append(self.word)
-                print(self.comparingWords.controlFunctionExact(self.saidWord,self.word))
         except:
             print("unheard")
-            self.unsaid += 1
-            self.nothingWordSet.append(self.word)
 
-
+    def readOutCSV(self):
+        self.comparingWords.controlFunctionExact(self.saidWord,self.word)
+        self.fileHandle = open("excelFile1.csv", "a")
+        self.fileHandle.write(str(self.word))
+        self.fileHandle.write(",")
+        self.fileHandle.write(str(self.saidWord))
+        self.fileHandle.write(",")
+        self.fileHandle.write(str("working on that"))
+        self.fileHandle.write(",")
+        self.fileHandle.write(str(self.comparingWords.typeOfError(self.saidWord,self.word)))
+        self.fileHandle.write(",")
+        self.fileHandle.write(str(self.comparingWords.wrongListRevised))
+        self.fileHandle.write(",")
+        self.fileHandle.write(str(self.comparingWords.letterOfError))
+        self.fileHandle.write("\n")
 
 
 main()

@@ -133,38 +133,48 @@ class ComparingWords():
         return returnList
     def controlFunctionExact(self,inputWord,givenWord):
         if len(inputWord) == len(givenWord):
-            wrongList = app.equalSizedWordFunction(inputWord,givenWord)
-            placesSubstituted = app.inputSubstition(inputWord,givenWord, wrongList)
+            letterOfError = list("")
+            wrongList = self.equalSizedWordFunction(inputWord,givenWord)
+            placesSubAddDele = self.inputSubstition(inputWord,givenWord, wrongList)
             returnString = "Letters Substituted:\n"
 
-            for outer in placesSubstituted:
+            for outer in placesSubAddDele:
                     returnString += "\t Replaced '"+outer[0]+"' with '"+outer[1]+"'\n"
-
+                    letterOfError.append(outer[1])
             return returnString
         elif len(inputWord) < len(givenWord):
-            wrongListLess = app.calcWrongListInputLess(inputWord, givenWord)
-            inputShifted = app.shiftInput(inputWord, givenWord, wrongListLess)
-            wrongListRevised = app.equalSizedWordFunction(inputShifted, givenWord)
-            placesDeleted = app.inputDeletion(inputShifted, givenWord, wrongListRevised)
+            letterOfError = list("")
+            wrongList = self.calcWrongListInputLess(inputWord, givenWord)
+            wordShifted = self.shiftInput(inputWord, givenWord, wrongList)
+            wrongListRevised = self.equalSizedWordFunction(wordShifted, givenWord)
+            placesSubAddDele = self.inputDeletion(wordShifted, givenWord, wrongListRevised)
+            letterOfError = list("")
+
             returnString = "deletions or substitution:\n"
-            for outer in placesDeleted:
+            for outer in placesSubAddDele:
                 if(outer[0] == "+"):
                     returnString += "\t did not pronounce'"+outer[1]+"'\n"
+                    letterOfError.append(outer[1])
                 else:
                     returnString += "\t Replaced '"+str(outer[0])+"' with '"+(outer[1])+"'\n"
+                    letterOfError.append(outer[1])
 
             return returnString
         elif len(inputWord) > len(givenWord):
-            wronglistGreater = app.calcWrongListInputGreater(inputWord,givenWord)
-            givenShifted = app.shiftGiven(inputWord,givenWord,wronglistGreater)
-            wronglistRevised = app.equalSizedWordFunction(inputWord,givenShifted)
-            placesAdded = app.inputAddition(inputWord,givenShifted,wronglistRevised)
+            letterOfError = list("")
+            wronglist=  self.calcWrongListInputGreater(inputWord,givenWord)
+            wordShifted = self.shiftGiven(inputWord,givenWord,wronglist)
+            wronglistRevised = self.equalSizedWordFunction(inputWord,wordShifted)
+            placesSubAddDele = self.inputAddition(inputWord,wordShifted,wronglistRevised)
+
             returnString ="additions or substitution:\n"
-            for outer in placesAdded:
+            for outer in placesSubAddDele:
                 if (outer[0] == "+"):
                     returnString += "\t added '" + outer[1] + "'\n"
+                    letterOfError.append(outer[1])
                 else:
                     returnString += "\t Replaced '" + str(outer[0]) + "' with '" + (outer[1]) + "'\n"
+                    letterOfError.append(outer[1])
                 return returnString
     def typeOfError(self, inputWord, compareWord):
         inputList = list(inputWord)
@@ -179,7 +189,3 @@ class ComparingWords():
         elif len(inputList) < len(compareList):
             return "Deletion"
 
-input = "hello"
-output = "dsdsadellodasd"
-app = ComparingWords()
-print(app.controlFunctionExact(input,output))
