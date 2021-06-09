@@ -160,13 +160,10 @@ class GUI(tk.Frame):
         self.fileHandle.write(",")
         self.fileHandle.write(str(self.saidWord))
         self.fileHandle.write(",")
-        self.fileHandle.write(str("working on that"))
+        self.fileHandle.write(str(" "))
         self.fileHandle.write(",")
         self.fileHandle.write(str(self.comparingWords.typeOfError(self.saidWord,self.word)))
         self.fileHandle.write(",")
-        self.fileHandle.write(str(self.comparingWords.wrongListRevised))
-        self.fileHandle.write(",")
-        self.fileHandle.write(str(self.comparingWords.letterOfError))
         self.fileHandle.write("\n")
 
 
