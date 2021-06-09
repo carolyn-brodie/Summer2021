@@ -3,6 +3,7 @@
 import tkinter as tk
 import speech_recognition as sr
 import random
+import ComparingWords
 
 WIDTH = 600
 HEIGHT = 600
@@ -49,6 +50,7 @@ class GUI(tk.Frame):
         super(GUI, self).__init__(master)
         self.pack()
         self.create_widgets()
+        self.comparingWords = ComparingWords.ComparingWords()
 
     def create_widgets(self):
         self.startButton = tk.Button(self, text="Start", command=lambda: self.startFunc())
@@ -146,9 +148,12 @@ class GUI(tk.Frame):
             else:
                 self.wrong += 1
                 self.wrongWordSet.append(self.word)
+                print(self.comparingWords.controlFunctionExact(self.saidWord,self.word))
         except:
+            print("unheard")
             self.unsaid += 1
             self.nothingWordSet.append(self.word)
+
 
 
 
