@@ -246,7 +246,7 @@ class ComparingWords():
 
             for outer in placesSubAddDele:
                 if (outer[0] == "+"):
-                    letterOfError.append(outer[1])
+                    letterOfError.append(outer[0])
                 else:
-                    letterOfError.append(outer[1])
+                    letterOfError.append(outer[0])
                 return letterOfError
