@@ -1,5 +1,3 @@
-
-
 import tkinter as tk
 import speech_recognition as sr
 import random
@@ -15,13 +13,13 @@ WINDOW_NAME = "Window"
 
 
 def main():
-
     root = tk.Tk()
     root.title(WINDOW_NAME)
     root.geometry(WINDOW_STARTING_SIZE)
 
     app = GUI(root)
     root.mainloop()
+
 
 class GUI(tk.Frame):
     def __init__(self, master):
@@ -60,20 +58,23 @@ class GUI(tk.Frame):
         self.nextButton = tk.Button(self, text="Next", command=lambda: self.nextFunc())
         self.nextButton.grid(row=2, column=0)
 
-        self.exit = tk.Button(self, text="Exit", command=lambda :self.exitButtonFunc())
+        self.exit = tk.Button(self, text="Exit", command=lambda: self.exitButtonFunc())
         self.exit.grid(row=10, column=0)
 
     def calcPercentages(self):
 
         try:
-            self.percentageOfRight = (len(self.rightWordSet) / (len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
-            self.percentageOfWrong = (len(self.wrongWordSet) / (len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
-            self.percentageOfNothing = (len(self.nothingWordSet) / (len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
+            self.percentageOfRight = (len(self.rightWordSet) / (
+                    len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
+            self.percentageOfWrong = (len(self.wrongWordSet) / (
+                    len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
+            self.percentageOfNothing = (len(self.nothingWordSet) / (
+                    len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
         except ZeroDivisionError:
             self.master.quit()
 
     def writeFilePerc(self):
-        self.fileHandle = open("statsForExels.csv", "a")
+        self.fileHandle = open("statsForExcels.csv", "a")
         self.fileHandle.write(str(self.percentageOfRight))
         self.fileHandle.write(",")
         self.fileHandle.write(str(self.percentageOfWrong))
@@ -87,6 +88,7 @@ class GUI(tk.Frame):
         self.calcPercentages()
         self.writeFilePerc()
         self.master.quit()
+
     def startFunc(self):
         self.startButton.destroy()
 
@@ -135,10 +137,10 @@ class GUI(tk.Frame):
 
         else:
             self.wrong += 1
-            self.readOutCSV()
             self.wrongWordSet.append(self.word)
 
         self.saidWord = ""
+
     def audioFunc(self):
 
         with self.mic as source:
@@ -149,21 +151,26 @@ class GUI(tk.Frame):
             self.saidWord = self.saidWord.lower()
             self.canvas2.create_text(WIDTH / 8, 15, fill="black", font="Times " + str(10) + " italic bold",
                                      text=self.saidWord)
-            self.canvas2.update
+            self.readOutCSV()
         except:
             print("unheard")
 
     def readOutCSV(self):
-        self.comparingWords.controlFunctionExact(self.saidWord,self.word)
+        self.comparingWords.controlFunctionExact(self.saidWord, self.word)
         self.fileHandle = open("excelFile1.csv", "a")
         self.fileHandle.write(str(self.word))
         self.fileHandle.write(",")
         self.fileHandle.write(str(self.saidWord))
         self.fileHandle.write(",")
-        self.fileHandle.write(str(" "))
+        self.fileHandle.write(str(self.comparingWords.whereErrorOccurs(self.word,
+                                                                       self.comparingWords.returnRevisedWrongList(
+                                                                           self.saidWord, self.word))))
         self.fileHandle.write(",")
-        self.fileHandle.write(str(self.comparingWords.typeOfError(self.saidWord,self.word)))
+        self.fileHandle.write(str(self.comparingWords.typeOfError(self.saidWord, self.word)))
         self.fileHandle.write(",")
+        self.fileHandle.write(str(self.comparingWords.returnRevisedWrongList(self.saidWord, self.word)))
+        self.fileHandle.write(",")
+        self.fileHandle.write(str(self.comparingWords.letterList(self.saidWord, self.word)))
         self.fileHandle.write("\n")
 
 

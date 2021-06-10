@@ -179,13 +179,88 @@ class ComparingWords():
     def typeOfError(self, inputWord, compareWord):
         inputList = list(inputWord)
         compareList = list(compareWord)
+        if (inputWord == compareWord):
+            return "None"
+        else:
+            if len(inputList) == len(compareList):
+                return "Substitution"
 
-        if len(inputList) == len(compareList):
-            return "Substitution"
+            elif len(inputList) > len(compareList):
+                return "Addition"
 
-        elif len(inputList) > len(compareList):
-            return "Addition"
+            elif len(inputList) < len(compareList):
+                return "Deletion"
 
-        elif len(inputList) < len(compareList):
-            return "Deletion"
+    def whereErrorOccurs(self,shiftedWord,wrongList):
+        for index in wrongList:
+            if(index == 0):
+                return "Beginning"
+            elif (index == len(shiftedWord)-1):
+                return "End"
+            else:
+                return "Middle"
+    def returnRevisedWrongList(self,inputWord,givenWord):
+        if len(inputWord) == len(givenWord):
+            letterOfError = list("")
+            wrongList = self.equalSizedWordFunction(inputWord,givenWord)
+            return wrongList
+        elif len(inputWord) < len(givenWord):
+            letterOfError = list("")
+            wrongList = self.calcWrongListInputLess(inputWord, givenWord)
+            wordShifted = self.shiftInput(inputWord, givenWord, wrongList)
+            wrongListRevised = self.equalSizedWordFunction(wordShifted, givenWord)
+            return wrongListRevised
+        elif len(inputWord) > len(givenWord):
+            wronglist=  self.calcWrongListInputGreater(inputWord,givenWord)
+            wordShifted = self.shiftGiven(inputWord,givenWord,wronglist)
+            wronglistRevised = self.equalSizedWordFunction(inputWord,wordShifted)
+            return wronglistRevised
+    def letterList(self,inputWord,givenWord):
+        if len(inputWord) == len(givenWord):
+            letterOfError = list("")
+            wrongList = self.equalSizedWordFunction(inputWord,givenWord)
+            placesSubAddDele = self.inputSubstition(inputWord,givenWord, wrongList)
+            for outer in placesSubAddDele:
+                    letterOfError.append(outer[1])
+            return letterOfError
+        elif len(inputWord) < len(givenWord):
+            letterOfError = list("")
+            wrongList = self.calcWrongListInputLess(inputWord, givenWord)
+            wordShifted = self.shiftInput(inputWord, givenWord, wrongList)
+            wrongListRevised = self.equalSizedWordFunction(wordShifted, givenWord)
+            placesSubAddDele = self.inputDeletion(wordShifted, givenWord, wrongListRevised)
+            for outer in placesSubAddDele:
+                if(outer[0] == "+"):
+                    letterOfError.append(outer[1])
+                else:
+                    letterOfError.append(outer[1])
 
+            return letterOfError
+        elif len(inputWord) > len(givenWord):
+            letterOfError = list("")
+            wronglist=  self.calcWrongListInputGreater(inputWord,givenWord)
+            wordShifted = self.shiftGiven(inputWord,givenWord,wronglist)
+            wronglistRevised = self.equalSizedWordFunction(inputWord,wordShifted)
+            placesSubAddDele = self.inputAddition(inputWord,wordShifted,wronglistRevised)
+
+
+            for outer in placesSubAddDele:
+                if (outer[0] == "+"):
+                    letterOfError.append(outer[1])
+                else:
+                    letterOfError.append(outer[1])
+                return letterOfError
+
+
+root = ComparingWords()
+inputWord = "Text"
+givenWord = "fTextg"
+wronglist = root.calcWrongListInputLess(inputWord, givenWord)
+wordShifted = root.shiftInput(inputWord, givenWord, wronglist)
+print(wronglist)
+wronglistRevised = root.equalSizedWordFunction(wordShifted, givenWord)
+print(wronglistRevised)
+# placesSubAddDele = root.inputDeletion(wordShifted, givenWord, wronglistRevised)
+# print(root.whereErrorOccurs(wordShifted,wronglistRevised))
+# print(placesSubAddDele)
+# print(wronglistRevised)
