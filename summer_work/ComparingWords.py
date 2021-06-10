@@ -250,17 +250,3 @@ class ComparingWords():
                 else:
                     letterOfError.append(outer[1])
                 return letterOfError
-
-
-root = ComparingWords()
-inputWord = "Text"
-givenWord = "fTextg"
-wronglist = root.calcWrongListInputLess(inputWord, givenWord)
-wordShifted = root.shiftInput(inputWord, givenWord, wronglist)
-print(wronglist)
-wronglistRevised = root.equalSizedWordFunction(wordShifted, givenWord)
-print(wronglistRevised)
-# placesSubAddDele = root.inputDeletion(wordShifted, givenWord, wronglistRevised)
-# print(root.whereErrorOccurs(wordShifted,wronglistRevised))
-# print(placesSubAddDele)
-# print(wronglistRevised)
