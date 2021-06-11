@@ -74,6 +74,7 @@ class GUI(tk.Frame):
             self.master.quit()
 
     def writeFilePerc(self):
+        self.calcPercentages()
         self.fileHandle = open("statsForExcels.csv", "a")
         self.fileHandle.write(str(self.percentageOfRight))
         self.fileHandle.write(",")
@@ -109,6 +110,7 @@ class GUI(tk.Frame):
         self.printWord()
 
     def randomWord(self):
+        self.word =""
         self.word = self.WordList[random.randrange(0, stop=len(self.WordList))]
         self.WordList.remove(self.word)
 
@@ -125,22 +127,24 @@ class GUI(tk.Frame):
         self.canvas2.delete("all")
         self.canvas1.delete("all")
 
-        self.randomWord()
         self.printWord()
 
         if self.saidWord == "":
+            print(1)
             self.unsaid += 1
             self.nothingWordSet.append(self.word)
         elif self.saidWord == self.word:
+            print(2)
             self.correct += 1
             self.rightWordSet.append(self.word)
 
         else:
+            print(self.word)
+            print(self.saidWord)
             self.wrong += 1
             self.wrongWordSet.append(self.word)
 
-        self.saidWord = ""
-
+        self.randomWord()
     def audioFunc(self):
 
         with self.mic as source:

@@ -1,14 +1,15 @@
 class ComparingWords():
     # This should be the function that is always called to give the indexs of the differences:
-    def equalSizedWordFunction(self,inputWord,givenWord):
+    def equalSizedWordFunction(self, inputWord, givenWord):
         inputList = list(inputWord)
         givenList = list(givenWord)
         wrongList = list("")
-        for index in range(0,len(inputList)):
+        for index in range(0, len(inputList)):
             if inputList[index] != givenList[index]:
                 wrongList.append(index)
         return wrongList
-    def inputLessSubStringReturn(self,inputWord,givenWord):
+
+    def inputLessSubStringReturn(self, inputWord, givenWord):
         lenInputWord = len(inputWord)
         lenGivenWord = len(givenWord)
 
@@ -33,7 +34,8 @@ class ComparingWords():
 
         # return longest common substring having length `maxLength`
         return inputWord[endingIndex - maxLength: endingIndex]
-    def inputGreaterSubStringReturn(self,inputWord,givenWord):
+
+    def inputGreaterSubStringReturn(self, inputWord, givenWord):
 
         lenGiven = len(givenWord)
         lenInput = len(inputWord)
@@ -59,52 +61,55 @@ class ComparingWords():
 
         # return longest common substring having length `maxLength`
         return givenWord[endingIndex - maxLength: endingIndex]
-    def calcWrongListInputLess(self,inputWord,givenWord):
-        returnList = list()
-        LCS = self.inputLessSubStringReturn(inputWord,givenWord)
-        startIndexInput = inputWord.index(LCS)
-        endIndexInput = startIndexInput + len(LCS)-1
-        returnList.append([startIndexInput,endIndexInput])
 
+    def calcWrongListInputLess(self, inputWord, givenWord):
+        returnList = list()
+        LCS = self.inputLessSubStringReturn(inputWord, givenWord)
+        startIndexInput = inputWord.index(LCS)
+        endIndexInput = startIndexInput + len(LCS) - 1
+        returnList.append([startIndexInput, endIndexInput])
 
         startIndexOutput = givenWord.index(LCS)
-        endIndexOutput = startIndexOutput + len(LCS)-1
-        returnList.append([startIndexOutput,endIndexOutput])
+        endIndexOutput = startIndexOutput + len(LCS) - 1
+        returnList.append([startIndexOutput, endIndexOutput])
 
         return returnList
-    def calcWrongListInputGreater(self,inputWord,givenWord):
+
+    def calcWrongListInputGreater(self, inputWord, givenWord):
         returnList = list()
-        LCS = self.inputGreaterSubStringReturn(inputWord,givenWord)
+        LCS = self.inputGreaterSubStringReturn(inputWord, givenWord)
         startIndexInput = inputWord.index(LCS)
-        endIndexInput = startIndexInput + len(LCS)-1
-        returnList.append([startIndexInput,endIndexInput])
+        endIndexInput = startIndexInput + len(LCS) - 1
+        returnList.append([startIndexInput, endIndexInput])
 
         startIndexOutput = givenWord.index(LCS)
-        endIndexOutput = startIndexOutput + len(LCS)-1
-        returnList.append([startIndexOutput,endIndexOutput])
+        endIndexOutput = startIndexOutput + len(LCS) - 1
+        returnList.append([startIndexOutput, endIndexOutput])
 
         return returnList
-    def shiftInput(self,inputWord,givenWord,returnList):
+
+    def shiftInput(self, inputWord, givenWord, returnList):
 
         listOfInputWordShifted = list(inputWord)
         startDiff = returnList[1][0] - returnList[0][0]
         for index in range(startDiff):
-            listOfInputWordShifted.insert(index,"+")
-        while(len(listOfInputWordShifted) != len(givenWord)):
+            listOfInputWordShifted.insert(index, "+")
+        while len(listOfInputWordShifted) != len(givenWord):
             listOfInputWordShifted.append("+")
 
         return self.listToString(listOfInputWordShifted)
-    def shiftGiven(self,inputWord,givenWord,returnList):
+
+    def shiftGiven(self, inputWord, givenWord, returnList):
         listOfOutputWordShifted = list(givenWord)
         startDiff = returnList[0][0] - returnList[1][0]
         for index in range(startDiff):
-            listOfOutputWordShifted.insert(index,"+")
-        while(len(listOfOutputWordShifted) != len(inputWord)):
+            listOfOutputWordShifted.insert(index, "+")
+        while (len(listOfOutputWordShifted) != len(inputWord)):
             listOfOutputWordShifted.append("+")
 
         return listOfOutputWordShifted
 
-    def listToString(self,s):
+    def listToString(self, s):
         # initialize an empty string
         str1 = ""
 
@@ -114,36 +119,37 @@ class ComparingWords():
 
             # return string
         return str1
-    def inputAddition(self,inputWord,givenWord,wrongList):
+
+    def inputAddition(self, inputWord, givenWord, wrongList):
         returnList = list("")
         for index in wrongList:
-            returnList.append([inputWord[index],givenWord[index]])
+            returnList.append([inputWord[index], givenWord[index]])
         return returnList
 
     def inputDeletion(self, inputWord, givenWord, wrongList):
         returnList = list("")
         for index in wrongList:
-            returnList.append([inputWord[index],givenWord[index]])
+            returnList.append([inputWord[index], givenWord[index]])
         return returnList
 
-    def inputSubstition(self,inputWord,givenWord,wrongList):
+    def inputSubstition(self, inputWord, givenWord, wrongList):
         returnList = list("")
         for index in wrongList:
-            returnList.append([inputWord[index],givenWord[index]])
+            returnList.append([inputWord[index], givenWord[index]])
         return returnList
-    def controlFunctionExact(self,inputWord,givenWord):
+
+    def controlFunctionExact(self, inputWord, givenWord):
         if len(inputWord) == len(givenWord):
             letterOfError = list("")
-            wrongList = self.equalSizedWordFunction(inputWord,givenWord)
-            placesSubAddDele = self.inputSubstition(inputWord,givenWord, wrongList)
+            wrongList = self.equalSizedWordFunction(inputWord, givenWord)
+            placesSubAddDele = self.inputSubstition(inputWord, givenWord, wrongList)
             returnString = "Letters Substituted:\n"
 
             for outer in placesSubAddDele:
-                    returnString += "\t Replaced '"+outer[0]+"' with '"+outer[1]+"'\n"
-                    letterOfError.append(outer[1])
+                returnString += "\t Replaced '" + outer[0] + "' with '" + outer[1] + "'\n"
+                letterOfError.append(outer[1])
             return returnString
         elif len(inputWord) < len(givenWord):
-            letterOfError = list("")
             wrongList = self.calcWrongListInputLess(inputWord, givenWord)
             wordShifted = self.shiftInput(inputWord, givenWord, wrongList)
             wrongListRevised = self.equalSizedWordFunction(wordShifted, givenWord)
@@ -152,22 +158,22 @@ class ComparingWords():
 
             returnString = "deletions or substitution:\n"
             for outer in placesSubAddDele:
-                if(outer[0] == "+"):
-                    returnString += "\t did not pronounce'"+outer[1]+"'\n"
+                if (outer[0] == "+"):
+                    returnString += "\t did not pronounce'" + outer[1] + "'\n"
                     letterOfError.append(outer[1])
                 else:
-                    returnString += "\t Replaced '"+str(outer[0])+"' with '"+(outer[1])+"'\n"
+                    returnString += "\t Replaced '" + str(outer[0]) + "' with '" + (outer[1]) + "'\n"
                     letterOfError.append(outer[1])
 
             return returnString
         elif len(inputWord) > len(givenWord):
             letterOfError = list("")
-            wronglist=  self.calcWrongListInputGreater(inputWord,givenWord)
-            wordShifted = self.shiftGiven(inputWord,givenWord,wronglist)
-            wronglistRevised = self.equalSizedWordFunction(inputWord,wordShifted)
-            placesSubAddDele = self.inputAddition(inputWord,wordShifted,wronglistRevised)
+            wronglist = self.calcWrongListInputGreater(inputWord, givenWord)
+            wordShifted = self.shiftGiven(inputWord, givenWord, wronglist)
+            wronglistRevised = self.equalSizedWordFunction(inputWord, wordShifted)
+            placesSubAddDele = self.inputAddition(inputWord, wordShifted, wronglistRevised)
 
-            returnString ="additions or substitution:\n"
+            returnString = "additions or substitution:\n"
             for outer in placesSubAddDele:
                 if (outer[0] == "+"):
                     returnString += "\t added '" + outer[1] + "'\n"
@@ -176,6 +182,7 @@ class ComparingWords():
                     returnString += "\t Replaced '" + str(outer[0]) + "' with '" + (outer[1]) + "'\n"
                     letterOfError.append(outer[1])
                 return returnString
+
     def typeOfError(self, inputWord, compareWord):
         inputList = list(inputWord)
         compareList = list(compareWord)
@@ -191,18 +198,19 @@ class ComparingWords():
             elif len(inputList) < len(compareList):
                 return "Deletion"
 
-    def whereErrorOccurs(self,shiftedWord,wrongList):
+    def whereErrorOccurs(self, shiftedWord, wrongList):
         for index in wrongList:
-            if(index == 0):
+            if index == 0:
                 return "Beginning"
-            elif (index == len(shiftedWord)-1):
+            elif (index == len(shiftedWord) - 1):
                 return "End"
             else:
                 return "Middle"
-    def returnRevisedWrongList(self,inputWord,givenWord):
+
+    def returnRevisedWrongList(self, inputWord, givenWord):
         if len(inputWord) == len(givenWord):
             letterOfError = list("")
-            wrongList = self.equalSizedWordFunction(inputWord,givenWord)
+            wrongList = self.equalSizedWordFunction(inputWord, givenWord)
             return wrongList
         elif len(inputWord) < len(givenWord):
             letterOfError = list("")
@@ -211,17 +219,18 @@ class ComparingWords():
             wrongListRevised = self.equalSizedWordFunction(wordShifted, givenWord)
             return wrongListRevised
         elif len(inputWord) > len(givenWord):
-            wronglist=  self.calcWrongListInputGreater(inputWord,givenWord)
-            wordShifted = self.shiftGiven(inputWord,givenWord,wronglist)
-            wronglistRevised = self.equalSizedWordFunction(inputWord,wordShifted)
+            wronglist = self.calcWrongListInputGreater(inputWord, givenWord)
+            wordShifted = self.shiftGiven(inputWord, givenWord, wronglist)
+            wronglistRevised = self.equalSizedWordFunction(inputWord, wordShifted)
             return wronglistRevised
-    def letterList(self,inputWord,givenWord):
+
+    def letterList(self, inputWord, givenWord):
         if len(inputWord) == len(givenWord):
             letterOfError = list("")
-            wrongList = self.equalSizedWordFunction(inputWord,givenWord)
-            placesSubAddDele = self.inputSubstition(inputWord,givenWord, wrongList)
+            wrongList = self.equalSizedWordFunction(inputWord, givenWord)
+            placesSubAddDele = self.inputSubstition(inputWord, givenWord, wrongList)
             for outer in placesSubAddDele:
-                    letterOfError.append(outer[1])
+                letterOfError.append(outer[1])
             return letterOfError
         elif len(inputWord) < len(givenWord):
             letterOfError = list("")
@@ -230,7 +239,7 @@ class ComparingWords():
             wrongListRevised = self.equalSizedWordFunction(wordShifted, givenWord)
             placesSubAddDele = self.inputDeletion(wordShifted, givenWord, wrongListRevised)
             for outer in placesSubAddDele:
-                if(outer[0] == "+"):
+                if (outer[0] == "+"):
                     letterOfError.append(outer[1])
                 else:
                     letterOfError.append(outer[1])
@@ -238,14 +247,13 @@ class ComparingWords():
             return letterOfError
         elif len(inputWord) > len(givenWord):
             letterOfError = list("")
-            wronglist=  self.calcWrongListInputGreater(inputWord,givenWord)
-            wordShifted = self.shiftGiven(inputWord,givenWord,wronglist)
-            wronglistRevised = self.equalSizedWordFunction(inputWord,wordShifted)
-            placesSubAddDele = self.inputAddition(inputWord,wordShifted,wronglistRevised)
-
+            wronglist = self.calcWrongListInputGreater(inputWord, givenWord)
+            wordShifted = self.shiftGiven(inputWord, givenWord, wronglist)
+            wronglistRevised = self.equalSizedWordFunction(inputWord, wordShifted)
+            placesSubAddDele = self.inputAddition(inputWord, wordShifted, wronglistRevised)
 
             for outer in placesSubAddDele:
-                if (outer[0] == "+"):
+                if outer[0] == "+":
                     letterOfError.append(outer[0])
                 else:
                     letterOfError.append(outer[0])
