@@ -110,9 +110,9 @@ class GUI(tk.Frame):
         self.printWord()
 
     def randomWord(self):
-        self.word =""
+
         self.word = self.WordList[random.randrange(0, stop=len(self.WordList))]
-        self.WordList.remove(self.word)
+
 
     def printWord(self):
         self.canvas1.create_text(WIDTH / 8, 15, fill="black", font="Times " + str(10) + " italic bold",
@@ -127,7 +127,6 @@ class GUI(tk.Frame):
         self.canvas2.delete("all")
         self.canvas1.delete("all")
 
-        self.printWord()
 
         if self.saidWord == "":
             print(1)
@@ -139,12 +138,15 @@ class GUI(tk.Frame):
             self.rightWordSet.append(self.word)
 
         else:
+            print(4)
             print(self.word)
             print(self.saidWord)
             self.wrong += 1
             self.wrongWordSet.append(self.word)
 
+        self.readOutCSV()
         self.randomWord()
+        self.printWord()
     def audioFunc(self):
 
         with self.mic as source:
@@ -155,7 +157,6 @@ class GUI(tk.Frame):
             self.saidWord = self.saidWord.lower()
             self.canvas2.create_text(WIDTH / 8, 15, fill="black", font="Times " + str(10) + " italic bold",
                                      text=self.saidWord)
-            self.readOutCSV()
         except:
             print("unheard")
 
