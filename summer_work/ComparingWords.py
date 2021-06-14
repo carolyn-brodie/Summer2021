@@ -187,7 +187,7 @@ class ComparingWords():
         inputList = list(inputWord)
         compareList = list(compareWord)
         if (inputWord == compareWord):
-            return "None"
+            return "No_Error"
         else:
             if len(inputList) == len(compareList):
                 return "Substitution"
@@ -200,7 +200,9 @@ class ComparingWords():
 
     def whereErrorOccurs(self, shiftedWord, wrongList):
         for index in wrongList:
-            if index == 0:
+            if len(wrongList) == 0 or wrongList == None:
+                return "No_Error"
+            elif index == 0:
                 return "Beginning"
             elif (index == len(shiftedWord) - 1):
                 return "End"
