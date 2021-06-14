@@ -164,17 +164,17 @@ class GUI(tk.Frame):
         self.comparingWords.controlFunctionExact(self.saidWord, self.word)
         self.fileHandle = open("excelFile1.csv", "a")
         self.fileHandle.write(str(self.word))
-        self.fileHandle.write(",")
+        self.fileHandle.write(";")
         self.fileHandle.write(str(self.saidWord))
-        self.fileHandle.write(",")
+        self.fileHandle.write(";")
         self.fileHandle.write(str(self.comparingWords.whereErrorOccurs(self.word,
                                                                        self.comparingWords.returnRevisedWrongList(
                                                                            self.saidWord, self.word))))
-        self.fileHandle.write(",")
+        self.fileHandle.write(";")
         self.fileHandle.write(str(self.comparingWords.typeOfError(self.saidWord, self.word)))
-        self.fileHandle.write(",")
+        self.fileHandle.write(";")
         self.fileHandle.write(str(self.comparingWords.returnRevisedWrongList(self.saidWord, self.word)))
-        self.fileHandle.write(",")
+        self.fileHandle.write(";")
         self.fileHandle.write(str(self.comparingWords.letterList(self.saidWord, self.word)))
         self.fileHandle.write("\n")
 
