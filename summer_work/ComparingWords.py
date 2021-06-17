@@ -9,6 +9,7 @@ class ComparingWords():
                 wrongList.append(index)
         return wrongList
 
+    #     Takes the input when its less then the givenWord
     def inputLessSubStringReturn(self, inputWord, givenWord):
         lenInputWord = len(inputWord)
         lenGivenWord = len(givenWord)
@@ -35,6 +36,7 @@ class ComparingWords():
         # return longest common substring having length `maxLength`
         return inputWord[endingIndex - maxLength: endingIndex]
 
+    # Input is greater then the given word
     def inputGreaterSubStringReturn(self, inputWord, givenWord):
 
         lenGiven = len(givenWord)
@@ -61,6 +63,7 @@ class ComparingWords():
 
         # return longest common substring having length `maxLength`
         return givenWord[endingIndex - maxLength: endingIndex]
+
 
     def calcWrongListInputLess(self, inputWord, givenWord):
         returnList = list()
@@ -259,3 +262,5 @@ class ComparingWords():
                 else:
                     letterOfError.append(outer[0])
                 return letterOfError
+
+
