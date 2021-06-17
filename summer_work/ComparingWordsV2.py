@@ -74,7 +74,6 @@ class ComparingWordsV2():
 
     def equalShiftedInputFunction(self):
         inputList = list(self.shiftedWord)
-        print(self.shiftedWord)
         givenList = list(self.givenWord)
         for index in range(0, len(inputList)):
             if inputList[index] != givenList[index]:
