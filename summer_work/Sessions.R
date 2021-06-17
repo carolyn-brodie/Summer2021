@@ -2,13 +2,16 @@ plotSessions <- function(f1, f2) {
   library(ggplot2)
   library(ggeasy)
 
-  percentCorrect <- read.csv("ErrorFile.csv", sep =';')
+png("PercentagePerSession.png")
+
+  percentCorrect <- read.csv("summer_work/statsForExcels.csv", sep =';')
+  number_of_lines <- nrow(read.csv("summer_work/statsForExcels.csv", sep =';'))
   week <-percentCorrect[c(f1:f2), c(1,2,3:4)]
   displayCorrect <- paste(round((week[,2]) * 100, 1), "%", sep="")
   displayIncorrect <- paste(round((week[,3]) * 100, 1), "%", sep="")
   displayNoResponse <- paste(round((week[,4]) * 100, 1), "%", sep="")
 
-  ggplot(week, aes(x=Session)) +
+  LineGraph <- ggplot(week, aes(x=Sessions)) +
     #Add all 3 columns of data and create legend
     geom_line(aes(y=Correct, col="Correct")) +
     geom_line(aes(y=Incorrect, col="Incorrect")) +
@@ -34,6 +37,11 @@ plotSessions <- function(f1, f2) {
     #Get rid of legend title
     theme(legend.title=element_blank()) +
     ggeasy:: easy_center_title()
+
+print(LineGraph)
+dev.off()
+
+ggsave("PercentagePerSession.png", path = "summer_work/Graphs", scale = 0.15)
 }
 plotSessions(8,14)
 

@@ -5,14 +5,16 @@ plotBME <- function() {
    library(stringr)
    library(ggeasy)
 
-incorrectData <- read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';')
+png("BME.png")
+
+incorrectData <- read.csv("summer_work/excelFile1.csv", sep=';')
 #print(incorrectData)
-number_of_lines <- nrow(read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';'))
+number_of_lines <- nrow(read.csv("summer_work/excelFile1.csv", sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
-  ggplot(errorWords, aes(x=WhereErrorOccurred, fill=Word)) +
+  BME <- ggplot(errorWords, aes(x=WhereErrorOccurred, fill=Word)) +
     geom_bar(stat="count") +
     scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
     ggtitle(label="Session Feedback") +
@@ -21,6 +23,10 @@ errorWords <-incorrectData %>%
     ggeasy:: easy_center_title() +
     labs(fill="Expected Word")
 
+print(BME)
+dev.off()
+
+ggsave("BME.png", path = "summer_work/Graphs", scale = 0.15)
 }
 
 plotBME()
