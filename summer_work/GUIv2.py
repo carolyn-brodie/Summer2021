@@ -206,8 +206,8 @@ class GUI(tk.Frame):
             self.fileCreated = False
 
         self.fileHandle = open("statsForExcels.csv", "a")
-        if self.fileHandle == False:
-            self.fileHandle.write("Sessions, Correct, Incorrect, NoResponse")
+        if self.fileCreated == False:
+            self.fileHandle.write("Sessions, Correct, Incorrect, NoResponse" + "\n")
             self.fileCreated = True
         self.fileHandle.write(str(self.sessionNumber))
         self.fileHandle.write(";")
