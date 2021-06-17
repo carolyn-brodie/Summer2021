@@ -4,8 +4,8 @@
 #print(read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';'))
 #print(errorWords)
 
-incorrectData <- read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';')
-number_of_lines <- nrow(read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';'))
+incorrectData <- read.csv("summer_work/Graphs/ErrorFile.csv", sep=';')
+number_of_lines <- nrow(read.csv("summer_work/Graphs/ErrorFile.csv", sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))

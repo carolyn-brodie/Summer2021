@@ -2,7 +2,7 @@ plotSessions <- function(f1, f2) {
   library(ggplot2)
   library(ggeasy)
 
-  percentCorrect <- read.csv("ErrorFile.csv", sep =';')
+  percentCorrect <- read.csv("summer_work/Graphs/ErrorFile.csv", sep =';')
   week <-percentCorrect[c(f1:f2), c(1,2,3:4)]
   displayCorrect <- paste(round((week[,2]) * 100, 1), "%", sep="")
   displayIncorrect <- paste(round((week[,3]) * 100, 1), "%", sep="")
