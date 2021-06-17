@@ -1,22 +1,22 @@
 
 
 plotBME <- function(sound) {
-   library(dplyr)
-  library(ggplot2)
- library(stringr)
- library(ggeasy)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(ggeasy)
 
-incorrectData <- read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';')
+incorrectData <- read.csv("summer_work/Graphs/ErrorFile.csv", sep=';')
 print(incorrectData)
-number_of_lines <- nrow(read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';'))
+number_of_lines <- nrow(read.csv("summer_work/Graphs/ErrorFile.csv", sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
   s <- paste("^", sound, sep="")
   Words <- errorWords %>%
-    filter(str_detect(Word, s))
-  ggplot(Words, aes(x=WhereErrorOccurred, fill=Word)) +
+    filter(str_detect(word, s))
+  ggplot(Words, aes(x=WhereErrorOccurred, fill=word)) +
     geom_bar(stat="count") +
     scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
     ggtitle(label="Session Feedback") +
@@ -27,4 +27,4 @@ errorWords <-incorrectData %>%
 
 }
 
-plotBME("c")
+plotBME("r")
