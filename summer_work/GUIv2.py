@@ -149,7 +149,7 @@ class GUI(tk.Frame):
         self.fileCreated1 = True
         try:
             self.sessions1 = open("percentOfError.csv", "r")
-            self.fileList1 = self.sessions.read().split("\n")
+            self.fileList1 = self.sessions1.read().split("\n")
             self.sessions1.close()
 
             self.sessionNumber1 = len(self.fileList) - 1
@@ -162,6 +162,7 @@ class GUI(tk.Frame):
         if self.fileCreated1 == False:
             self.fileHandle1.write("Sessions; Deletion; Addition; Substitution" + "\n")
             self.fileCreated1 = True
+
         self.fileHandle1.write(str(self.sessionNumber1))
         self.fileHandle1.write(";")
         self.fileHandle1.write(str(self.percOfDeletion))
@@ -178,6 +179,7 @@ class GUI(tk.Frame):
             self.percOfSubstitution = (self.substitution) / (self.addition+self.substitution+self.deletion)
         except ZeroDivisionError:
             self.master.quit()
+
     def checkWord(self):
         if self.saidWord == self.givenWord:
             self.rightList.append(self.givenWord)
