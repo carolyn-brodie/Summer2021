@@ -1,11 +1,11 @@
  library(dplyr)
  library(ggplot2)
  library(stringr)
-print(read.csv("ErrorFile.csv", sep=';'))
+#print(read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';'))
 #print(errorWords)
 
-incorrectData <- read.csv("ErrorFile.csv", sep=';')
-number_of_lines <- nrow(read.csv("ErrorFile.csv", sep=';'))
+incorrectData <- read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';')
+number_of_lines <- nrow(read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
@@ -13,7 +13,7 @@ errorWords <-incorrectData %>%
 plotWhereError <- function(sound) {
   s <- paste("^", sound, sep="")
   Words <- errorWords %>%
-    filter(str_detect(EWord, s))
+    filter(str_detect(Word, s))
   ggplot(Words, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
     geom_bar(stat="count") +
     scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
@@ -24,4 +24,4 @@ plotWhereError <- function(sound) {
     labs(fill="Type of Error")
 }
 
-plotWhereError("r")
+plotWhereError("c")
