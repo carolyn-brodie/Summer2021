@@ -54,6 +54,9 @@ class GUI(tk.Frame):
         # Creates a word list called wordList that has each word from the file.
         self.wordList = []
 
+        self.addition = 0
+        self.deletion = 0
+        self.substitution = 0
         # Reads through each line of the word file appending the word to the wordList.
         for line in self.file:
             self.wordList.append(line.strip("\n"))
@@ -75,7 +78,7 @@ class GUI(tk.Frame):
 
         # Creates the start button which then calls the start function.
         self.testButton = tk.Button(self,text = "testButton",command = self.testFunction)
-        self.testButton.grid(row = 3)
+        self.testButton.grid(row = 4)
         self.startButton = tk.Button(self,text = "Start",command = self.startFunction)
         self.startButton.grid(row = 1,column = 0)
         # Exits the programs but does not call the write to file function.
@@ -97,7 +100,7 @@ class GUI(tk.Frame):
         self.exitButton.grid(row = 3,column = 0)
 
         self.labelGivenWord = tk.Label(self,text = "Say the Give Word")
-        self.labelGivenWord.grid(row = 4)
+        self.labelGivenWord.grid(row = 5)
         # Creates a canvas for the given word
         self.canvasGivenWord = tk.Canvas(self.master, width=WIDTH / 4,height=40)
         self.canvasGivenWord.pack(side = "top")
@@ -139,8 +142,42 @@ class GUI(tk.Frame):
     def exitFunction(self):
         self.calcPercentages()
         self.writeFilePerc()
+        self.writePercOfError()
         self.master.quit()
+    def writePercOfError(self):
+        self.calcPercOfError()
+        self.fileCreated1 = True
+        try:
+            self.sessions1 = open("percentOfError.csv", "r")
+            self.fileList1 = self.sessions.read().split("\n")
+            self.sessions1.close()
 
+            self.sessionNumber1 = len(self.fileList) - 1
+
+        except:
+            self.sessionNumber1 = 1
+            self.fileCreated1 = False
+
+        self.fileHandle1 = open("percentOfError.csv", "a")
+        if self.fileCreated1 == False:
+            self.fileHandle1.write("Sessions, Deletion, Addition, Substitution" + "\n")
+            self.fileCreated1 = True
+        self.fileHandle1.write(str(self.sessionNumber1))
+        self.fileHandle1.write(";")
+        self.fileHandle1.write(str(self.percOfDeletion))
+        self.fileHandle1.write(";")
+        self.fileHandle1.write(str(self.percOfAddition))
+        self.fileHandle1.write(";")
+        self.fileHandle1.write(str(self.percOfSubstitution))
+        self.fileHandle1.write("\n")
+        self.fileHandle1.close()
+    def calcPercOfError(self):
+        try:
+            self.percOfDeletion = (self.deletion) / (self.substitution + self.deletion + self.addition)
+            self.percOfAddition = (self.addition) / (self.addition + self.deletion + self.substitution)
+            self.percOfSubstitution = (self.substitution) / (self.addition+self.substitution+self.deletion)
+        except ZeroDivisionError:
+            self.master.quit()
     def checkWord(self):
         if self.saidWord == self.givenWord:
             self.rightList.append(self.givenWord)
@@ -165,13 +202,23 @@ class GUI(tk.Frame):
         self.fileHandle.write(";")
         self.fileHandle.write(str(self.comparingWords.typeOfErrors))
         self.fileHandle.write(";")
-        self.fileHandle.write(str(self.comparingWords.wrongIndexList))
+        self.fileHandle.write(str(self.comparingWords.revisedWrongIndexList))
         self.fileHandle.write(";")
         self.fileHandle.write(str(self.comparingWords.wrongLetterList))
         self.fileHandle.write("\n")
 
+        self.typeOfError(self.comparingWords.typeOfErrors)
+
         self.comparingWords.reset()
         self.fileHandle.close()
+
+    def typeOfError(self,error):
+        if (error == "Addition"):
+            self.addition += 1
+        elif (error == "Substitution"):
+            self.substitution += 1
+        elif (error == "Deletion"):
+            self.deletion += 1
 
     def newGivenWord(self):
         self.givenWord = self.wordList[random.randrange(0, stop=len(self.wordList))]
@@ -232,9 +279,10 @@ class GUI(tk.Frame):
             self.master.quit()
 
     def testFunction(self):
-        patientName = input("File Name:")
-
-        file1 = open(patientName,"r")
+        # patientName = input("File Name:")
+        # path  = "./data/"+patientName+".txt"
+        path = "./data/patient1.txt"
+        file1 = open(path,"r")
 
         for line in file1:
             line = line.strip()

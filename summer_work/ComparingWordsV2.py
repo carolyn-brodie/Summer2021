@@ -63,21 +63,21 @@ class ComparingWordsV2():
         givenList = list(self.givenWord)
         for index in range(0, len(inputList)):
             if inputList[index] != givenList[index]:
-                self.wrongIndexList.append(index)
+                self.revisedWrongIndexList.append(index)
 
     def equalShiftedGivenFunction(self):
         inputList = list(self.saidWord)
         givenList = list(self.shiftedWord)
         for index in range(0, len(inputList)):
             if inputList[index] != givenList[index]:
-                self.wrongIndexList.append(index)
+                self.revisedWrongIndexList.append(index)
 
     def equalShiftedInputFunction(self):
         inputList = list(self.shiftedWord)
         givenList = list(self.givenWord)
         for index in range(0, len(inputList)):
             if inputList[index] != givenList[index]:
-                self.wrongIndexList.append(index)
+                self.revisedWrongIndexList.append(index)
 
     def inputLessLCS(self):
         lenInputWord = len(self.saidWord)
@@ -135,19 +135,19 @@ class ComparingWordsV2():
 
         listOfInputWordShifted = list(self.saidWord)
         startDiff = self.returnList[1][0] - self.returnList[0][0]
-        for index in range(0,startDiff-1):
-            listOfInputWordShifted.insert(index, "+")
+        for index in range(0,startDiff):
+            listOfInputWordShifted.insert(index, "_")
         while len(listOfInputWordShifted) < len(self.givenWord):
-            listOfInputWordShifted.append("+")
+            listOfInputWordShifted.append("_")
         self.shiftedWord = self.listToString(listOfInputWordShifted)
 
     def shiftGiven(self):
         listOfOutputWordShifted = list(self.givenWord)
         startDiff = self.returnList[0][0] - self.returnList[1][0]
-        for index in range(0,startDiff-1):
-            listOfOutputWordShifted.insert(index, "+")
+        for index in range(0,startDiff):
+            listOfOutputWordShifted.insert(index, "_")
         while (len(listOfOutputWordShifted) < len(self.saidWord)):
-            listOfOutputWordShifted.append("+")
+            listOfOutputWordShifted.append("_")
         self.shiftedWord = self.listToString(listOfOutputWordShifted)
 
     def listToString(self, s):
@@ -179,7 +179,7 @@ class ComparingWordsV2():
         endIndexOutput = startIndexOutput + len(self.LCS) - 1
         self.returnList.append([startIndexOutput, endIndexOutput])
     def whereErrorOccurs(self):
-        for index in self.wrongIndexList:
+        for index in self.revisedWrongIndexList:
             if index == 0:
                 self.whereErrorOccurred = "Beginning"
             elif (index == len(self.shiftedWord)):
@@ -189,13 +189,13 @@ class ComparingWordsV2():
 
     def calcLetters(self):
         if len(self.givenWord) > len(self.saidWord):
-            for index in self.wrongIndexList:
+            for index in self.revisedWrongIndexList:
                 self.wrongLetterList.append(self.givenWord[index])
         elif len(self.givenWord) < len(self.saidWord):
-            for index in self.wrongIndexList:
-                self.wrongLetterList.append(self.saidWord[index])
-        else:
-            for index in self.wrongIndexList:
+            for index in self.revisedWrongIndexList:
+                self.wrongLetterList.append(self.shiftedWord[index])
+        elif len(self.givenWord) == len(self.saidWord):
+            for index in self.revisedWrongIndexList:
                 self.wrongLetterList.append(self.saidWord[index])
     def typeOfError(self):
         if (self.saidWord == self.givenWord):
@@ -204,10 +204,10 @@ class ComparingWordsV2():
             if(len(self.saidWord) == len(self.givenWord)):
                 self.typeOfErrors = "Substitution"
 
-            elif len(self.saidList) > len(self.givenList):
+            elif len(self.saidWord) > len(self.givenWord):
                 self.typeOfErrors = "Addition"
 
-            else:
+            elif len(self.saidWord) < len(self.givenWord):
                 self.typeOfErrors = "Deletion"
 
     def reset(self):
@@ -232,5 +232,17 @@ class ComparingWordsV2():
 
         self.totalList = []
 
+input = "hue"
+old = "blue"
+#
+app = ComparingWordsV2()
 
+app.constructor(saidWord=input,givenWord=old)
+app.controller()
 
+print(app.shiftedWord)
+print(app.LCS)
+print(app.saidList)
+print(app.wrongLetterList)
+print(app.wrongIndexList)
+print(app.revisedWrongIndexList)
