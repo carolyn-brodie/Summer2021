@@ -281,7 +281,7 @@ class GUI(tk.Frame):
     def testFunction(self):
         # patientName = input("File Name:")
         # path  = "./data/"+patientName+".txt"
-        path = "./data/patient1.txt"
+        path = "./data/patient2.txt"
         file1 = open(path,"r")
 
         for line in file1:
