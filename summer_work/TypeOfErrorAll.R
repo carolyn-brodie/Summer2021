@@ -4,7 +4,7 @@ plotLetter <- function() {
   library(stringr)
   library(ggeasy)
 
-png("TypeOFError.png")
+png("TypeOfError.png")
 
 incorrectData <- read.csv("summer_work/excelFile1.csv", sep=';')
 
