@@ -152,7 +152,7 @@ class GUI(tk.Frame):
             self.fileList1 = self.sessions1.read().split("\n")
             self.sessions1.close()
 
-            self.sessionNumber1 = len(self.fileList) - 1
+            self.sessionNumber1 = len(self.fileList1) - 1
 
         except:
             self.sessionNumber1 = 1
