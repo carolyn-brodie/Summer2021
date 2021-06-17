@@ -3,14 +3,16 @@ plotWhereError <- function() {
   library(ggplot2)
   library(stringr)
 
-incorrectData <- read.csv("summer_work/Graphs/ErrorFile.csv", sep=';')
+png("BMETypeOfError.png")
 
-number_of_lines <- nrow(read.csv("summer_work/Graphs/ErrorFile.csv", sep=';'))
+incorrectData <- read.csv("summer_work/excelFile1.csv", sep=';')
+
+number_of_lines <- nrow(read.csv("summer_work/excelFile1.csv", sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
-  ggplot(errorWords, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
+  BMETypeOfError <- ggplot(errorWords, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
     geom_bar(stat="count") +
     scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
     ggtitle(label="Session Feedback") +
@@ -18,6 +20,10 @@ errorWords <-incorrectData %>%
     ylab(label="# of Words") +
     ggeasy:: easy_center_title() +
     labs(fill="Type of Error")
+
+print(BMETypeOfError)
+dev.off()
+ggsave("BMETypeOFError.png", path = "summer_work/Graphs", scale = 0.15)
 }
 
 plotWhereError()

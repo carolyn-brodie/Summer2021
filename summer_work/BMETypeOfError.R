@@ -1,20 +1,20 @@
- library(dplyr)
+plotWhereError <- function(sound) {
+library(dplyr)
  library(ggplot2)
  library(stringr)
-#print(read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';'))
-#print(errorWords)
 
-incorrectData <- read.csv("summer_work/Graphs/ErrorFile.csv", sep=';')
-number_of_lines <- nrow(read.csv("summer_work/Graphs/ErrorFile.csv", sep=';'))
+png("specificBMETypeOfError.png")
+
+incorrectData <- read.csv("summer_work/excelFile1.csv", sep=';')
+number_of_lines <- nrow(read.csv("summer_work/excelFile1.csv", sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
-plotWhereError <- function(sound) {
   s <- paste("^", sound, sep="")
   Words <- errorWords %>%
-    filter(str_detect(word, s))
-  ggplot(Words, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
+    filter(str_detect(Word, s))
+  BMETypeOfError <- ggplot(Words, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
     geom_bar(stat="count") +
     scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
     ggtitle(label="Session Feedback") +
@@ -22,6 +22,11 @@ plotWhereError <- function(sound) {
     ylab(label="# of Words") +
     ggeasy:: easy_center_title() +
     labs(fill="Type of Error")
+
+print(BMETypeOfError)
+dev.off()
+
+ggsave("specificBMETypeOfError.png", path = "summer_work/Graphs", scale = 0.15)
 }
 
 plotWhereError("r")
