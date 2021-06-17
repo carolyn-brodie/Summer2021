@@ -160,7 +160,7 @@ class GUI(tk.Frame):
 
         self.fileHandle1 = open("percentOfError.csv", "a")
         if self.fileCreated1 == False:
-            self.fileHandle1.write("Sessions, Deletion, Addition, Substitution" + "\n")
+            self.fileHandle1.write("Sessions; Deletion; Addition; Substitution" + "\n")
             self.fileCreated1 = True
 
         self.fileHandle1.write(str(self.sessionNumber1))
