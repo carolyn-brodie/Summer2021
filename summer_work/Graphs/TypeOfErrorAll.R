@@ -1,19 +1,17 @@
-plotLetter <- function(sound) {
+plotLetter <- function() {
   library(dplyr)
   library(ggplot2)
   library(stringr)
   library(ggeasy)
 
 incorrectData <- read.csv("summer_work/Graphs/ErrorFile.csv", sep=';')
+
 number_of_lines <- nrow(read.csv("summer_work/Graphs/ErrorFile.csv", sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
-  s <- paste("^", sound, sep="")
-   Words <- errorWords %>%
-     filter(str_detect(Word, s))
-   ggplot(Words, aes(x=TypeOfError, fill=word)) +
+   ggplot(errorWords, aes(x=TypeOfError, fill=word)) +
      geom_bar(stat="count") +
      scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
       ggtitle(label="Session Feedback") +
@@ -21,8 +19,6 @@ errorWords <-incorrectData %>%
       ylab(label="# of Words") +
       ggeasy:: easy_center_title() +
       labs(fill="Expected Word")
-
 }
 
-plotLetter("r|c")
-
+plotLetter()

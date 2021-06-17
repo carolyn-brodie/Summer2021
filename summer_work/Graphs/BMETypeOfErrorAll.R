@@ -1,20 +1,16 @@
- library(dplyr)
- library(ggplot2)
- library(stringr)
-#print(read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/Graphs/fooddata", sep=';'))
-#print(errorWords)
+plotWhereError <- function() {
+  library(dplyr)
+  library(ggplot2)
+  library(stringr)
 
 incorrectData <- read.csv("summer_work/Graphs/ErrorFile.csv", sep=';')
+
 number_of_lines <- nrow(read.csv("summer_work/Graphs/ErrorFile.csv", sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
-plotWhereError <- function(sound) {
-  s <- paste("^", sound, sep="")
-  Words <- errorWords %>%
-    filter(str_detect(word, s))
-  ggplot(Words, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
+  ggplot(errorWords, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
     geom_bar(stat="count") +
     scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
     ggtitle(label="Session Feedback") +
@@ -24,4 +20,4 @@ plotWhereError <- function(sound) {
     labs(fill="Type of Error")
 }
 
-plotWhereError("r")
+plotWhereError()

@@ -35,7 +35,7 @@ class GUI(tk.Frame):
         self.saidWord = ""
 
         self.recognizer = sr.Recognizer()
-        self.mic = sr.Microphone(device_index=1)
+        self.mic = sr.Microphone(device_index=0)
 
         file = open("rWordsBeginning", "r")
         self.WordList = []
@@ -62,7 +62,6 @@ class GUI(tk.Frame):
         self.exit.grid(row=10, column=0)
 
     def calcPercentages(self):
-
         try:
             self.percentageOfRight = (len(self.rightWordSet) / (
                     len(self.rightWordSet) + len(self.wrongWordSet) + len(self.nothingWordSet)))
@@ -94,23 +93,26 @@ class GUI(tk.Frame):
         self.startButton.destroy()
 
         self.lable1 = tk.Label(self, text="Say the Word:")
-        self.lable1.grid(row=11, column=0)
+        self.lable1.grid()
 
         self.canvas1 = tk.Canvas(self.master,
                                  width=WIDTH / 4,
                                  height=40)
         self.canvas1.pack(side="top")
 
+        self.randomWord()
+        self.printWord()
+
         self.canvas2 = tk.Canvas(self.master,
                                  width=WIDTH / 4,
                                  height=40)
         self.canvas2.pack(side="top")
 
-        self.randomWord()
-        self.printWord()
+        self.lable2 = tk.Label(self, text="The Word I Heard:")
+        self.lable2.grid()
 
     def randomWord(self):
-
+        self.saidWord = ""
         self.word = self.WordList[random.randrange(0, stop=len(self.WordList))]
 
 
@@ -143,6 +145,7 @@ class GUI(tk.Frame):
             print(self.saidWord)
             self.wrong += 1
             self.wrongWordSet.append(self.word)
+
 
         self.readOutCSV()
         self.randomWord()
