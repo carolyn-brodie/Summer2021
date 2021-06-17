@@ -74,6 +74,8 @@ class GUI(tk.Frame):
     def create_widgets(self):
 
         # Creates the start button which then calls the start function.
+        self.testButton = tk.Button(self,text = "testButton",command = self.testFunction)
+        self.testButton.grid(row = 3)
         self.startButton = tk.Button(self,text = "Start",command = self.startFunction)
         self.startButton.grid(row = 1,column = 0)
         # Exits the programs but does not call the write to file function.
@@ -228,4 +230,18 @@ class GUI(tk.Frame):
                     len(self.rightList) + len(self.wrongList) + len(self.unHeardList)))
         except ZeroDivisionError:
             self.master.quit()
+
+    def testFunction(self):
+        patientName = input("File Name:")
+
+        file1 = open(patientName,"r")
+
+        for line in file1:
+            line = line.strip()
+            line1 = line.split(";")
+            print(line1)
+            self.givenWord = line1[0]
+            self.saidWord = line1[1]
+
+            self.readOutCSV()
 main()
