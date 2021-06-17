@@ -13,7 +13,7 @@ errorWords <-incorrectData %>%
 plotWhereError <- function(sound) {
   s <- paste("^", sound, sep="")
   Words <- errorWords %>%
-    filter(str_detect(Word, s))
+    filter(str_detect(word, s))
   ggplot(Words, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
     geom_bar(stat="count") +
     scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
@@ -24,4 +24,4 @@ plotWhereError <- function(sound) {
     labs(fill="Type of Error")
 }
 
-plotWhereError("c")
+plotWhereError("r")

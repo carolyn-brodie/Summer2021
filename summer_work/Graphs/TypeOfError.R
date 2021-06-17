@@ -13,7 +13,7 @@ errorWords <-incorrectData %>%
   s <- paste("^", sound, sep="")
    Words <- errorWords %>%
      filter(str_detect(Word, s))
-   ggplot(Words, aes(x=TypeOfError, fill=Word)) +
+   ggplot(Words, aes(x=TypeOfError, fill=word)) +
      geom_bar(stat="count") +
      scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
       ggtitle(label="Session Feedback") +
