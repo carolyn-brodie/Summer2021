@@ -1,10 +1,9 @@
+import LettersToCharactersTest as LCT
+
 class ComparingWordsV2():
     def __init__(self):
         self.givenWord = ""
         self.saidWord = ""
-
-        self.saidList = list(self.saidWord)
-        self.givenList = list(self.givenWord)
 
         self.wrongIndexList = []
         self.revisedWrongIndexList = []
@@ -19,14 +18,19 @@ class ComparingWordsV2():
 
         self.whereErrorOccurred = ""
         self.totalList = []
-
+        self.changedGivenWord = ""
+        self.changedSaidWord = ""
     # Constructor, take the givenWord and the saidWord, have this be called first!!
     def constructor(self,givenWord,saidWord):
         self.givenWord = givenWord
         self.saidWord = saidWord
+        self.changedGivenWord = LCT.lettersToCharacters(self.givenWord)
+        self.changedSaidWord = LCT.lettersToCharacters(self.saidWord)
 
+        self.saidList = list(self.changedSaidWord)
+        self.givenList = list(self.changedSaidWord)
     def controller(self):
-        if len(self.saidWord) == len(self.givenWord):
+        if len(self.changedSaidWord) == len(self.changedGivenWord):
             self.equalSizedWordFunction()
 
             self.calcWrongListInputLess()
@@ -38,7 +42,7 @@ class ComparingWordsV2():
             self.typeOfError()
 
 
-        elif len(self.saidWord) > len(self.givenWord):
+        elif len(self.changedSaidWord) > len(self.changedGivenWord):
             self.inputGreaterLCS()
             self.calcWrongListInputGreater()
             self.shiftGiven()
@@ -59,14 +63,14 @@ class ComparingWordsV2():
 
 
     def equalSizedWordFunction(self):
-        inputList = list(self.saidWord)
-        givenList = list(self.givenWord)
+        inputList = list(self.changedSaidWord)
+        givenList = list(self.changedGivenWord)
         for index in range(0, len(inputList)):
             if inputList[index] != givenList[index]:
                 self.revisedWrongIndexList.append(index)
 
     def equalShiftedGivenFunction(self):
-        inputList = list(self.saidWord)
+        inputList = list(self.changedSaidWord)
         givenList = list(self.shiftedWord)
         for index in range(0, len(inputList)):
             if inputList[index] != givenList[index]:
@@ -74,14 +78,14 @@ class ComparingWordsV2():
 
     def equalShiftedInputFunction(self):
         inputList = list(self.shiftedWord)
-        givenList = list(self.givenWord)
+        givenList = list(self.changedGivenWord)
         for index in range(0, len(inputList)):
             if inputList[index] != givenList[index]:
                 self.revisedWrongIndexList.append(index)
 
     def inputLessLCS(self):
-        lenInputWord = len(self.saidWord)
-        lenGivenWord = len(self.givenWord)
+        lenInputWord = len(self.changedSaidWord)
+        lenGivenWord = len(self.changedGivenWord)
 
         maxLength = 0  # stores the max length of LCS
         endingIndex = lenInputWord  # stores the ending index of LCS in `X`
@@ -94,7 +98,7 @@ class ComparingWordsV2():
             for j in range(1, lenGivenWord + 1):
 
                 # if the current character of `X` and `Y` matches
-                if self.saidWord[i - 1] == self.givenWord[j - 1]:
+                if self.changedSaidWord[i - 1] == self.changedGivenWord[j - 1]:
                     lookup[i][j] = lookup[i - 1][j - 1] + 1
 
                     # update the maximum length and ending index
@@ -103,12 +107,12 @@ class ComparingWordsV2():
                         endingIndex = i
 
         # return longest common substring having length `maxLength`
-        self.LCS = self.saidWord[endingIndex - maxLength: endingIndex]
+        self.LCS = self.changedSaidWord[endingIndex - maxLength: endingIndex]
 
     def inputGreaterLCS(self):
 
-        lenGiven = len(self.givenWord)
-        lenInput = len(self.saidWord)
+        lenGiven = len(self.changedGivenWord)
+        lenInput = len(self.changedSaidWord)
 
         maxLength = 0  # stores the max length of LCS
         endingIndex = lenGiven  # stores the ending index of LCS in `X`
@@ -121,7 +125,7 @@ class ComparingWordsV2():
             for j in range(1, lenInput + 1):
 
                 # if the current character of `X` and `Y` matches
-                if self.givenWord[i - 1] == self.saidWord[j - 1]:
+                if self.changedGivenWord[i - 1] == self.changedSaidWord[j - 1]:
                     lookup[i][j] = lookup[i - 1][j - 1] + 1
 
                     # update the maximum length and ending index
@@ -129,24 +133,24 @@ class ComparingWordsV2():
                         maxLength = lookup[i][j]
                         endingIndex = i
         # return longest common substring having length `maxLength`
-        self.LCS = self.givenWord[endingIndex - maxLength: endingIndex]
+        self.LCS = self.changedGivenWord[endingIndex - maxLength: endingIndex]
 
     def shiftInput(self):
 
-        listOfInputWordShifted = list(self.saidWord)
+        listOfInputWordShifted = list(self.changedSaidWord)
         startDiff = self.returnList[1][0] - self.returnList[0][0]
         for index in range(0,startDiff):
             listOfInputWordShifted.insert(index, "_")
-        while len(listOfInputWordShifted) < len(self.givenWord):
+        while len(listOfInputWordShifted) < len(self.changedGivenWord):
             listOfInputWordShifted.append("_")
         self.shiftedWord = self.listToString(listOfInputWordShifted)
 
     def shiftGiven(self):
-        listOfOutputWordShifted = list(self.givenWord)
+        listOfOutputWordShifted = list(self.changedGivenWord)
         startDiff = self.returnList[0][0] - self.returnList[1][0]
         for index in range(0,startDiff):
             listOfOutputWordShifted.insert(index, "_")
-        while (len(listOfOutputWordShifted) < len(self.saidWord)):
+        while (len(listOfOutputWordShifted) < len(self.changedSaidWord)):
             listOfOutputWordShifted.append("_")
         self.shiftedWord = self.listToString(listOfOutputWordShifted)
 
@@ -161,21 +165,21 @@ class ComparingWordsV2():
         return str1
 
     def calcWrongListInputLess(self):
-        startIndexInput = self.saidWord.index(self.LCS)
+        startIndexInput = self.changedSaidWord.index(self.LCS)
         endIndexInput = startIndexInput + len(self.LCS) - 1
         self.returnList.append([startIndexInput, endIndexInput])
 
-        startIndexOutput = self.givenWord.index(self.LCS)
+        startIndexOutput = self.changedGivenWord.index(self.LCS)
         endIndexOutput = startIndexOutput + len(self.LCS) - 1
         self.returnList.append([startIndexOutput, endIndexOutput])
 
     def calcWrongListInputGreater(self):
 
-        startIndexInput = self.saidWord.index(self.LCS)
+        startIndexInput = self.changedSaidWord.index(self.LCS)
         endIndexInput = startIndexInput + len(self.LCS) - 1
         self.returnList.append([startIndexInput, endIndexInput])
 
-        startIndexOutput = self.givenWord.index(self.LCS)
+        startIndexOutput = self.changedGivenWord.index(self.LCS)
         endIndexOutput = startIndexOutput + len(self.LCS) - 1
         self.returnList.append([startIndexOutput, endIndexOutput])
     def whereErrorOccurs(self):
@@ -188,34 +192,34 @@ class ComparingWordsV2():
                 self.whereErrorOccurred = "Middle"
 
     def calcLetters(self):
-        if len(self.givenWord) > len(self.saidWord):
+        if len(self.changedGivenWord) > len(self.changedSaidWord):
             for index in self.revisedWrongIndexList:
-                self.wrongLetterList.append(self.givenWord[index])
-        elif len(self.givenWord) < len(self.saidWord):
+                self.wrongLetterList.append(self.changedGivenWord[index])
+        elif len(self.changedGivenWord) < len(self.changedSaidWord):
             for index in self.revisedWrongIndexList:
                 self.wrongLetterList.append(self.shiftedWord[index])
-        elif len(self.givenWord) == len(self.saidWord):
+        elif len(self.changedGivenWord) == len(self.changedSaidWord):
             for index in self.revisedWrongIndexList:
-                self.wrongLetterList.append(self.saidWord[index])
+                self.wrongLetterList.append(self.changedSaidWord[index])
     def typeOfError(self):
-        if (self.saidWord == self.givenWord):
+        if (self.changedSaidWord== self.changedGivenWord):
             self.typeOfErrors = "None"
         else:
-            if(len(self.saidWord) == len(self.givenWord)):
+            if(len(self.changedSaidWord) == len(self.changedGivenWord)):
                 self.typeOfErrors = "Substitution"
 
-            elif len(self.saidWord) > len(self.givenWord):
+            elif len(self.changedSaidWord) > len(self.changedGivenWord):
                 self.typeOfErrors = "Addition"
 
-            elif len(self.saidWord) < len(self.givenWord):
+            elif len(self.changedSaidWord) < len(self.changedGivenWord):
                 self.typeOfErrors = "Deletion"
 
     def reset(self):
-        self.givenWord = ""
-        self.saidWord = ""
+        self.changedGivenWord = ""
+        self.changedSaidWord = ""
 
-        self.saidList = list(self.saidWord)
-        self.givenList = list(self.givenWord)
+        self.saidList = list(self.changedSaidWord)
+        self.GivenWord = list(self.changedGivenWord)
 
         self.wrongIndexList = []
         self.revisedWrongIndexList = []
@@ -232,17 +236,3 @@ class ComparingWordsV2():
 
         self.totalList = []
 
-input = "hue"
-old = "blue"
-#
-app = ComparingWordsV2()
-
-app.constructor(saidWord=input,givenWord=old)
-app.controller()
-
-print(app.shiftedWord)
-print(app.LCS)
-print(app.saidList)
-print(app.wrongLetterList)
-print(app.wrongIndexList)
-print(app.revisedWrongIndexList)

@@ -2,7 +2,7 @@ import tkinter as tk
 import speech_recognition as sr
 import random
 import ComparingWordsV2
-
+import pillow as PIL
 WIDTH = 600
 HEIGHT = 600
 TEXT_SIZE = 10
@@ -192,6 +192,7 @@ class GUI(tk.Frame):
             self.numWrong += 1
 
     def readOutCSV(self):
+
         self.comparingWords.constructor(self.givenWord,self.saidWord)
         self.comparingWords.controller()
 
@@ -301,7 +302,7 @@ class GUI(tk.Frame):
     def testFunction(self):
         # patientName = input("File Name:")
         # path  = "./data/"+patientName+".txt"
-        path = "./data/patient2.txt"
+        path = "data/patient1.txt"
         file1 = open(path,"r")
 
         for line in file1:
