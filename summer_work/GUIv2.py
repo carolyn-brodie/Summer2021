@@ -152,7 +152,7 @@ class GUI(tk.Frame):
             self.fileList1 = self.sessions1.read().split("\n")
             self.sessions1.close()
 
-            self.sessionNumber1 = len(self.fileList) - 1
+            self.sessionNumber1 = len(self.fileList1) - 1
 
         except:
             self.sessionNumber1 = 1
@@ -195,24 +195,42 @@ class GUI(tk.Frame):
         self.comparingWords.constructor(self.givenWord,self.saidWord)
         self.comparingWords.controller()
 
-        self.fileHandle = open("excelFile1.csv", "a")
-        self.fileHandle.write(str(self.comparingWords.givenWord))
-        self.fileHandle.write(";")
-        self.fileHandle.write(str(self.comparingWords.saidWord))
-        self.fileHandle.write(";")
-        self.fileHandle.write(str(self.comparingWords.whereErrorOccurred))
-        self.fileHandle.write(";")
-        self.fileHandle.write(str(self.comparingWords.typeOfErrors))
-        self.fileHandle.write(";")
-        self.fileHandle.write(str(self.comparingWords.revisedWrongIndexList))
-        self.fileHandle.write(";")
-        self.fileHandle.write(str(self.comparingWords.wrongLetterList))
-        self.fileHandle.write("\n")
+        self.fileCreated2 = True
+        try:
+            self.sessions2 = open("excelFile1.csv", "r")
+            self.fileList2 = self.sessions2.read().split("\n")
+            self.sessions2.close()
+
+            self.sessionNumber2 = len(self.fileList2) - 1
+
+        except:
+            self.sessionNumber2 = 1
+            self.fileCreated2 = False
+
+        self.fileHandle2 = open("excelFile1.csv", "a")
+        if self.fileCreated2 == False:
+            self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;LetterOfError" + "\n")
+            self.fileCreated2 = True
+
+        self.fileHandle2.write(str(self.sessionNumber2))
+        self.fileHandle2.write(";")
+        self.fileHandle2.write(str(self.comparingWords.givenWord))
+        self.fileHandle2.write(";")
+        self.fileHandle2.write(str(self.comparingWords.saidWord))
+        self.fileHandle2.write(";")
+        self.fileHandle2.write(str(self.comparingWords.whereErrorOccurred))
+        self.fileHandle2.write(";")
+        self.fileHandle2.write(str(self.comparingWords.typeOfErrors))
+        self.fileHandle2.write(";")
+        self.fileHandle2.write(str(self.comparingWords.revisedWrongIndexList))
+        self.fileHandle2.write(";")
+        self.fileHandle2.write(str(self.comparingWords.wrongLetterList))
+        self.fileHandle2.write("\n")
 
         self.typeOfError(self.comparingWords.typeOfErrors)
 
         self.comparingWords.reset()
-        self.fileHandle.close()
+        self.fileHandle2.close()
 
     def typeOfError(self,error):
         if (error == "Addition"):
