@@ -226,7 +226,9 @@ class GUI(tk.Frame):
         self.fileHandle2.write(";")
         self.fileHandle2.write(str(self.comparingWords.revisedWrongIndexList))
         self.fileHandle2.write(";")
-        self.fileHandle2.write(str(self.comparingWords.wrongLetterList))
+        self.fileHandle2.write(str(self.comparingWords.wrongLetterListOutput))
+        self.fileHandle2.write(";")
+        self.fileHandle2.write(str(self.comparingWords.wrongLetterListInput))
         self.fileHandle2.write("\n")
 
         self.typeOfError(self.comparingWords.typeOfErrors)
@@ -303,7 +305,7 @@ class GUI(tk.Frame):
     def testFunction(self):
         # patientName = input("File Name:")
         # path  = "./data/"+patientName+".txt"
-        path = "data/patient1.txt"
+        path = "data/patient2.txt"
         file1 = open(path,"r")
 
         for line in file1:
