@@ -2,7 +2,8 @@ import tkinter as tk
 import speech_recognition as sr
 import random
 import ComparingWordsV2
-import pillow as PIL
+from PIL import Image
+
 WIDTH = 600
 HEIGHT = 600
 TEXT_SIZE = 10
@@ -89,6 +90,7 @@ class GUI(tk.Frame):
         # Destroys the startButton and the MainPageExit
         self.startButton.destroy()
         self.mainPageExit.destroy()
+        self.testButton.destroy()
 
         self.audioButton = tk.Button(self,text = "Record Audio", command = self.audioFunction)
         self.audioButton.grid(row = 1,column = 0)
@@ -96,13 +98,15 @@ class GUI(tk.Frame):
         self.nextButton = tk.Button(self, text="Next", command=self.nextFunction)
         self.nextButton.grid(row=2, column=0)
 
+        self.anayliticsButton = tk.Button(self,text = "Analytics",command = self.analyticsFunction)
+        self.anayliticsButton.grid(row = 5)
         self.exitButton = tk.Button(self,text = "Exit",command = self.exitFunction)
-        self.exitButton.grid(row = 3,column = 0)
+        self.exitButton.grid(row = 6,column = 0)
 
         self.labelGivenWord = tk.Label(self,text = "Say the Give Word")
-        self.labelGivenWord.grid(row = 5)
+        self.labelGivenWord.grid(row = 7)
         # Creates a canvas for the given word
-        self.canvasGivenWord = tk.Canvas(self.master, width=WIDTH / 4,height=40)
+        self.canvasGivenWord = tk.Canvas(self.master,width=WIDTH / 4,height=40)
         self.canvasGivenWord.pack(side = "top")
 
         # Creates a canvas for the said word
@@ -111,6 +115,12 @@ class GUI(tk.Frame):
 
         self.newGivenWord()
         self.printGivenWord()
+    def analyticsFunction(self):
+        # img = PhotoImage(file='/Users/zachg/PycharmProjects/Summer2021a/BME.png')
+        img = Image.open('./Graphs/BME.png')
+        img.show()
+
+
 
     # Is called on the audioButton being pressed, starts the audio
     def audioFunction(self):
@@ -198,7 +208,7 @@ class GUI(tk.Frame):
 
         self.fileCreated2 = True
         try:
-            self.sessions2 = open("excelFile1.csv", "r")
+            self.sessions2 = open("excelFile2.csv", "r")
             self.fileList2 = self.sessions2.read().split("\n")
             self.sessions2.close()
 
@@ -208,9 +218,9 @@ class GUI(tk.Frame):
             self.sessionNumber2 = 1
             self.fileCreated2 = False
 
-        self.fileHandle2 = open("excelFile1.csv", "a")
+        self.fileHandle2 = open("excelFile2.csv", "a")
         if self.fileCreated2 == False:
-            self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;LetterOfError" + "\n")
+            self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;GivenLetter;SaidLetter" + "\n")
             self.fileCreated2 = True
 
         self.fileHandle2.write(str(self.sessionNumber2))
@@ -225,7 +235,9 @@ class GUI(tk.Frame):
         self.fileHandle2.write(";")
         self.fileHandle2.write(str(self.comparingWords.revisedWrongIndexList))
         self.fileHandle2.write(";")
-        self.fileHandle2.write(str(self.comparingWords.wrongLetterList))
+        self.fileHandle2.write(str(self.comparingWords.wrongLetterListOutput))
+        self.fileHandle2.write(";")
+        self.fileHandle2.write(str(self.comparingWords.wrongLetterListInput))
         self.fileHandle2.write("\n")
 
         self.typeOfError(self.comparingWords.typeOfErrors)

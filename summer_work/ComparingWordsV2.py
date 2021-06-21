@@ -8,7 +8,8 @@ class ComparingWordsV2():
         self.wrongIndexList = []
         self.revisedWrongIndexList = []
 
-        self.wrongLetterList = []
+        self.wrongLetterListInput = []
+        self.wrongLetterListOutput = []
 
         self.typeOfErrors = ''
 
@@ -186,7 +187,7 @@ class ComparingWordsV2():
         for index in self.revisedWrongIndexList:
             if index == 0:
                 self.whereErrorOccurred = "Beginning"
-            elif (index == len(self.shiftedWord)):
+            elif (index == len(self.shiftedWord)-1):
                 self.whereErrorOccurred = "End"
             else:
                 self.whereErrorOccurred = "Middle"
@@ -194,13 +195,19 @@ class ComparingWordsV2():
     def calcLetters(self):
         if len(self.changedGivenWord) > len(self.changedSaidWord):
             for index in self.revisedWrongIndexList:
-                self.wrongLetterList.append(self.changedGivenWord[index])
+                self.wrongLetterListOutput.append(self.changedGivenWord[index])
+                self.wrongLetterListInput.append(self.shiftedWord[index])
         elif len(self.changedGivenWord) < len(self.changedSaidWord):
             for index in self.revisedWrongIndexList:
-                self.wrongLetterList.append(self.shiftedWord[index])
+
+                self.wrongLetterListInput.append(self.changedSaidWord[index])
+                self.wrongLetterListOutput.append(self.shiftedWord[index])
+
         elif len(self.changedGivenWord) == len(self.changedSaidWord):
             for index in self.revisedWrongIndexList:
-                self.wrongLetterList.append(self.changedSaidWord[index])
+                self.wrongLetterListInput.append(self.changedSaidWord[index])
+                self.wrongLetterListOutput.append(self.changedGivenWord[index])
+
     def typeOfError(self):
         if (self.changedSaidWord== self.changedGivenWord):
             self.typeOfErrors = "None"
@@ -224,7 +231,8 @@ class ComparingWordsV2():
         self.wrongIndexList = []
         self.revisedWrongIndexList = []
 
-        self.wrongLetterList = []
+        self.wrongLetterListInput = []
+        self.wrongLetterListOutput = []
 
         self.typeOfErrors = []
 

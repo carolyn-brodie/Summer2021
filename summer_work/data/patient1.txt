@@ -7,10 +7,10 @@ worm;warm
 blue;hue
 green;greet
 jade;jude
-may ;say
+may;say
 alto;also
 beat;meat
-note ;wrote
+note;wrote
 gym;gum
 pitch;pinch
 jog;job
@@ -42,7 +42,7 @@ black;back
 brown;brow
 month;moth
 Monday;day
-march ;mar
+march;mar
 olive;live
 gift;git
 blues;blue
