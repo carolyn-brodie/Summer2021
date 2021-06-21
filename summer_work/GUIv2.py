@@ -3,6 +3,8 @@ import speech_recognition as sr
 import random
 import ComparingWordsV2
 from PIL import Image
+import datetime
+
 
 WIDTH = 600
 HEIGHT = 600
@@ -23,9 +25,16 @@ def main():
 class GUI(tk.Frame):
     def __init__(self,master):
         # List of wrong, right, unheard words.
+        now = datetime.datetime.now()
+        self.fileAppend = str(str(now.month)+"-"+str(now.day)+"_"+str(now.hour)+"-"+str(now.minute))
+        print(self.fileAppend)
         self.wrongList = []
         self.rightList = []
         self.unHeardList = []
+
+        self.outCSVFile = "outData/ErrorFile_"+self.fileAppend+".csv"
+        self.readPercPercentFile = "outData/RightWrongUnheard.csv"
+        self.readPercErrorFile = "outData/TypeOfError.csv"
 
         # Percentages
         self.percentageOfRight = 0
@@ -82,6 +91,10 @@ class GUI(tk.Frame):
         self.testButton.grid(row = 4)
         self.startButton = tk.Button(self,text = "Start",command = self.startFunction)
         self.startButton.grid(row = 1,column = 0)
+
+        self.analyticsButton = tk.Button(self,text = "Analytics",command = self.AnalyticsFunction)
+        self.analyticsButton.grid(row = 3,column = 0)
+
         # Exits the programs but does not call the write to file function.
         self.mainPageExit = tk.Button(self,text = "Exit",command =lambda :self.master.quit())
         self.mainPageExit.grid(row = 2,column = 0)
@@ -90,6 +103,7 @@ class GUI(tk.Frame):
         # Destroys the startButton and the MainPageExit
         self.startButton.destroy()
         self.mainPageExit.destroy()
+        self.analyticsButton.destroy()
 
         self.audioButton = tk.Button(self,text = "Record Audio", command = self.audioFunction)
         self.audioButton.grid(row = 1,column = 0)
@@ -141,7 +155,6 @@ class GUI(tk.Frame):
         self.printGivenWord()
 
     def exitFunction(self):
-        self.calcPercentages()
         self.writeFilePerc()
         self.writePercOfError()
         self.master.quit()
@@ -149,7 +162,7 @@ class GUI(tk.Frame):
         self.calcPercOfError()
         self.fileCreated1 = True
         try:
-            self.sessions1 = open("percentOfError.csv", "r")
+            self.sessions1 = open(self.readPercErrorFile, "r")
             self.fileList1 = self.sessions1.read().split("\n")
             self.sessions1.close()
 
@@ -159,7 +172,7 @@ class GUI(tk.Frame):
             self.sessionNumber1 = 1
             self.fileCreated1 = False
 
-        self.fileHandle1 = open("percentOfError.csv", "a")
+        self.fileHandle1 = open(self.readPercErrorFile, "a")
         if self.fileCreated1 == False:
             self.fileHandle1.write("Sessions; Deletion; Addition; Substitution" + "\n")
             self.fileCreated1 = True
@@ -179,7 +192,7 @@ class GUI(tk.Frame):
             self.percOfAddition = (self.addition) / (self.addition + self.deletion + self.substitution)
             self.percOfSubstitution = (self.substitution) / (self.addition+self.substitution+self.deletion)
         except ZeroDivisionError:
-            self.master.quit()
+            return 0
 
     def checkWord(self):
         if self.saidWord == self.givenWord:
@@ -199,7 +212,7 @@ class GUI(tk.Frame):
 
         self.fileCreated2 = True
         try:
-            self.sessions2 = open("excelFile1.csv", "r")
+            self.sessions2 = open(self.outCSVFile, "r")
             self.fileList2 = self.sessions2.read().split("\n")
             self.sessions2.close()
 
@@ -209,7 +222,7 @@ class GUI(tk.Frame):
             self.sessionNumber2 = 1
             self.fileCreated2 = False
 
-        self.fileHandle2 = open("excelFile1.csv", "a")
+        self.fileHandle2 = open(self.outCSVFile, "a")
         if self.fileCreated2 == False:
             self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;LetterOfError" + "\n")
             self.fileCreated2 = True
@@ -235,6 +248,10 @@ class GUI(tk.Frame):
 
         self.comparingWords.reset()
         self.fileHandle2.close()
+
+    def AnalyticsFunction(self):
+        img = Image.open("./Graphs/BME.png")
+        img.show()
 
     def typeOfError(self,error):
         if (error == "Addition"):
@@ -266,7 +283,7 @@ class GUI(tk.Frame):
         self.calcPercentages()
         self.fileCreated = True
         try:
-            self.sessions = open("statsForExcels.csv", "r")
+            self.sessions = open(self.readPercPercentFile, "r")
             self.fileList = self.sessions.read().split("\n")
             self.sessions.close()
 
@@ -276,7 +293,7 @@ class GUI(tk.Frame):
             self.sessionNumber = 1
             self.fileCreated = False
 
-        self.fileHandle = open("statsForExcels.csv", "a")
+        self.fileHandle = open(self.readPercPercentFile, "a")
         if self.fileCreated == False:
             self.fileHandle.write("Sessions; Correct; Incorrect; NoResponse" + "\n")
             self.fileCreated = True
@@ -314,6 +331,6 @@ class GUI(tk.Frame):
             print(line1)
             self.givenWord = line1[0]
             self.saidWord = line1[1]
-
+            self.checkWord()
             self.readOutCSV()
 main()
