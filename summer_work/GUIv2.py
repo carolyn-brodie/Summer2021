@@ -224,7 +224,7 @@ class GUI(tk.Frame):
 
         self.fileHandle2 = open(self.outCSVFile, "a")
         if self.fileCreated2 == False:
-            self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;LetterOfError" + "\n")
+            self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;LetterExpectedError;SaidLetterError" + "\n")
             self.fileCreated2 = True
 
         self.fileHandle2.write(str(self.sessionNumber2))
