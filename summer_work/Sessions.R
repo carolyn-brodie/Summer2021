@@ -4,8 +4,8 @@ plotSessions <- function(f1, f2) {
 
 png("PercentagePerSession.png")
 
-  percentCorrect <- read.csv("summer_work/statsForExcels.csv", sep =';')
-  number_of_lines <- nrow(read.csv("summer_work/statsForExcels.csv", sep =';'))
+  percentCorrect <- read.csv("summer_work/fileForExcel.csv")
+  number_of_lines <- nrow(read.csv("summer_work/fileForExcel.csv"))
   week <-percentCorrect[c(f1:f2), c(1,2,3:4)]
   displayCorrect <- paste(round((week[,2]) * 100, 1), "%", sep="")
   displayIncorrect <- paste(round((week[,3]) * 100, 1), "%", sep="")

@@ -5,9 +5,9 @@ plotWhereError <- function() {
 
 png("BMETypeOfError.png")
 
-incorrectData <- read.csv("summer_work/excelFile1.csv", sep=';')
+incorrectData <- read.csv("excelFile2.csv", sep=';')
 
-number_of_lines <- nrow(read.csv("summer_work/excelFile1.csv", sep=';'))
+number_of_lines <- nrow(read.csv("excelFile2.csv", sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))

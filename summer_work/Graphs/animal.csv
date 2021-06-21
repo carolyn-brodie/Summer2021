@@ -1,0 +1,20 @@
+Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;LetterOfError\
+dog;dogged;Middle;Addition;[3, 4, 5];['g']\
+yak;yolk;Middle;Addition;[1, 2, 3];['o']\
+camel;karma;Beginning;Substitution;[0, 2, 3, 4];['c', 'm', 'e', 'l']\
+kangaroo;kangaroos;Middle;Addition;[8];['s']\
+insect;inside;Middle;Substitution;[3, 4, 5];['e', 'c', 't']\
+monarch;monarch;None;None;[];[]\
+worm;warm;Middle;Substitution;[1];['o']\
+whale;bill;Beginning;Deletion;[0, 1, 2, 4];['w', 'h', 'a', 'e']\
+turtle;turtle;None;None;[];[]\
+kangaroo;kanga;Middle;Deletion;[5, 6, 7];['r', 'o', 'o']\
+snail;snail;None;None;[];[]\
+insect;insect;None;None;[];[]\
+snail;stale;Middle;Substitution;[1, 3, 4];['n', 'i', 'l']\
+rabbit;babbitt;Beginning;Addition;[0, 6];['b']\
+eagle;eagles;Middle;Addition;[5];['s']\
+whale;wait;Middle;Deletion;[1, 2, 3, 4];['h', 'a', 'l', 'e']\
+eagle;seagull;Beginning;Addition;[0, 4, 5, 6];['s']\
+yak;yuck;Middle;Addition;[1, 2, 3];['u']\
+dinosaur;dinosaur;None;None;[];[]\cell

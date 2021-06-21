@@ -37,7 +37,7 @@ class GUI(tk.Frame):
         self.recognizer = sr.Recognizer()
         self.mic = sr.Microphone(device_index=0)
 
-        file = open("rWordsBeginning", "r")
+        file = open("foodtext", "r")
         self.WordList = []
 
         for line in file:
@@ -165,7 +165,7 @@ class GUI(tk.Frame):
 
     def readOutCSV(self):
         self.comparingWords.controlFunctionExact(self.saidWord, self.word)
-        self.fileHandle = open("excelFile1.csv", "a")
+        self.fileHandle = open("excelFile2.csv", "a")
         self.fileHandle.write(str(self.word))
         self.fileHandle.write(";")
         self.fileHandle.write(str(self.saidWord))

@@ -32,7 +32,7 @@ library(ggeasy)
   print(PercentOfError)
 dev.off()
 
-ggsave("percentTypeOfError.png", path = "summer_work/Graphs", scale = 5)
+ggsave("percentTypeOfError.png", path = "summer_work/Graphs", scale = .15)
 }
 
 plotErrorPercents(1,2)
