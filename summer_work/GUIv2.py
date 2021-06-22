@@ -224,7 +224,7 @@ class GUI(tk.Frame):
 
         self.fileHandle2 = open(self.outCSVFile, "a")
         if self.fileCreated2 == False:
-            self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;LetterExpectedError;SaidLetterError" + "\n")
+            self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError" + "\n")
             self.fileCreated2 = True
 
         self.fileHandle2.write(str(self.sessionNumber2))
@@ -322,7 +322,7 @@ class GUI(tk.Frame):
     def testFunction(self):
         # patientName = input("File Name:")
         # path  = "./data/"+patientName+".txt"
-        path = "data/patient2.txt"
+        path = "patient3.csv"
         file1 = open(path,"r")
 
         for line in file1:
