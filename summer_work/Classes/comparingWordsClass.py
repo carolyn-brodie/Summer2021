@@ -1,7 +1,8 @@
-import LettersToCharactersTest as LCT
+import LetterToCharactersClass as LCT
 
-class ComparingWordsV2():
+class ComparingWordsC():
     def __init__(self):
+        lct = LCT.LetterToCharacters()
         self.givenWord = ""
         self.saidWord = ""
 
@@ -243,3 +244,5 @@ class ComparingWordsV2():
         self.whereErrorOccurred = []
 
         self.totalList = []
+
+trysa = ComparingWordsC()
