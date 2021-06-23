@@ -32,3 +32,10 @@ class LetterToCharacters():
                 var = word.index(item)
                 word = word.replace(word[var], self.reverse_dict[item])
         return word
+
+    def returnCombined(self):
+        return self.combined_dict
+
+    def returnReversed(self):
+        return self.reverse_dict
+
