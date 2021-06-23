@@ -1,15 +1,20 @@
 
-plotBME <- function() {
+plotBME <- function(file) {
    library(dplyr)
    library(ggplot2)
    library(stringr)
    library(ggeasy)
 
-png("BME.png")
+   fileName <- file
+   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileNamecsv <- paste(fileName2, ".csv", sep ="")
+   pngName <- paste("BMEAll", fileName, sep = "")
+   addpng <- paste(pngName, ".png", sep ="")
+   png(addpng)
 
-incorrectData <- read.csv("excelFile2.csv", sep=';')
-#print(incorrectData)
-number_of_lines <- nrow(read.csv("excelFile2.csv", sep=';'))
+incorrectData <- read.csv(fileNamecsv, sep=';')
+
+number_of_lines <- nrow(read.csv(fileNamecsv, sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
@@ -26,9 +31,9 @@ errorWords <-incorrectData %>%
 print(BME)
 dev.off()
 
-ggsave("BME.png", path = "summer_work/Graphs", scale = 0.15)
+ggsave(addpng, path = "summer_work/Graphs", scale = 1)
 }
 
-plotBME()
+plotBME("ErrorFile2")
 
 

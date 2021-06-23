@@ -1,12 +1,18 @@
 #Graphing errors over time
-plotErrorPercents <- function(f1, f2) {
+plotErrorPercents <- function(f1, f2, file) {
   library(ggplot2)
-library(ggeasy)
+  library(ggeasy)
 
-  png("percentTypeOfError.png")
-  percentError <- read.csv("summer_work/percentOfError.csv", sep = ";")
+   fileName <- file
+   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileNamecsv <- paste(fileName2, ".csv", sep ="")
+   pngName <- paste("TypeOfErrorPercent", fileName, sep = "")
+   addpng <- paste(pngName, ".png", sep ="")
+   png(addpng)
+
+  percentError <- read.csv(fileNamecsv, sep = ";")
   week <- percentError[c(f1:f2), c(1,2,3,4)]
-  number_of_lines <- nrow(read.csv("summer_work/percentOfError.csv", sep = ";"))
+  number_of_lines <- nrow(read.csv(fileNamecsv, sep = ";"))
   displayAddition <- paste(round((week[,3]) * 100, 1), "%", sep="")
   displayDeletion <- paste(round((week[,2]) * 100, 1), "%", sep="")
   displaySubstitution <- paste(round((week[,4]) * 100, 1), "%", sep="")
@@ -32,7 +38,7 @@ library(ggeasy)
   print(PercentOfError)
 dev.off()
 
-ggsave("percentTypeOfError.png", path = "summer_work/Graphs", scale = .15)
+ggsave(addpng, path = "summer_work/Graphs", scale = 1)
 }
 
-plotErrorPercents(1,2)
+plotErrorPercents(1,2, "percentOfError")

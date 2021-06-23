@@ -1,11 +1,16 @@
-plotSessions <- function(f1, f2) {
+plotSessions <- function(f1, f2, file) {
   library(ggplot2)
   library(ggeasy)
 
-png("PercentagePerSession.png")
+   fileName <- file
+   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileNamecsv <- paste(fileName2, ".csv", sep ="")
+   pngName <- paste("LineGraph", fileName, sep = "")
+   addpng <- paste(pngName, ".png", sep ="")
+   png(addpng)
 
-  percentCorrect <- read.csv("summer_work/fileForExcel.csv")
-  number_of_lines <- nrow(read.csv("summer_work/fileForExcel.csv"))
+  percentCorrect <- read.csv(fileNamecsv, sep = ";")
+  number_of_lines <- nrow(read.csv(fileNamecsv, sep = ";"))
   week <-percentCorrect[c(f1:f2), c(1,2,3:4)]
   displayCorrect <- paste(round((week[,2]) * 100, 1), "%", sep="")
   displayIncorrect <- paste(round((week[,3]) * 100, 1), "%", sep="")
@@ -41,7 +46,7 @@ png("PercentagePerSession.png")
 print(LineGraph)
 dev.off()
 
-ggsave("PercentagePerSession.png", path = "summer_work/Graphs", scale = 0.15)
+ggsave(addpng, path = "summer_work/Graphs", scale = 1)
 }
-plotSessions(8,14)
+plotSessions(8,14, "statsForExcels")
 

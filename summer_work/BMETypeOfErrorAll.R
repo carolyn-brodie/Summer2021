@@ -6,10 +6,9 @@ plotWhereError <- function(file) {
   fileName <- file
   fileName2 <- paste("./summer_work/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
-   pngName <- paste("BMETypeOfError", fileName, sep = "")
+   pngName <- paste("BMETypeOfErrorAll", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
   png(addpng)
- #png("BMETypeOfError2.png")
 
 incorrectData <- read.csv(fileNamecsv, sep=';')
 

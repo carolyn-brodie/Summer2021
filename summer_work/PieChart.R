@@ -1,15 +1,21 @@
-percent_Of_Sessions <- function(f1, f2) {
+percent_Of_Sessions <- function(f1, f2, file) {
 
 library(ggplot2)
 
-png("pieChart.png")
+   fileName <- file
+   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileNamecsv <- paste(fileName2, ".csv", sep ="")
+   pngName <- paste("PieChart", fileName, sep = "")
+   addpng <- paste(pngName, ".png", sep ="")
+   png(addpng)
 
-percents_Of_Words.df <- read.csv("/Users/zachg/PycharmProjects/BryanResearchProgram/Rough Stuff/fileForExcel.csv", sep = ",")
+
+percents_Of_Words.df <- read.csv(fileNamecsv, sep = ";")
 percents_Of_Words.df
 
-right_Words <- mean(percents_Of_Words.df[c(f1, f2),2])
-wrong_Words <- mean(percents_Of_Words.df[c(f1, f2),3])
-unsaid_Words <- mean(percents_Of_Words.df[c(f1, f2),4])
+right_Words <- mean(percents_Of_Words.df[c(f1, f2), "Correct"])
+wrong_Words <- mean(percents_Of_Words.df[c(f1, f2), "Incorrect"])
+unsaid_Words <- mean(percents_Of_Words.df[c(f1, f2), "NoResponse"])
 
 data_frame = data.frame("Words" = c("Correct", "Incorrect", "No Response"), "percentages" = c(right_Words, wrong_Words, unsaid_Words))
 
@@ -25,5 +31,7 @@ pie_Chart <- bar_Plot + coord_polar("y", start = 0) + theme_void() +
 print(pie_Chart)
 dev.off()
 
-ggsave("pieChart.png", path = "/Users/zachg/Desktop", scale =0.15)
+ggsave(addpng, path = "summer_work/Graphs", scale =1)
 }
+
+percent_Of_Sessions(1, 4, "statsForExcels")
