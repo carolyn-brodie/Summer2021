@@ -1,18 +1,19 @@
-plotWhereError <- function() {
+plotWhereError <- function(file) {
   library(dplyr)
   library(ggplot2)
   library(stringr)
 
-  # fileName <- "summer_work/ErrorFile1"
-  #  fileNamecsv <- paste(fileName, ".csv", sep ="")
-  #  pngName <- paste("BMETypeOfError", fileName, sep = "")
-  #  addpng <- paste(pngName, ".png", sep ="")
-  # png(addpng)
- png("BMETypeOfError2.png")
+  fileName <- file
+  fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileNamecsv <- paste(fileName2, ".csv", sep ="")
+   pngName <- paste("BMETypeOfError", fileName, sep = "")
+   addpng <- paste(pngName, ".png", sep ="")
+  png(addpng)
+ #png("BMETypeOfError2.png")
 
-incorrectData <- read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/ErrorFile1.csv", sep=';')
+incorrectData <- read.csv(fileNamecsv, sep=';')
 
-number_of_lines <- nrow(read.csv("/Users/larakallem/PycharmProjects/Summer2021/summer_work/ErrorFile1.csv", sep=';'))
+number_of_lines <- nrow(read.csv(fileNamecsv, sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
@@ -28,8 +29,8 @@ errorWords <-incorrectData %>%
 
 print(BMETypeOfError)
 dev.off()
-ggsave("BMETypeOfError2.png", path = "summer_work/Graphs", scale = 1)
+ggsave(addpng, path = "summer_work/Graphs", scale = 1)
 
 }
 
-plotWhereError()
+plotWhereError("ErrorFile1")
