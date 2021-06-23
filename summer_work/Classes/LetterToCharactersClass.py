@@ -12,7 +12,7 @@ class LetterToCharacters():
                            "sp": "\u00de",
                            "st": "\u00df", "sw": "\u00e0"}
 
-        self.combined_dict = dict
+        self.combined_dict = {}
         self.combined_dict.update(self.digraph_dict)
         self.combined_dict.update(self.blend_dict)
 
