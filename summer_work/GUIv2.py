@@ -322,7 +322,7 @@ class GUI(tk.Frame):
     def testFunction(self):
         # patientName = input("File Name:")
         # path  = "./data/"+patientName+".txt"
-        path = "patient3.csv"
+        path = "patient2.csv"
         file1 = open(path,"r")
 
         for line in file1:
@@ -333,4 +333,5 @@ class GUI(tk.Frame):
             self.saidWord = line1[1]
             self.checkWord()
             self.readOutCSV()
+
 main()
