@@ -52,7 +52,9 @@ class ErrorFileDict:
         for listInside in listOfLetters:
             letter1 = listInside[0]
             letter2 = listInside[1]
-            temp[letter1][letter2] = temp[letter1][letter2] + 1
+            if letter1 in temp:
+                if letter2 in temp[letter1]:
+                    temp[letter1][letter2] = temp[letter1][letter2] + 1
 
         return temp
 
@@ -159,4 +161,3 @@ class ErrorFileDict:
         return returnList
 
 lol = ErrorFileDict()
-lol.occursController("./outData/ErrorFile_6-21_14-32.csv")

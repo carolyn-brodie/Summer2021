@@ -2,7 +2,7 @@ import LetterToCharactersClass as LCT
 
 class ComparingWordsC():
     def __init__(self):
-        lct = LCT.LetterToCharacters()
+        self.lct = LCT.LetterToCharacters()
         self.givenWord = ""
         self.saidWord = ""
 
@@ -26,8 +26,8 @@ class ComparingWordsC():
     def constructor(self,givenWord,saidWord):
         self.givenWord = givenWord
         self.saidWord = saidWord
-        self.changedGivenWord = LCT.lettersToCharacters(self.givenWord)
-        self.changedSaidWord = LCT.lettersToCharacters(self.saidWord)
+        self.changedGivenWord = self.lct.lettersToCharacters(self.givenWord)
+        self.changedSaidWord = self.lct.lettersToCharacters(self.saidWord)
 
         self.saidList = list(self.changedSaidWord)
         self.givenList = list(self.changedSaidWord)
@@ -210,7 +210,7 @@ class ComparingWordsC():
                 self.wrongLetterListOutput.append(self.changedGivenWord[index])
 
     def typeOfError(self):
-        if (self.changedSaidWord== self.changedGivenWord):
+        if (self.changedSaidWord == self.changedGivenWord):
             self.typeOfErrors = "None"
         else:
             if(len(self.changedSaidWord) == len(self.changedGivenWord)):
@@ -245,4 +245,4 @@ class ComparingWordsC():
 
         self.totalList = []
 
-trysa = ComparingWordsC()
+
