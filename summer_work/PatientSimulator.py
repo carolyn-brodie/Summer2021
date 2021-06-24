@@ -1,11 +1,12 @@
 import random
-
+import LettersToCharactersTest as LTC
 
 letterList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o","p", "q", "r", "s", "t", "u", "v","w","x","y","z"]
 vowelList = ["a", "e", "i", "o", "u"]
 
 def PatientSimulator(word):
     word = word.strip()
+    word = LTC.lettersToCharacters(word)
     firstIndexWord = firstIndex(word)
     middleVowelWord = middleVowel(word)
     additionEngingWord = additionEnding(word)
@@ -65,6 +66,7 @@ def listToString(s):
 
 wordFile = open("colorstext", "r")
 for line in wordFile:
+    line = line.strip()
     PatientSimulator(line)
 
     print(line)

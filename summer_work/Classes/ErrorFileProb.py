@@ -10,9 +10,9 @@ import LetterToCharactersClass as LTC
 class ErrorFileDict:
     def __init__(self):
         ltc = LTC.LetterToCharacters()
-        self.bothDictComb = ltc.returnCombined()
+        self.bothDictComb = ltc.returnAllCombined()
 
-        self.occursDictionary = self.createOccursDict(self.bothDictComb)
+        self.occursDictionary = ltc.returnFormated()
 
         self.filePath = ""
         self.fileHandle = ""
@@ -38,18 +38,6 @@ class ErrorFileDict:
         :param dict: dict is the dictionary that temp will be created with
         :return: returns the nested dictionary
         """
-        # Creates to blank dicts
-        temp = {}
-        temp1 = {}
-        temp.update(dict1)
-        # Loops through the keys in temp assigning another instance of temp per key
-        for char in temp:
-            temp[char] = {"a": 0, "b": 0, "c": 0, "d": 0, "e": 0, "f": 0,
-         "g": 0, "h": 0, "i": 0, "j": 0, "k": 0, "l": 0,
-         "m": 0, "n": 0, "o": 0, "p": 0, "q": 0, "r": 0,
-         "s": 0, "t": 0, "u": 0, "v": 0, "w": 0, "x": 0,
-         "y": 0, "z": 0,"!": 0, "@": 0, "#": 0, "$": 0, "%": 0, "^": 0, ")": 0, "*": 0, "(": 0,"_":0}
-        return temp
 
     @staticmethod
     def populateOccurs(dict1,listOfLetters):
@@ -172,4 +160,3 @@ class ErrorFileDict:
 
 lol = ErrorFileDict()
 lol.occursController("./outData/ErrorFile_6-21_14-32.csv")
-

@@ -23,7 +23,3 @@ def charactersToLetters(word):
             word = word.replace(word[var], reverse_dict[item])
     return word
 
-out = input("Type here: ")
-print(lettersToCharacters(out))
-out1 = lettersToCharacters(out)
-print(charactersToLetters(out1))
