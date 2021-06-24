@@ -38,6 +38,8 @@ def middleVowel(word):
     for index in range(len(word)):
         if word[index] in vowelList:
             wordlist[index] = vowelList[random.randrange(len(vowelList))]
+            if wordlist[index + 1] in vowelList:
+                del wordlist[index + 1]
             word = listToString(wordlist)
             return word
 
@@ -84,3 +86,5 @@ for item in range(len(wordList)):
         PatientSimulator(wordList[item], "addition")
     else:
         PatientSimulator(wordList[item], "deletion")
+
+
