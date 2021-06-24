@@ -37,9 +37,9 @@ def middleVowel(word):
     wordlist = list(word)
     for index in range(len(word)):
         if word[index] in vowelList:
-            wordlist[index] = vowelList[random.randrange(len(vowelList))]
-            if wordlist[index + 1] in vowelList:
+            if word[index: index + 2] in vowelList:
                 del wordlist[index + 1]
+            wordlist[index] = vowelList[random.randrange(len(vowelList))]
             word = listToString(wordlist)
             return word
 
