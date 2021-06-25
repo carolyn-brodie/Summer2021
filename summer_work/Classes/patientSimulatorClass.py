@@ -100,10 +100,9 @@ class PatientSimulatorClass():
 
     def readOutWord(self,givenWord,OutputWord):
         fileHandle = open("./inData/patient4.csv", "a")
-        if givenWord is not None:
-            givenWord = self.LTCC.charactersToLetters(givenWord)
-        if OutputWord is not None:
-            OutputWord = self.LTCC.charactersToLetters(OutputWord)
+
+        givenWord = self.LTCC.charactersToLetters(givenWord)
+        OutputWord = self.LTCC.charactersToLetters(OutputWord)
         fileHandle.write(givenWord)
 
         fileHandle.write(";")
