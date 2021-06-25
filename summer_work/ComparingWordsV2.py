@@ -245,4 +245,3 @@ class ComparingWordsV2():
         self.whereErrorOccurred = []
 
         self.totalList = []
-
