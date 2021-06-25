@@ -45,7 +45,7 @@ class ComparingWordsV2():
 
         elif len(self.changedSaidWord) > len(self.changedGivenWord):
             self.inputGreaterLCS()
-            if self.LCS == 0:
+            if len(self.LCS) == 0:
                 self.calcWrongListInputGreater()
                 self.shiftGiven()
                 self.equalShiftedGivenFunction()
@@ -56,7 +56,7 @@ class ComparingWordsV2():
 
         else:
             self.inputLessLCS()
-            if self.LCS == 0:
+            if len(self.LCS) == 0:
                 self.calcWrongListInputLess()
                 self.shiftInput()
                 self.equalShiftedInputFunction()
