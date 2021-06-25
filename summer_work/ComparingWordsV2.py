@@ -45,22 +45,24 @@ class ComparingWordsV2():
 
         elif len(self.changedSaidWord) > len(self.changedGivenWord):
             self.inputGreaterLCS()
-            self.calcWrongListInputGreater()
-            self.shiftGiven()
-            self.equalShiftedGivenFunction()
-            self.whereErrorOccurs()
-            self.calcLetters()
-            self.typeOfError()
+            if self.LCS == 0:
+                self.calcWrongListInputGreater()
+                self.shiftGiven()
+                self.equalShiftedGivenFunction()
+                self.whereErrorOccurs()
+                self.calcLetters()
+                self.typeOfError()
 
 
         else:
             self.inputLessLCS()
-            self.calcWrongListInputLess()
-            self.shiftInput()
-            self.equalShiftedInputFunction()
-            self.whereErrorOccurs()
-            self.calcLetters()
-            self.typeOfError()
+            if self.LCS == 0:
+                self.calcWrongListInputLess()
+                self.shiftInput()
+                self.equalShiftedInputFunction()
+                self.whereErrorOccurs()
+                self.calcLetters()
+                self.typeOfError()
 
 
     def equalSizedWordFunction(self):
