@@ -322,7 +322,7 @@ class GUI(tk.Frame):
     def testFunction(self):
         # patientName = input("File Name:")
         # path  = "./data/"+patientName+".txt"
-        path = "./inData/patient3.csv"
+        path = "./inData/patient4.csv"
         file1 = open(path,"r")
 
         for line in file1:

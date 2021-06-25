@@ -24,8 +24,8 @@ class ComparingWordsC():
         self.changedSaidWord = ""
     # Constructor, take the givenWord and the saidWord, have this be called first!!
     def constructor(self,givenWord,saidWord):
-        self.givenWord = givenWord
-        self.saidWord = saidWord
+        self.givenWord = givenWord.lower()
+        self.saidWord = saidWord.lower()
         self.changedGivenWord = self.lct.lettersToCharacters(self.givenWord)
         self.changedSaidWord = self.lct.lettersToCharacters(self.saidWord)
 
