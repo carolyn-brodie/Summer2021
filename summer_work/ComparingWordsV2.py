@@ -227,8 +227,8 @@ class ComparingWordsV2():
         self.changedGivenWord = ""
         self.changedSaidWord = ""
 
-        self.saidList = list(self.changedSaidWord)
-        self.GivenWord = list(self.changedGivenWord)
+        self.givenWord = ""
+        self.saidWord = ""
 
         self.wrongIndexList = []
         self.revisedWrongIndexList = []
