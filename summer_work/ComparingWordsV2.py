@@ -25,6 +25,8 @@ class ComparingWordsV2():
     def constructor(self,givenWord,saidWord):
         self.givenWord = givenWord.lower()
         self.saidWord = saidWord.lower()
+        self.givenWord.strip()
+        self.saidWord.strip()
         self.changedGivenWord = LCT.lettersToCharacters(self.givenWord)
         self.changedSaidWord = LCT.lettersToCharacters(self.saidWord)
 
@@ -32,6 +34,7 @@ class ComparingWordsV2():
         self.givenList = list(self.changedSaidWord)
     def controller(self):
         if len(self.changedSaidWord) == len(self.changedGivenWord):
+            print("Here")
             self.equalSizedWordFunction()
 
             self.calcWrongListInputLess()
@@ -45,6 +48,7 @@ class ComparingWordsV2():
 
         elif len(self.changedSaidWord) > len(self.changedGivenWord):
             self.inputGreaterLCS()
+            print("Here1")
             if len(self.LCS) == 0:
                 self.calcWrongListInputGreater()
                 self.shiftGiven()
@@ -56,6 +60,7 @@ class ComparingWordsV2():
 
         else:
             self.inputLessLCS()
+            print("Here2")
             if len(self.LCS) == 0:
                 self.calcWrongListInputLess()
                 self.shiftInput()
@@ -146,6 +151,7 @@ class ComparingWordsV2():
             listOfInputWordShifted.insert(index, "_")
         while len(listOfInputWordShifted) < len(self.changedGivenWord):
             listOfInputWordShifted.append("_")
+        print(self.shiftedWord)
         self.shiftedWord = self.listToString(listOfInputWordShifted)
 
     def shiftGiven(self):
@@ -245,3 +251,10 @@ class ComparingWordsV2():
         self.whereErrorOccurred = []
 
         self.totalList = []
+test = ComparingWordsV2()
+
+test.constructor("exercise","issue")
+test.controller()
+print(test.LCS)
+print(test.wrongIndexList)
+print()
