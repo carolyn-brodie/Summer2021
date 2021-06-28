@@ -138,23 +138,31 @@ class ComparingWordsC():
         self.LCS = self.changedGivenWord[endingIndex - maxLength: endingIndex]
 
     def shiftInput(self):
-
+        listOfOutputWordShifted = list(self.changedGivenWord)
         listOfInputWordShifted = list(self.changedSaidWord)
         startDiff = self.returnList[1][0] - self.returnList[0][0]
         for index in range(0,startDiff):
             listOfInputWordShifted.insert(index, "_")
         while len(listOfInputWordShifted) < len(self.changedGivenWord):
             listOfInputWordShifted.append("_")
+        while len(listOfInputWordShifted) > len(listOfOutputWordShifted):
+            listOfOutputWordShifted.append("_")
         self.shiftedWord = self.listToString(listOfInputWordShifted)
+        self.changedGivenWord = self.listToString(listOfOutputWordShifted)
 
     def shiftGiven(self):
         listOfOutputWordShifted = list(self.changedGivenWord)
+        listofInputWordShifted = list(self.changedSaidWord)
         startDiff = self.returnList[0][0] - self.returnList[1][0]
         for index in range(0,startDiff):
             listOfOutputWordShifted.insert(index, "_")
         while (len(listOfOutputWordShifted) < len(self.changedSaidWord)):
             listOfOutputWordShifted.append("_")
+        while(len(listOfOutputWordShifted) > len(self.changedSaidWord)):
+            listofInputWordShifted.append("_")
+
         self.shiftedWord = self.listToString(listOfOutputWordShifted)
+        self.changedSaidWord = self.listToString(listofInputWordShifted)
 
     def listToString(self, s):
         # initialize an empty string

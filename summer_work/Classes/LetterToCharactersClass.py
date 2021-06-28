@@ -16,12 +16,15 @@ class LetterToCharacters():
                            "sp": "\u00de",
                            "st": "\u00df", "sw": "\u00e0"}
 
-        self.vowel_dict = {"ai": "\u00e1", "au": "\u00e2", "aw": "\u00e3", "ay": "\u00e4", "ea": "\u00e5", "ee": "\u00e6",
-                      "ei": "\u00e7",
-                      "eo": "\u00e8", "eu": "\u00e9", "ew": "\u00ea", "ey": "\u00eb", "ie": "\u00ec", "oa": "\u00ed",
-                      "oe": "\u00ee",
-                      "oi": "\u00ef", "oo": "\u00f0", "ou": "\u00f1", "ow": "\u00f2", "oy": "\u00f3", "ue": "\u00f4",
-                      "ui": "\u00f5"}
+        self.vowel_dict = {"ai": "\u00e1", "au": "\u00e2", "aw": "\u00e3", "ay": "\u00e4", "ea": "\u00e5",
+                           "ee": "\u00e6",
+                           "ei": "\u00e7",
+                           "eo": "\u00e8", "eu": "\u00e9", "ew": "\u00ea", "ey": "\u00eb", "ie": "\u00ec",
+                           "oa": "\u00ed",
+                           "oe": "\u00ee",
+                           "oi": "\u00ef", "oo": "\u00f0", "ou": "\u00f1", "ow": "\u00f2", "oy": "\u00f3",
+                           "ue": "\u00f4",
+                           "ui": "\u00f5"}
 
         self.combined_dict = {}
         self.combined_dict.update(self.digraph_dict)
@@ -52,16 +55,19 @@ class LetterToCharacters():
 
     def returnReversed(self):
         return self.reverse_dict
+
     def returnAllCombined(self):
         temp = self.alphabet
         temp.update(self.reverse_dict)
         return temp
-    def formatDictForReturn(self,dict1):
+
+    def formatDictForReturn(self, dict1):
         temp = dict1
         for char in temp:
             temp[char] = 0
         return temp
-    def nestDict(self,dict1):
+
+    def nestDict(self, dict1):
         temp = {}
         temp.update(dict1)
         for char1 in temp:
@@ -73,4 +79,3 @@ class LetterToCharacters():
     def returnFormated(self):
         temp = self.nestDict(self.formatDictForReturn(self.returnAllCombined()))
         return temp
-
