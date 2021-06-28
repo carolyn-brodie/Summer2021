@@ -21,6 +21,7 @@ class ComparingWordsV2():
         self.totalList = []
         self.changedGivenWord = ""
         self.changedSaidWord = ""
+
     # Constructor, take the givenWord and the saidWord, have this be called first!!
     def constructor(self,givenWord,saidWord):
         self.givenWord = givenWord.lower()
