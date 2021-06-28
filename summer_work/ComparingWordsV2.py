@@ -89,6 +89,9 @@ class ComparingWordsV2():
         inputList = list(self.shiftedWord)
         givenList = list(self.changedGivenWord)
         for index in range(0, len(inputList)):
+            print(index)
+            print(inputList)
+            print(givenList)
             if inputList[index] != givenList[index]:
                 self.revisedWrongIndexList.append(index)
 
@@ -145,24 +148,31 @@ class ComparingWordsV2():
         self.LCS = self.changedGivenWord[endingIndex - maxLength: endingIndex]
 
     def shiftInput(self):
-
+        listOfOutputWordShifted = list(self.changedGivenWord)
         listOfInputWordShifted = list(self.changedSaidWord)
         startDiff = self.returnList[1][0] - self.returnList[0][0]
         for index in range(0,startDiff):
             listOfInputWordShifted.insert(index, "_")
         while len(listOfInputWordShifted) < len(self.changedGivenWord):
             listOfInputWordShifted.append("_")
-        print(self.shiftedWord)
+        while len(listOfInputWordShifted) > len(listOfOutputWordShifted):
+            listOfOutputWordShifted.append("_")
         self.shiftedWord = self.listToString(listOfInputWordShifted)
+        self.changedGivenWord = self.listToString(listOfOutputWordShifted)
 
     def shiftGiven(self):
         listOfOutputWordShifted = list(self.changedGivenWord)
+        listofInputWordShifted = list(self.changedSaidWord)
         startDiff = self.returnList[0][0] - self.returnList[1][0]
         for index in range(0,startDiff):
             listOfOutputWordShifted.insert(index, "_")
         while (len(listOfOutputWordShifted) < len(self.changedSaidWord)):
             listOfOutputWordShifted.append("_")
+        while(len(listOfOutputWordShifted) > len(self.changedSaidWord)):
+            listofInputWordShifted.append("_")
+
         self.shiftedWord = self.listToString(listOfOutputWordShifted)
+        self.changedSaidWord = self.listToString(listofInputWordShifted)
 
     def listToString(self, s):
         # initialize an empty string
@@ -176,21 +186,21 @@ class ComparingWordsV2():
 
     def calcWrongListInputLess(self):
         startIndexInput = self.changedSaidWord.index(self.LCS)
-        endIndexInput = startIndexInput + len(self.LCS) - 1
+        endIndexInput = startIndexInput + len(self.LCS)
         self.returnList.append([startIndexInput, endIndexInput])
 
         startIndexOutput = self.changedGivenWord.index(self.LCS)
-        endIndexOutput = startIndexOutput + len(self.LCS) - 1
+        endIndexOutput = startIndexOutput + len(self.LCS)
         self.returnList.append([startIndexOutput, endIndexOutput])
 
     def calcWrongListInputGreater(self):
 
         startIndexInput = self.changedSaidWord.index(self.LCS)
-        endIndexInput = startIndexInput + len(self.LCS) - 1
+        endIndexInput = startIndexInput + len(self.LCS)
         self.returnList.append([startIndexInput, endIndexInput])
 
         startIndexOutput = self.changedGivenWord.index(self.LCS)
-        endIndexOutput = startIndexOutput + len(self.LCS) - 1
+        endIndexOutput = startIndexOutput + len(self.LCS)
         self.returnList.append([startIndexOutput, endIndexOutput])
     def whereErrorOccurs(self):
         for index in self.revisedWrongIndexList:
