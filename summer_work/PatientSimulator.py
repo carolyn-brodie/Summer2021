@@ -87,11 +87,19 @@ def removeLetter(word):
     word = listToString(wordList)
     return word
 
-def flipLetters(word):
+def flipLetters(word,letter1,letter2):
     wordList = list(word)
-    tempLetter = wordList[0]
-    wordList[0] = wordList[len(wordList) - 1]
-    wordList[len(wordList) - 1] = tempLetter
+    if letter1 in word and letter2 in word:
+        index1 = wordList.index(letter1)
+        index2 = wordList.index(letter2)
+        tempLetter1 = wordList[index1]
+        wordList[index1] = wordList[index2]
+        wordList[index2] = tempLetter1
+    else:
+        tempLetter2 = wordList[0]
+        index3 = random.randrange(1,len(word)-1)
+        wordList[0] = wordList[index3]
+        wordList[index3] = tempLetter2
     word = listToString(wordList)
     return word
 def listToString(s):
@@ -116,19 +124,22 @@ addPercentage = 0
 delPercentage = 0
 swapPercentage = 50
 
-wordFile = open("ThousandWords", "r")
-wordList = wordFile.read().split("\n")
-wordListLength = len(wordList)
-for item in range(len(wordList)):
-    if item < ((subPercentage * wordListLength) / 100):
-        PatientSimulator(wordList[item],"firstIndex")
-    elif item < (((subPercentage + subPercentage1) * wordListLength) / 100):
-        PatientSimulator(wordList[item],"vowel")
-    elif item < (((subPercentage + subPercentage1 + addPercentage) * wordListLength) / 100):
-        PatientSimulator(wordList[item], "addition")
-    elif item < (((subPercentage + subPercentage1 + addPercentage + delPercentage) * wordListLength) / 100):
-        PatientSimulator(wordList[item], "deletion")
-    else:
-        PatientSimulator(wordList[item], "swap")
+print(flipLetters("budd", "b", "d"))
+
+
+# wordFile = open("ThousandWords", "r")
+# wordList = wordFile.read().split("\n")
+# wordListLength = len(wordList)
+# for item in range(len(wordList)):
+#     if item < ((subPercentage * wordListLength) / 100):
+#         PatientSimulator(wordList[item],"firstIndex")
+#     elif item < (((subPercentage + subPercentage1) * wordListLength) / 100):
+#         PatientSimulator(wordList[item],"vowel")
+#     elif item < (((subPercentage + subPercentage1 + addPercentage) * wordListLength) / 100):
+#         PatientSimulator(wordList[item], "addition")
+#     elif item < (((subPercentage + subPercentage1 + addPercentage + delPercentage) * wordListLength) / 100):
+#         PatientSimulator(wordList[item], "deletion")
+#     else:
+#         PatientSimulator(wordList[item], "swap")
 
 
