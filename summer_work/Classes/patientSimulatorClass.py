@@ -24,16 +24,18 @@ class PatientSimulatorClass():
         self.percentVowel = 25
         self.percentFirstIndex = 25
 
-    def constructor(self, percentAddition, percentDeletion, percentVowel, percentFirstIndex):
+    def constructor(self, percentAddition, percentDeletion, percentVowel, percentFirstIndex,percentFlip):
         self.percentAddition = percentAddition
         self.percentDeletion = percentDeletion
         self.percentVowel = percentVowel
         self.percentFirstIndex = percentFirstIndex
+        self.percentFlip = percentFlip
 
         self.numberOfAddition = int(self.fileLength* (100/percentAddition))
         self.numberOfDeletion = int(self.fileLength*(100/percentDeletion))
         self.numberOfVowel = int(self.fileLength* (100/percentVowel))
         self.numberOfFirstIndex = int(self.fileLength* (100/percentFirstIndex))
+        self.numberOfPercentFlip = int(self.fileLength*(100/percentFlip))
 
         for indexAd in range(self.numberOfAddition):
             numberAd = random.randrange(0,self.fileLength)
@@ -63,6 +65,17 @@ class PatientSimulatorClass():
             wordEdited = self.firstIndex(wordChanged)
             self.readOutWord(wordChanged,wordEdited)
 
+        for indexFlip in range(self.numberOfPercentFlip):
+            numberVow = random.randrange(0,self.fileLength)
+            word = self.wordList[numberVow]
+            wordChanged = self.LTCC.lettersToCharacters(word)
+
+            firstLetter = wordChanged[random.randrange(len(wordChanged))]
+            secondLetter = self.listAlph[random.randrange(len(self.listAlph))]
+            wordEdited = self.flipLetters(wordChanged,firstLetter,secondLetter)
+            self.readOutWord(wordChanged,wordEdited)
+
+
     def firstIndex(self,word):
         wordList = list(word)
         for index in range(len(word)):
@@ -88,7 +101,22 @@ class PatientSimulatorClass():
         for letters in sList:
             wordList.append(letters)
         word = listToString(wordList)
-        print(word)
+        return word
+
+    def flipLetters(self,word, letter1, letter2):
+        wordList = list(word)
+        if letter1 in word and letter2 in word:
+            index1 = wordList.index(letter1)
+            index2 = wordList.index(letter2)
+            tempLetter1 = wordList[index1]
+            wordList[index1] = wordList[index2]
+            wordList[index2] = tempLetter1
+        else:
+            index1 = wordList.index(letter1)
+            index3 = random.randrange(len(word))
+            wordList[index1] = wordList[index3]
+            wordList[index3] = letter1
+        word = listToString(wordList)
         return word
 
     def removeLetter(self,word):
@@ -110,7 +138,8 @@ class PatientSimulatorClass():
 
         fileHandle.write("\n")
         fileHandle.close()
-
+        print(givenWord)
+        print(OutputWord)
 def listToString(s):
     # initialize an empty string
     str1 = ""
@@ -122,4 +151,4 @@ def listToString(s):
     return str1
 
 lol = PatientSimulatorClass()
-lol.constructor(25,25,25,25)
+lol.constructor(5,5,5,5,5)
