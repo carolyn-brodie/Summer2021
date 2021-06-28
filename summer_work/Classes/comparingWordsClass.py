@@ -1,4 +1,4 @@
-import LetterToCharactersClass as LCT
+from summer_work.Classes import LetterToCharactersClass as LCT
 
 class ComparingWordsC():
     def __init__(self):
