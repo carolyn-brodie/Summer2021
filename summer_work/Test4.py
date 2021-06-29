@@ -125,17 +125,17 @@ def main():
     #     fileHandle.write("\n")
     # fileHandle.close()
 
-    a = function1("ErrorFile_6-28_14-48")
+    a = function1(1, 15, "RightWrongUnheard")
     print(a)
 
-def function1(filename):
+def function1(input, output, filename):
     p = 0
     r = ro.r
     # print(path+"r_To_Python.R")
     # r.source(path + "r_To_Python.R")
-    print(path + "TypeOfErrorAll.R")
-    r.source(path + "TypeOfErrorAll.R")
-    p = r.plotLetter(filename)
+    print(path + "PieChart.R")
+    r.source(path + "PieChart.R")
+    p = r.percent_Of_Sessions(input, output, filename)
     return p
 
 # a = function1(1, 3)
