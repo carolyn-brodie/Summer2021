@@ -1,19 +1,18 @@
 
 plotBME <- function(sound, file) {
-   library(dplyr)
+  library(dplyr)
   library(ggplot2)
- library(stringr)
- library(ggeasy)
+  library(stringr)
+  library(ggeasy)
 
    fileName <- file
-  fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName2 <- paste("./summer_work/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("BME", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
-  png(addpng)
+   png(addpng)
 
 incorrectData <- read.csv(fileNamecsv, sep=';')
-print(incorrectData)
 number_of_lines <- nrow(read.csv(fileNamecsv, sep=';'))
 
 errorWords <-incorrectData %>%
