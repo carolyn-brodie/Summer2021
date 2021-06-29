@@ -2,7 +2,8 @@ import tkinter as tk
 import WordQuizer
 import PatientSimulator
 import Analytics
-class MainMenu(tk.Frame):
+
+class MainMenu1(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -26,3 +27,4 @@ class MainMenu(tk.Frame):
         # Exit button
         self.Quit = tk.Button(self, text="Exit", command=self.master.quit)
         self.Quit.grid(row = 10)
+
