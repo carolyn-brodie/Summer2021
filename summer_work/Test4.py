@@ -2,12 +2,12 @@ import random
 import rpy2.robjects as ro
 import os
 import matplotlib.pyplot as plt
-numberOfWords = 1
+numberOfWords = 5
 # path = "/Users/zachg/PycharmProjects/BryanResearchProgram/Rough Stuff/"
 path = ""
 
 def main():
-    inFile = open("words.txt","r")
+    inFile = open("animaltext","r")
     # inFile = open("word.txt","r")
     wordList = []
     wrongWordSet = []
@@ -125,17 +125,17 @@ def main():
     #     fileHandle.write("\n")
     # fileHandle.close()
 
-    a = function1(1, 4)
+    a = function1("ErrorFile_6-28_14-48")
     print(a)
 
-def function1(input, output):
+def function1(filename):
     p = 0
     r = ro.r
     # print(path+"r_To_Python.R")
     # r.source(path + "r_To_Python.R")
-    print(path + "PieChart.R")
-    r.source(path + "PieChart.R")
-    p = r.percent_Of_Sessions(input, output)
+    print(path + "TypeOfErrorAll.R")
+    r.source(path + "TypeOfErrorAll.R")
+    p = r.plotLetter(filename)
     return p
 
 # a = function1(1, 3)
@@ -157,25 +157,25 @@ def function1(input, output):
 
 
 
-def add_row_num(filename):
-    file = open(filename,"r")
-    rows = file.read().split("\n")
-    file.close()
-    # print(rows)
-    file = open(filename,"w")
-    count = 1
-    for index in range(0, len(rows)):
-        # print(len(rows[index]))
-        # print(len(rows))
-        if index == 0:
-            file.write(rows[index] + "\n")
-        elif len(rows[index]) > 0:
-            file.write(str(count)+","+rows[index]+"\n")
-            count += 1
-        elif len(rows[index]) == 0:
-            file.write(str(count) + ",")
-            count += 1
-    file.close()
+# def add_row_num(filename):
+#     file = open(filename,"r")
+#     rows = file.read().split("\n")
+#     file.close()
+#     # print(rows)
+#     file = open(filename,"w")
+#     count = 1
+#     for index in range(0, len(rows)):
+#         # print(len(rows[index]))
+#         # print(len(rows))
+#         if index == 0:
+#             file.write(rows[index] + "\n")
+#         elif len(rows[index]) > 0:
+#             file.write(str(count)+","+rows[index]+"\n")
+#             count += 1
+#         elif len(rows[index]) == 0:
+#             file.write(str(count) + ",")
+#             count += 1
+#     file.close()
 
 #add_row_num("fileForExcel.csv")
 main()

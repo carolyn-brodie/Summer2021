@@ -5,7 +5,7 @@ plotLetter <- function(file) {
   library(ggeasy)
 
    fileName <- file
-   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName2 <- paste("./summer_work/outData/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("TypeOfErrorAll", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
@@ -24,12 +24,11 @@ errorWords <-incorrectData %>%
       xlab(label="Type of Error") +
       ylab(label="# of Words") +
       ggeasy:: easy_center_title() +
-      labs(fill="Expected Word")
+      labs(fill="Expected Word") +
+      # theme(legend.position = "none")
 
 print(TypeOfError)
 dev.off()
 
-ggsave(addpng, path = "summer_work/Graphs", scale = 1)
+ggsave(addpng, path = "summer_work/Graphs", scale = 0.15)
 }
-
-plotLetter("ExcelFile2")
