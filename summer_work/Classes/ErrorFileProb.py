@@ -65,7 +65,6 @@ class ErrorFileDict:
         :return:
         """
         self.setFileHandle(filePath)
-        self.openFileHandler()
         returnedList = self.formatFileHandle()
         self.closeFileHandler()
         self.occursDictionary = self.populateOccurs(self.occursDictionary,returnedList)
@@ -77,13 +76,6 @@ class ErrorFileDict:
         :return: No return
         """
         self.filePath = filePath
-    def openFileHandler(self):
-        """
-        :description: Opens the fileHandler
-        :return: No return
-        """
-        self.fileHandle = open(self.filePath,"r")
-        self.fileHandleBoolean = True
     def closeFileHandler(self):
         """
         :description: Closes the fileHandler
@@ -93,7 +85,7 @@ class ErrorFileDict:
             self.fileHandle.close()
             self.fileHandleBoolean = False
         else:
-            print("fileNotOpen")
+            pass
 
     def checkFileHandle(self):
         """
@@ -111,17 +103,18 @@ class ErrorFileDict:
         :return: Returns a nestedList that includes the letters within the file. (ie: [[a,b]])
         """
         returnList = []
+        with open(self.filePath) as self.fileHandle:
+            next(self.fileHandle)
+            for line in self.fileHandle:
 
-        for line in self.fileHandle:
+                lineStripped = line.strip()
+                lineSplit = lineStripped.split(";")
 
-            lineStripped = line.strip()
-            lineSplit = lineStripped.split(";")
+                letter1 = str(lineSplit[6]).strip("[]'")
+                letter2 = str(lineSplit[7]).strip("[]'")
 
-            letter1 = str(lineSplit[6]).strip("[]'")
-            letter2 = str(lineSplit[7]).strip("[]'")
-
-            returnList.append([letter1,letter2])
-        return returnList
+                returnList.append([letter1,letter2])
+            return returnList
 
     def getOccursList(self):
         """ :return: returns the occursDictionary"""
@@ -159,5 +152,3 @@ class ErrorFileDict:
                     highestFirstChar = firstChar
         returnList.append([highestFirstChar,highestSecondChar,highestOccurence])
         return returnList
-
-lol = ErrorFileDict()

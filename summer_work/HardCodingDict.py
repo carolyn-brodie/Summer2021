@@ -221,7 +221,7 @@ OverallDict = {"a": a1, "b": b1, "c": c1, "d": d1, "e": e1, "f": f1,
                "y": y1, "z": z1, "!": ex1, "@": at1, "#": pou1, "$": dol1,
                "%": perc1, "^": car1, ")": par11, "*": sta1, "(": par21,"_":spac1}
 
-fileName = "Classes/outData/ErrorFile_6-21_14-32.csv"
+fileName = "ErrorFile_6-21_14-32.csv"
 fileReader = open(fileName, "r")
 
 

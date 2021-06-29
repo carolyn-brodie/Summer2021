@@ -41,6 +41,23 @@ class PatientSimulator(tk.Frame):
         self.comparingWords.constructor(self.givenWord,self.saidWord)
         self.comparingWords.controller()
 
+        self.fileCreated2 = True
+        try:
+            self.sessions2 = open(self.outPath, "r")
+            self.fileList2 = self.sessions2.read().split("\n")
+            self.sessions2.close()
+
+            self.sessionNumber2 = len(self.fileList2) - 1
+
+        except:
+            self.sessionNumber2 = 1
+            self.fileCreated2 = False
+
+        self.fileHandle2 = open(self.outPath, "a")
+        if self.fileCreated2 == False:
+            self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError" + "\n")
+            self.fileCreated2 = True
+
         self.fileHandle2 = open(self.outPath,"a")
         self.fileHandle2.write(str(self.comparingWords.givenWord))
         self.fileHandle2.write(";")
