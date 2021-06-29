@@ -1,6 +1,6 @@
 import random
 
-
+consonantList = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
 letterList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o","p", "q", "r", "s", "t", "u", "v",
               "w","x","y","z"]
 vowelList = ["a", "e", "i", "o", "u", "ai", "au", "aw", "ay", "ea", "ee", "ei", "eo", "eu", "ew", "ey", "ie", "oa", "oi",
@@ -17,7 +17,7 @@ def PatientSimulator(word,string):
     elif string == "remove":
         changedWord = removeLetter(word)
     else:
-        changedWord = flipLetters(word)
+        changedWord = flipLetters(word,"c","h")
 
 
 
@@ -43,15 +43,14 @@ def PatientSimulator(word,string):
 def firstIndex(word):
     wordList = list(word)
     for index in range(len(word)):
-        if word[index] in letterList:
-            tempLetter = random.randrange(len(letterList))
-            wordList[index] = letterList[tempLetter]
+        if word[index] in consonantList:
+            tempLetter = random.randrange(len(consonantList))
+            wordList[index] = consonantList[tempLetter]
             if wordList[index] == word[index]:
-                if tempLetter < (len(letterList) - 1):
-                    wordList[index] = letterList[tempLetter + 1]
+                if tempLetter < (len(consonantList) - 1):
+                    wordList[index] = consonantList[tempLetter + 1]
                 else:
-                    wordList[index] = letterList[tempLetter - 1]
-            # wordList = getNewIndex(letterList, word, index)
+                    wordList[index] = consonantList[tempLetter - 1]
             word = listToString(wordList)
             return word
 
@@ -68,7 +67,6 @@ def middleVowel(word):
                     wordList[index] = vowelList[tempLetter + 1]
                 else:
                     wordList[index] = vowelList[tempLetter - 1]
-            # wordList = getNewIndex(vowelList,word,index)
             word = listToString(wordList)
             return word
 
@@ -124,22 +122,19 @@ addPercentage = 0
 delPercentage = 0
 swapPercentage = 50
 
-print(flipLetters("budd", "b", "d"))
-
-
-# wordFile = open("ThousandWords", "r")
-# wordList = wordFile.read().split("\n")
-# wordListLength = len(wordList)
-# for item in range(len(wordList)):
-#     if item < ((subPercentage * wordListLength) / 100):
-#         PatientSimulator(wordList[item],"firstIndex")
-#     elif item < (((subPercentage + subPercentage1) * wordListLength) / 100):
-#         PatientSimulator(wordList[item],"vowel")
-#     elif item < (((subPercentage + subPercentage1 + addPercentage) * wordListLength) / 100):
-#         PatientSimulator(wordList[item], "addition")
-#     elif item < (((subPercentage + subPercentage1 + addPercentage + delPercentage) * wordListLength) / 100):
-#         PatientSimulator(wordList[item], "deletion")
-#     else:
-#         PatientSimulator(wordList[item], "swap")
+wordFile = open("foodtext", "r")
+wordList = wordFile.read().split("\n")
+wordListLength = len(wordList)
+for item in range(len(wordList)):
+    if item < ((subPercentage * wordListLength) / 100):
+        PatientSimulator(wordList[item],"firstIndex")
+    elif item < (((subPercentage + subPercentage1) * wordListLength) / 100):
+        PatientSimulator(wordList[item],"vowel")
+    elif item < (((subPercentage + subPercentage1 + addPercentage) * wordListLength) / 100):
+        PatientSimulator(wordList[item], "addition")
+    elif item < (((subPercentage + subPercentage1 + addPercentage + delPercentage) * wordListLength) / 100):
+        PatientSimulator(wordList[item], "deletion")
+    else:
+        PatientSimulator(wordList[item], "swap")
 
 
