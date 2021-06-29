@@ -3,12 +3,12 @@ plotWhereError <- function(file) {
   library(ggplot2)
   library(stringr)
 
-  fileName <- file
-  fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName <- file
+   fileName2 <- paste("./summer_work/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("BMETypeOfErrorAll", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
-  png(addpng)
+   png(addpng)
 
 incorrectData <- read.csv(fileNamecsv, sep=';')
 
@@ -32,4 +32,4 @@ ggsave(addpng, path = "summer_work/Graphs", scale = 1)
 
 }
 
-plotWhereError("ErrorFile1")
+plotWhereError("ErrorFile2")

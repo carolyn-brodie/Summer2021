@@ -8,13 +8,13 @@ vowelList = ["a", "e", "i", "o", "u", "ai", "au", "aw", "ay", "ea", "ee", "ei", 
 
 def PatientSimulator(word,string):
     word = word.strip()
-    if string == "firstIndex":
+    if string == 1:
         changedWord = firstIndex(word)
-    elif string == "vowel":
+    elif string == 2:
         changedWord = middleVowel(word)
-    elif string == "addition":
+    elif string == 3:
         changedWord = additionEnding(word)
-    elif string == "remove":
+    elif string == 4:
         changedWord = removeLetter(word)
     else:
         changedWord = flipLetters(word,"c","h")
@@ -28,17 +28,6 @@ def PatientSimulator(word,string):
     fileHandle.write("\n")
 
     fileHandle.close()
-
-# def getNewIndex(list1, word, index):
-#     wordList = list(word)
-#     tempLetter = random.randrange(len(list1))
-#     wordList[index] = list1[tempLetter]
-#     if wordList[index] == word[index]:
-#         if tempLetter < (len(list1) - 1):
-#             wordList[index] = list1[tempLetter + 1]
-#         else:
-#             wordList[index] = list1[tempLetter - 1]
-#     return wordList
 
 def firstIndex(word):
     wordList = list(word)
@@ -109,32 +98,35 @@ def listToString(s):
         str1 += ele
     # return string
     return str1
+try:
+    subPercentage = int(input("Type % of Consonant Substitution Errors: "))
+    subPercentage1 = int(input("Type % of Vowel Substitution Errors: "))
+    addPercentage = int(input("Type % of Addition Errors: "))
+    delPercentage = int(input("Type % of Deletion Errors: "))
+    swapPercentage = int(input("Type % of Swapping Substitution Errors: "))
+except:
+    print("You entered invalid numbers. Please enter whole numbers.")
+    subPercentage = 20
+    subPercentage1 = 20
+    addPercentage = 20
+    delPercentage = 20
+    swapPercentage = 20
 
-# subPercentage = int(input("Type % of Consonant Substitution Errors: "))
-# subPercentage1 = int(input("Type % of Vowel Substitution Errors: "))
-# addPercentage = int(input("Type % of Addition Errors: "))
-# delPercentage = int(input("Type % of Deletion Errors: "))
-# swapPercentage = int(input("Type % of Swapping Substitution Errors: "))
+percentSum = subPercentage + subPercentage1 + addPercentage + delPercentage + swapPercentage
+if percentSum != 100:
+    print("Warning: Your percentages do not add up to 100!")
 
-subPercentage = 25
-subPercentage1 = 25
-addPercentage = 0
-delPercentage = 0
-swapPercentage = 50
-
-wordFile = open("foodtext", "r")
+wordFile = open("musictext", "r")
 wordList = wordFile.read().split("\n")
 wordListLength = len(wordList)
 for item in range(len(wordList)):
     if item < ((subPercentage * wordListLength) / 100):
-        PatientSimulator(wordList[item],"firstIndex")
+        PatientSimulator(wordList[item],1)
     elif item < (((subPercentage + subPercentage1) * wordListLength) / 100):
-        PatientSimulator(wordList[item],"vowel")
+        PatientSimulator(wordList[item],2)
     elif item < (((subPercentage + subPercentage1 + addPercentage) * wordListLength) / 100):
-        PatientSimulator(wordList[item], "addition")
+        PatientSimulator(wordList[item], 3)
     elif item < (((subPercentage + subPercentage1 + addPercentage + delPercentage) * wordListLength) / 100):
-        PatientSimulator(wordList[item], "deletion")
+        PatientSimulator(wordList[item], 4)
     else:
-        PatientSimulator(wordList[item], "swap")
-
-
+        PatientSimulator(wordList[item], 5)
