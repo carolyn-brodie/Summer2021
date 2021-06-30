@@ -3,7 +3,7 @@ percent_Of_Sessions <- function(f1, f2, file) {
 library(ggplot2)
 
    fileName <- file
-   fileName2 <- paste("/Users/zachg/PycharmProjects/Summer2021a/summer_work/", fileName, sep ="")
+   fileName2 <- paste("C:\\Users\\somet\\Desktop\\Summer2021\\summer_work\\", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("PieChart", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")

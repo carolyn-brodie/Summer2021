@@ -2,6 +2,7 @@ import tkinter as tk
 import WordQuizer
 from summer_work.Classes import comparingWordsClass
 from summer_work.Classes import LetterToCharactersClass
+import summer_work.Classes.GUI.MainMenu as MainMenu
 
 
 class PatientSimulator(tk.Frame):
@@ -9,7 +10,7 @@ class PatientSimulator(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.inPath = "../inData/patient4.csv"
-        self.outPath = "../outData/test1"
+        self.outPath =  "../outData/PatientTest"
         self.givenWord = ""
         self.saidWord = ""
         self.right = 0
@@ -19,6 +20,9 @@ class PatientSimulator(tk.Frame):
 
         self.runTest = tk.Button(self,text = "Run Test",command = lambda : self.runTestFunc())
         self.runTest.pack(side = "top")
+
+        self.backButton = tk.Button(self, text="Back", command=lambda: self.backFunction(controller))
+        self.backButton.pack(side = "top")
     def runTestFunc(self):
         file1 = open(self.inPath, "r")
 
@@ -27,7 +31,6 @@ class PatientSimulator(tk.Frame):
             line1 = line.split(";")
             self.givenWord = line1[0]
             self.saidWord = line1[1]
-            print(self.givenWord)
             self.readOutCSV()
     def checkWord(self):
         if self.saidWord.lower() != self.givenWord.lower():
@@ -76,6 +79,10 @@ class PatientSimulator(tk.Frame):
 
         self.comparingWords.reset()
         self.fileHandle2.close()
+
+    def backFunction(self,controller):
+        from summer_work.Classes.GUI.MainMenu import MainMenu1
+        controller.show_frame(MainMenu1)
 
 
 

@@ -125,7 +125,7 @@ def main():
     #     fileHandle.write("\n")
     # fileHandle.close()
 
-    a = function1(1, 15, "RightWrongUnheard")
+    a = function1(1, 2, "RightWrongUnheard")
     print(a)
 
 def function1(input, output, filename):
