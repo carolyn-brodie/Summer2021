@@ -38,7 +38,9 @@ class WordQuizer(tk.Frame):
 
         self.canvasGivenWord = tk.Canvas(self.master, width=600 / 4,height=40)
         self.canvasGivenWord.grid(row = 2)
-
+        # Creates a canvas for the said word
+        self.canvasSaidWord = tk.Canvas(self.master, width=600 / 4,height=40)
+        self.canvasSaidWord.grid(row = 3)
         inFile = open(self.inPath,"r")
         for line in inFile:
             line = line.strip()
@@ -71,9 +73,7 @@ class WordQuizer(tk.Frame):
         self.labelGivenWord.pack(side = "top")
         # Creates a canvas for the given word
 
-        # Creates a canvas for the said word
-        self.canvasSaidWord = tk.Canvas(self.master, width=600 / 4,height=40)
-        self.canvasSaidWord.grid(row = 3)
+
         self.newGivenWord()
         self.printGivenWord()
 
