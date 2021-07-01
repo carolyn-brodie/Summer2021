@@ -6,10 +6,11 @@ plotBME <- function(file) {
    library(ggeasy)
 
    fileName <- file
-   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName2 <- paste("C\\Users\\somet\\Desktop\\Summer2021\\summer_work\\", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("BMEAll", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
+
    png(addpng)
 
 incorrectData <- read.csv(fileNamecsv, sep=';')
@@ -31,9 +32,7 @@ errorWords <-incorrectData %>%
 print(BME)
 dev.off()
 
-ggsave(addpng, path = "summer_work/Graphs", scale = 1)
+ggsave(addpng, path = "C\\Users\\somet\\Desktop\\Summer2021\\summer_work\\", scale = .5)
 }
 
 plotBME("ErrorFile2")
-
-

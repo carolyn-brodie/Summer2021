@@ -4,6 +4,7 @@ import WordQuizer
 import PatientSimulator
 import Analytics
 
+
 class GUI(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -29,7 +30,7 @@ class GUI(tk.Tk):
             Loops through the frame list selecting a frame to put on top
         """
         for FrameSelected in (
-        MainMenu1, WordQuizer.WordQuizer, PatientSimulator.PatientSimulator, Analytics.Analytics):
+                MainMenu1, WordQuizer.WordQuizer, PatientSimulator.PatientSimulator, Analytics.Analytics):
             frame = FrameSelected(container, self)
 
             self.frames[FrameSelected] = frame
@@ -41,6 +42,7 @@ class GUI(tk.Tk):
 
         # this is the function that switches the frame
         print(self.frames)
+
     def show_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()
@@ -51,5 +53,6 @@ def main():
     app.title("Application")
     app.geometry("600x600")
     app.mainloop()
+
 
 main()

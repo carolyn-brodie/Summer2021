@@ -16,7 +16,7 @@ class Analytics(tk.Frame):
         path = ("../../")
         print(path+ "BMEAll.R")
         r1.source(path + "BMEAll.R")
-        r1.plotBME("C:\\Users\somet\\Desktop\\Summer2021\\summer_work\\ErrorFile_6-21_14-32.csv")
+        r1.plotBME("ErrorFile_6-21_14-32.csv")
 
     def backFunction(self, controller):
         from summer_work.Classes.GUI.MainMenu import MainMenu1

@@ -5,7 +5,6 @@ import ComparingWordsV2
 from PIL import Image
 import datetime
 
-
 WIDTH = 600
 HEIGHT = 600
 TEXT_SIZE = 10
