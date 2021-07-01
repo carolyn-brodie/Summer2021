@@ -1,9 +1,12 @@
 import tkinter as tk
 import speech_recognition as sr
 import random
-import ComparingWordsV2
-from PIL import Image
+import comparingWordsClass
+import PIL.Image
 import datetime
+import rpy2.robjects as ro
+from tkinter import *
+
 
 WIDTH = 600
 HEIGHT = 600
@@ -31,9 +34,9 @@ class GUI(tk.Frame):
         self.rightList = []
         self.unHeardList = []
 
-        self.outCSVFile = "./outData/ErrorFile_"+self.fileAppend+".csv"
-        self.readPercPercentFile = "./outData/RightWrongUnheard.csv"
-        self.readPercErrorFile = "./outData/TypeOfError.csv"
+        self.outCSVFile = "ErrorFile_"+self.fileAppend+".csv"
+        self.readPercPercentFile = "RightWrongUnheard1.csv"
+        self.readPercErrorFile = "TypeOfError.csv"
 
         # Percentages
         self.percentageOfRight = 0
@@ -47,6 +50,8 @@ class GUI(tk.Frame):
         # Given word and the said word.
         self.givenWord = ""
         self.saidWord = ""
+        self.path = ""
+        self.path1 = "../"
 
         # The speech recognizer that we are using.
         self.recognizer = sr.Recognizer()
@@ -55,7 +60,7 @@ class GUI(tk.Frame):
         self.mic = sr.Microphone(device_index=1)
 
         # The file name that we use
-        self.fileName = "rWordsBeginning"
+        self.fileName = "inData/ThousandWords"
 
         # Opening the file
         self.file = open(self.fileName, "r")
@@ -66,6 +71,7 @@ class GUI(tk.Frame):
         self.addition = 0
         self.deletion = 0
         self.substitution = 0
+        self.e = 0
         # Reads through each line of the word file appending the word to the wordList.
         for line in self.file:
             self.wordList.append(line.strip("\n"))
@@ -79,7 +85,7 @@ class GUI(tk.Frame):
         self.create_widgets()
 
         # Creates a instance of the comparingWords class so we can use it in later functions
-        self.comparingWords = ComparingWordsV2.ComparingWordsV2()
+        self.comparingWords = comparingWordsClass.ComparingWordsC()
 
     #     Create widgets:
     #           makes the start button.
@@ -113,7 +119,7 @@ class GUI(tk.Frame):
         self.exitButton = tk.Button(self,text = "Exit",command = self.exitFunction)
         self.exitButton.grid(row = 3,column = 0)
 
-        self.labelGivenWord = tk.Label(self,text = "Say the Given Word")
+        self.labelGivenWord = tk.Label(self,text = "Say the Give Word")
         self.labelGivenWord.grid(row = 5)
         # Creates a canvas for the given word
         self.canvasGivenWord = tk.Canvas(self.master, width=WIDTH / 4,height=40)
@@ -248,9 +254,73 @@ class GUI(tk.Frame):
         self.comparingWords.reset()
         self.fileHandle2.close()
 
-    def AnalyticsFunction(self):
-        img = Image.open("./Graphs/BME.png")
+    def PieChartFunction(self,input1,output1,filename):
+        self.pieChartButton.destroy()
+        r = ro.r
+        print(self.path1 + "PieChart.R")
+        r.source(self.path1 + "PieChart.R")
+        try:
+            r.percent_Of_Sessions(input1, output1, filename)
+        except:
+            print(input1)
+        img = PIL.Image.open("/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/PieChartSessionStatsExample.png")
         img.show()
+
+
+    def getNumberOfSession(self):
+        self.textBox = tk.Entry(self)
+        self.textBox.pack(side='bottom')
+        self.pieChartButton1.destroy()
+        self.a = Button(self, text='Enter Number of Sessions', command=self.getE)
+        self.a.pack(side='bottom')
+
+    def getE(self):
+        self.e = self.textBox.get()
+        self.e = int(self.e)
+        self.pieChartButton = Button(self, text='Pie Chart',
+                                     command=lambda: self.PieChartFunction(self.i, self.e, "SessionStatsExample"))
+        self.pieChartButton.pack(side='bottom')
+
+    def OverallSessionsFunction(self,input1,output1,filename):
+        self.sessionsButton.destroy()
+        r = ro.r
+        print(self.path1 + "Sessions.R")
+        r.source(self.path1 + "Sessions.R")
+        try:
+            r.plotSessions(input1, output1, filename)
+        except:
+            print(input1)
+        img = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/LineGraphSessionStatsExample.png")
+        img.show()
+
+    def getNumberOfSession1(self):
+        self.textBox = tk.Entry(self)
+        self.textBox.pack(side='bottom')
+        self.sessionsButton1.destroy()
+        self.a = Button(self, text='Enter Number of Sessions', command=self.getE1)
+        self.a.pack(side='bottom')
+
+    def getE1(self):
+        self.e = self.textBox.get()
+        self.e = int(self.e)
+        self.sessionsButton = Button(self, text='Overall Progress',
+                                     command=lambda: self.OverallSessionsFunction(self.i, self.e, "SessionStatsExample"))
+        self.sessionsButton.pack(side='bottom')
+
+    def AnalyticsFunction(self):
+        self.startButton.destroy()
+        self.mainPageExit.destroy()
+        self.analyticsButton.destroy()
+        self.testButton.destroy()
+
+        self.i = 1
+
+        self.pieChartButton1 = Button(self, text='Pie Chart', command=self.getNumberOfSession)
+        self.pieChartButton1.pack(side='bottom')
+
+        self.sessionsButton1 = Button(self, text='Overall Progress', command=self.getNumberOfSession1)
+        self.sessionsButton1.pack(side='bottom')
 
     def typeOfError(self,error):
         if (error == "Addition"):
@@ -331,6 +401,7 @@ class GUI(tk.Frame):
             self.givenWord = line1[0]
             self.saidWord = line1[1]
             self.checkWord()
-            self.readOutCSV()
+            if self.givenWord != self.saidWord:
+                self.readOutCSV()
 
 main()

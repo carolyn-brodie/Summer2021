@@ -1,8 +1,9 @@
 import tkinter as tk
-import MainMenu
+from summer_work.Classes.GUI.MainMenu import MainMenu1
 import WordQuizer
 import PatientSimulator
 import Analytics
+
 
 class GUI(tk.Tk):
 
@@ -29,7 +30,7 @@ class GUI(tk.Tk):
             Loops through the frame list selecting a frame to put on top
         """
         for FrameSelected in (
-        MainMenu.MainMenu, WordQuizer.WordQuizer, PatientSimulator.PatientSimulator, Analytics.Analytics):
+                MainMenu1, WordQuizer.WordQuizer, PatientSimulator.PatientSimulator, Analytics.Analytics):
             frame = FrameSelected(container, self)
 
             self.frames[FrameSelected] = frame
@@ -37,18 +38,21 @@ class GUI(tk.Tk):
             # I think this is like the pack() for frames, because nothing loads without it
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame(MainMenu.MainMenu)
+        self.show_frame(MainMenu1)
 
         # this is the function that switches the frame
+        print(self.frames)
 
     def show_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()
+
 
 def main():
     app = GUI()
     app.title("Application")
     app.geometry("600x600")
     app.mainloop()
+
 
 main()
