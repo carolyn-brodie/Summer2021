@@ -31,9 +31,9 @@ class GUI(tk.Frame):
         self.rightList = []
         self.unHeardList = []
 
-        self.outCSVFile = "./outdata/ErrorFile_"+self.fileAppend+".csv"
-        self.readPercPercentFile = "./outdata/RightWrongUnheard.csv"
-        self.readPercErrorFile = "./outdata/TypeOfError.csv"
+        self.outCSVFile = "./outData/ErrorFile_"+self.fileAppend+".csv"
+        self.readPercPercentFile = "./outData/RightWrongUnheard.csv"
+        self.readPercErrorFile = "./outData/TypeOfError.csv"
 
         # Percentages
         self.percentageOfRight = 0
@@ -113,7 +113,7 @@ class GUI(tk.Frame):
         self.exitButton = tk.Button(self,text = "Exit",command = self.exitFunction)
         self.exitButton.grid(row = 3,column = 0)
 
-        self.labelGivenWord = tk.Label(self,text = "Say the Give Word")
+        self.labelGivenWord = tk.Label(self,text = "Say the Given Word")
         self.labelGivenWord.grid(row = 5)
         # Creates a canvas for the given word
         self.canvasGivenWord = tk.Canvas(self.master, width=WIDTH / 4,height=40)
