@@ -36,6 +36,9 @@ class WordQuizer(tk.Frame):
         self.percentageOfRight = 0
         self.comparingWords = comparingWordsClass.ComparingWordsC()
 
+        self.canvasGivenWord = tk.Canvas(self.master, width=600 / 4,height=40)
+        self.canvasGivenWord.grid(row = 2)
+
         inFile = open(self.inPath,"r")
         for line in inFile:
             line = line.strip()
@@ -67,8 +70,6 @@ class WordQuizer(tk.Frame):
         self.labelGivenWord = tk.Label(self,text = "Say the Given Word")
         self.labelGivenWord.pack(side = "top")
         # Creates a canvas for the given word
-        self.canvasGivenWord = tk.Canvas(self.master, width=600 / 4,height=40)
-        self.canvasGivenWord.grid(row = 2)
 
         # Creates a canvas for the said word
         self.canvasSaidWord = tk.Canvas(self.master, width=600 / 4,height=40)
