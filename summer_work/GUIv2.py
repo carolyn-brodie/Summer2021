@@ -31,9 +31,9 @@ class GUI(tk.Frame):
         self.rightList = []
         self.unHeardList = []
 
-        self.outCSVFile = "./outdata1/ErrorFile_"+self.fileAppend+".csv"
-        self.readPercPercentFile = "./outdata1/RightWrongUnheard.csv"
-        self.readPercErrorFile = "./outdata1/TypeOfError.csv"
+        self.outCSVFile = "./outdata/ErrorFile_"+self.fileAppend+".csv"
+        self.readPercPercentFile = "./outdata/RightWrongUnheard.csv"
+        self.readPercErrorFile = "./outdata/TypeOfError.csv"
 
         # Percentages
         self.percentageOfRight = 0
