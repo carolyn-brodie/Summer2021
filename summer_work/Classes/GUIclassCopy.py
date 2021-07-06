@@ -263,7 +263,7 @@ class GUI(tk.Frame):
             r.percent_Of_Sessions(input1, output1, filename)
         except:
             print(input1)
-        img = PIL.Image.open("/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/PieChartSessionStatsExample.png")
+        img = PIL.Image.open("/summer_work/Classes/PieChartSessionStatsExample1.png")
         img.show()
 
 
@@ -278,7 +278,7 @@ class GUI(tk.Frame):
         self.e = self.textBox.get()
         self.e = int(self.e)
         self.pieChartButton = Button(self, text='Pie Chart',
-                                     command=lambda: self.PieChartFunction(self.i, self.e, "SessionStatsExample"))
+                                     command=lambda: self.PieChartFunction(self.i, self.e, "SessionStatsExample1"))
         self.pieChartButton.pack(side='bottom')
 
     def OverallSessionsFunction(self,input1,output1,filename):
@@ -291,7 +291,7 @@ class GUI(tk.Frame):
         except:
             print(input1)
         img = PIL.Image.open(
-            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/LineGraphSessionStatsExample.png")
+            "./summer_work/Classes/LineGraphSessionStatsExample.png")
         img.show()
 
     def getNumberOfSession1(self):

@@ -36,11 +36,11 @@ class WordQuizer(tk.Frame):
         self.percentageOfRight = 0
         self.comparingWords = comparingWordsClass.ComparingWordsC()
 
-        self.canvasGivenWord = tk.Canvas(self.master, width=600 / 4,height=40)
-        self.canvasGivenWord.grid(row = 2)
+        self.canvasGivenWord = tk.Canvas(self.master, width=600 / 4,height=20)
+        self.canvasGivenWord.grid(row = 1,sticky = "n")
         # Creates a canvas for the said word
-        self.canvasSaidWord = tk.Canvas(self.master, width=600 / 4,height=40)
-        self.canvasSaidWord.grid(row = 3)
+        self.canvasSaidWord = tk.Canvas(self.master, width=600 / 4,height=20)
+        self.canvasSaidWord.grid(row = 2,sticky = "n")
         inFile = open(self.inPath,"r")
         for line in inFile:
             line = line.strip()
@@ -86,11 +86,10 @@ class WordQuizer(tk.Frame):
             self.saidWord = self.recognizer.recognize_google(audio)
             self.saidWord = self.saidWord.lower()
             self.printSaidWord()
-            print(self.saidWord)
 
         except sr.UnknownValueError:
             self.saidWord = ""
-            self.canvasSaidWord.create_text(600/ 8, 15, fill="black",
+            self.canvasSaidWord.create_text(600/2,20, fill="black",
                                              font="Times " + str(TEXT_SIZE) + " italic bold",
                                              text="Unheard")
             self.checkWord()
@@ -112,12 +111,12 @@ class WordQuizer(tk.Frame):
 
     def printGivenWord(self):
         self.canvasGivenWord.delete("all")
-        self.canvasGivenWord.create_text(600 / 8, 15, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold", text=self.givenWord)
+        self.canvasGivenWord.create_text(600 / 8, 10, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold", text=self.givenWord)
         self.canvasGivenWord.update()
 
     def printSaidWord(self):
         self.canvasSaidWord.delete("all")
-        self.canvasSaidWord.create_text(600 / 8, 15, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold",
+        self.canvasSaidWord.create_text(600 / 8, 10, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold",
                                          text=self.saidWord)
         self.canvasSaidWord.update
 
@@ -145,12 +144,12 @@ class WordQuizer(tk.Frame):
         self.saidWord = ""
     def printGivenWord(self):
         self.canvasGivenWord.delete("all")
-        self.canvasGivenWord.create_text(600 / 8, 15, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold", text=self.givenWord)
+        self.canvasGivenWord.create_text(600 / 8, 10, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold", text=self.givenWord)
         self.canvasGivenWord.update
 
     def printSaidWord(self):
         self.canvasSaidWord.delete("all")
-        self.canvasSaidWord.create_text(600 / 8, 15, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold",
+        self.canvasSaidWord.create_text(600 / 8, 10, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold",
                                          text=self.saidWord)
         self.canvasSaidWord.update
 
@@ -284,10 +283,10 @@ class WordQuizer(tk.Frame):
                     self.percentageOfNothing = 0
 
     def backFunction(self,controller):
-        from summer_work.Classes.GUI.MainMenu import MainMenu1
+        from summer_work.Classes.GUI.MainMenuFrame import MainMenu
         self.canvasGivenWord.delete("all")
         self.canvasSaidWord.delete("all")
-        controller.show_frame(MainMenu1)
+        controller.show_frame(MainMenu)
     def exitFunction(self):
         self.calcPercentages()
         self.writeFilePerc()
