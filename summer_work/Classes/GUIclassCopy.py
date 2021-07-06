@@ -6,6 +6,8 @@ import PIL.Image
 import datetime
 import rpy2.robjects as ro
 from tkinter import *
+import glob
+import os.path
 
 
 WIDTH = 600
@@ -72,6 +74,7 @@ class GUI(tk.Frame):
         self.deletion = 0
         self.substitution = 0
         self.e = 0
+        self.letter = "r"
         # Reads through each line of the word file appending the word to the wordList.
         for line in self.file:
             self.wordList.append(line.strip("\n"))
@@ -308,6 +311,57 @@ class GUI(tk.Frame):
                                      command=lambda: self.OverallSessionsFunction(self.i, self.e, "SessionStatsExample"))
         self.sessionsButton.pack(side='bottom')
 
+    def locationOfError(self, filename):
+
+        r = ro.r
+        print(self.path1 + "BME.R")
+        r.source(self.path1 + "BME.R")
+        r.plotBME(filename)
+        img = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/BME"+self.latest_file+".png")
+        img.show()
+
+    def getFile(self):
+        self.locationOfErrorButton1.destroy()
+        self.list_of_files = glob.glob('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/*.csv')
+        self.latest_file2 = max(self.list_of_files, key=os.path.getctime)
+        self.latest_file1 = self.latest_file2.strip('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/csv')
+        self.latest_file = self.latest_file1.strip('.')
+
+        self.LOEButtonSpecific = Button(self, text='Location Of Error',
+                                        command=lambda: self.locationOfError(self.latest_file))
+        self.LOEButtonSpecific.pack(side='bottom')
+
+    def LOESpecific(self, letter, filename):
+        self.LOEButtonSpecific.destroy()
+        r = ro.r
+        print(self.path1 + "BMESpecific.R")
+        r.source(self.path1 + "BMESpecific.R")
+        try:
+            r.plotBME(letter, filename)
+        except:
+            print(letter)
+        img = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/BMESpecific" + self.latest_file + ".png")
+        img.show()
+
+    def getLetter(self):
+        self.textBox = tk.Entry(self)
+        self.textBox.pack(side='bottom')
+        self.LOEButtonSpecific1.destroy()
+        self.a = Button(self, text='Enter Letter', command=self.getSomething)
+        self.a.pack(side='bottom')
+
+    def getSomething(self):
+        self.list_of_files = glob.glob('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/*.csv')
+        self.latest_file2 = max(self.list_of_files, key=os.path.getctime)
+        self.latest_file1 = self.latest_file2.strip('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/csv')
+        self.latest_file = self.latest_file1.strip('.')
+
+        self.letter = self.textBox.get()
+        self.LOEButtonSpecific = Button(self, text='Location Of Error Specific',command=lambda: self.LOESpecific(str(self.letter),self.latest_file))
+        self.LOEButtonSpecific.pack(side='bottom')
+
     def AnalyticsFunction(self):
         self.startButton.destroy()
         self.mainPageExit.destroy()
@@ -321,6 +375,12 @@ class GUI(tk.Frame):
 
         self.sessionsButton1 = Button(self, text='Overall Progress', command=self.getNumberOfSession1)
         self.sessionsButton1.pack(side='bottom')
+
+        self.locationOfErrorButton1 = Button(self, text='Location Of Error', command=self.getFile)
+        self.locationOfErrorButton1.pack(side='bottom')
+
+        self.LOEButtonSpecific1 = Button(self, text='Location Of Error Specific', command=self.getLetter)
+        self.LOEButtonSpecific1.pack(side='bottom')
 
     def typeOfError(self,error):
         if (error == "Addition"):
