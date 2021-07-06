@@ -362,6 +362,57 @@ class GUI(tk.Frame):
         self.LOEButtonSpecific = Button(self, text='Location Of Error Specific',command=lambda: self.LOESpecific(str(self.letter),self.latest_file))
         self.LOEButtonSpecific.pack(side='bottom')
 
+    def typeOfErrorLOE(self, filename):
+
+        r = ro.r
+        print(self.path1 + "BMETypeOfError.R")
+        r.source(self.path1 + "BMETypeOfError.R")
+        r.plotWhereError(filename)
+        img = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/BMETypeOfError"+self.latest_file+".png")
+        img.show()
+
+    def getFile1(self):
+        self.locationOfErrorButton1.destroy()
+        self.list_of_files = glob.glob('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/*.csv')
+        self.latest_file2 = max(self.list_of_files, key=os.path.getctime)
+        self.latest_file1 = self.latest_file2.strip('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/csv')
+        self.latest_file = self.latest_file1.strip('.')
+
+        self.LOEButtonSpecific = Button(self, text='Type and Location of Error',
+                                        command=lambda: self.typeOfErrorLOE(self.latest_file))
+        self.LOEButtonSpecific.pack(side='bottom')
+
+    def TOELOESpecific(self, letter, filename):
+        self.LOETOESpecificButton.destroy()
+        r = ro.r
+        print(self.path1 + "BMETypeOfErrorSpecific.R")
+        r.source(self.path1 + "BMETypeOfErrorSpecific.R")
+        try:
+            r.plotWhereError(letter, filename)
+        except:
+            print(letter)
+        img = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/BMETypeOfErrorSpecific" + self.latest_file + ".png")
+        img.show()
+
+    def getLetter1(self):
+        self.textBox = tk.Entry(self)
+        self.textBox.pack(side='bottom')
+        self.LOETOESpecificButton1.destroy()
+        self.a = Button(self, text='Enter Letter', command=self.getSomething1)
+        self.a.pack(side='bottom')
+
+    def getSomething1(self):
+        self.list_of_files = glob.glob('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/*.csv')
+        self.latest_file2 = max(self.list_of_files, key=os.path.getctime)
+        self.latest_file1 = self.latest_file2.strip('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/csv')
+        self.latest_file = self.latest_file1.strip('.')
+
+        self.letter = self.textBox.get()
+        self.LOETOESpecificButton = Button(self, text='Location Of Error Specific',command=lambda: self.TOELOESpecific(str(self.letter),self.latest_file))
+        self.LOETOESpecificButton.pack(side='bottom')
+
     def AnalyticsFunction(self):
         self.startButton.destroy()
         self.mainPageExit.destroy()
@@ -381,6 +432,14 @@ class GUI(tk.Frame):
 
         self.LOEButtonSpecific1 = Button(self, text='Location Of Error Specific', command=self.getLetter)
         self.LOEButtonSpecific1.pack(side='bottom')
+
+        self.LOETypeOfErrorButton1 = Button(self, text='Type and Location of Error', command=self.getFile1)
+        self.LOETypeOfErrorButton1.pack(side='bottom')
+
+        self.LOETOESpecificButton1 = Button(self, text='Type and Location of Error Specific', command=self.getLetter1)
+        self.LOETOESpecificButton1.pack(side='bottom')
+
+
 
     def typeOfError(self,error):
         if (error == "Addition"):
