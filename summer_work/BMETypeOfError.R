@@ -1,7 +1,7 @@
-plotWhereError <- function(sound, file) {
-library(dplyr)
- library(ggplot2)
- library(stringr)
+plotWhereError <- function(file) {
+  library(dplyr)
+  library(ggplot2)
+  library(stringr)
 
    fileName <- file
    fileName2 <- paste("./summer_work/", fileName, sep ="")
@@ -10,17 +10,14 @@ library(dplyr)
    addpng <- paste(pngName, ".png", sep ="")
    png(addpng)
 
-
 incorrectData <- read.csv(fileNamecsv, sep=';')
+
 number_of_lines <- nrow(read.csv(fileNamecsv, sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
-  s <- paste("^", sound, sep="")
-  Words <- errorWords %>%
-    filter(str_detect(Word, s))
-  BMETypeOfError <- ggplot(Words, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
+  BMETypeOfError <- ggplot(errorWords, aes(x=WhereErrorOccurred, fill=TypeOfError)) +
     geom_bar(stat="count") +
     scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
     ggtitle(label="Session Feedback") +
@@ -31,8 +28,8 @@ errorWords <-incorrectData %>%
 
 print(BMETypeOfError)
 dev.off()
-
 ggsave(addpng, path = "summer_work/Graphs", scale = 1)
+
 }
 
-plotWhereError("l", "ErrorFile2")
+plotWhereError("ErrorFile2")
