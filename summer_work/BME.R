@@ -1,27 +1,26 @@
 
-plotBME <- function(sound, file) {
-  library(dplyr)
-  library(ggplot2)
-  library(stringr)
-  library(ggeasy)
+plotBME <- function(file) {
+   library(dplyr)
+   library(ggplot2)
+   library(stringr)
+   library(ggeasy)
 
    fileName <- file
-   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName2 <- paste("summer_work/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("BME", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
+
    png(addpng)
 
 incorrectData <- read.csv(fileNamecsv, sep=';')
+
 number_of_lines <- nrow(read.csv(fileNamecsv, sep=';'))
 
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
-  s <- paste("^", sound, sep="")
-  Words <- errorWords %>%
-    filter(str_detect(Word, s))
-  BME <- ggplot(Words, aes(x=WhereErrorOccurred, fill=Word)) +
+  BME <- ggplot(errorWords, aes(x=WhereErrorOccurred, fill=Word)) +
     geom_bar(stat="count") +
     scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
     ggtitle(label="Session Feedback") +
@@ -33,7 +32,7 @@ errorWords <-incorrectData %>%
 print(BME)
 dev.off()
 
-ggsave(addpng, path = "summer_work/Graphs", scale = 1)
+ggsave(addpng, path = "summer_work", scale = .5)
 }
 
-plotBME("l", "ErrorFile2")
+plotBME("ErrorFile2")
