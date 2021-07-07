@@ -413,6 +413,105 @@ class GUI(tk.Frame):
         self.LOETOESpecificButton = Button(self, text='Location Of Error Specific',command=lambda: self.TOELOESpecific(str(self.letter),self.latest_file))
         self.LOETOESpecificButton.pack(side='bottom')
 
+    def typeOfErrorAll(self, filename):
+
+        r = ro.r
+        print(self.path1 + "TypeOfError.R")
+        r.source(self.path1 + "TypeOfError.R")
+        r.plotLetter(filename)
+        img = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/TypeOfError"+self.latest_file+".png")
+        img.show()
+
+    def getFile2(self):
+        self.TypeOfErrorButton1.destroy()
+        self.list_of_files = glob.glob('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/*.csv')
+        self.latest_file2 = max(self.list_of_files, key=os.path.getctime)
+        self.latest_file1 = self.latest_file2.strip('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/csv')
+        self.latest_file = self.latest_file1.strip('.')
+
+        self.TypeOfErrorButton = Button(self, text='Type of Error',
+                                        command=lambda: self.typeOfErrorAll(self.latest_file))
+        self.TypeOfErrorButton.pack(side='bottom')
+
+    def typeOfErrorWithCorrect(self, filename):
+
+        r = ro.r
+        print(self.path1 + "TypeOfErrorWCorrect.R")
+        r.source(self.path1 + "TypeOfErrorWCorrect.R")
+        r.plotBar(filename)
+        img = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/TypeOfErrorWCorrect" + self.latest_file + ".png")
+        img.show()
+
+    def getFile3(self):
+        self.TOEWithCorrectButton1.destroy()
+        self.list_of_files = glob.glob('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/*.csv')
+        self.latest_file2 = max(self.list_of_files, key=os.path.getctime)
+        self.latest_file1 = self.latest_file2.strip('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/csv')
+        self.latest_file = self.latest_file1.strip('.')
+
+        self.TOEWithCorrectButton = Button(self, text='Type of Error with Correct',
+                                        command=lambda: self.typeOfErrorWithCorrect(self.latest_file))
+        self.TOEWithCorrectButton.pack(side='bottom')
+
+    def typeOfErrorSpecific(self, letter, filename):
+        self.LOETOESpecificButton.destroy()
+        r = ro.r
+        print(self.path1 + "TypeOfErrorSpecific.R")
+        r.source(self.path1 + "TypeOfErrorSpecific.R")
+        try:
+            r.plotLetter(letter, filename)
+        except:
+            print(letter)
+        img = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/TypeOfErrorSpecific" + self.latest_file + ".png")
+        img.show()
+
+    def getLetter2(self):
+        self.textBox = tk.Entry(self)
+        self.textBox.pack(side='bottom')
+        self.LOETOESpecificButton1.destroy()
+        self.a = Button(self, text='Enter Letter', command=self.getSomething2)
+        self.a.pack(side='bottom')
+
+    def getSomething2(self):
+        self.list_of_files = glob.glob('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/*.csv')
+        self.latest_file2 = max(self.list_of_files, key=os.path.getctime)
+        self.latest_file1 = self.latest_file2.strip('/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/csv')
+        self.latest_file = self.latest_file1.strip('.')
+
+        self.letter = self.textBox.get()
+        self.LOETOESpecificButton = Button(self, text='Type of Error Specific',command=lambda: self.typeOfErrorSpecific(str(self.letter),self.latest_file))
+        self.LOETOESpecificButton.pack(side='bottom')
+
+    def typeOfErrorPercentage(self,input1,output1,filename):
+        self.TOEPercentageButton.destroy()
+        r = ro.r
+        print(self.path1 + "TypeOfErrorPercents.R")
+        r.source(self.path1 + "TypeOfErrorPercents.R")
+        try:
+            r.plotErrorPercents(input1, output1, filename)
+        except:
+            print(input1)
+        img = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/TypeOfErrorPercentTypeOfError.png")
+        img.show()
+
+    def getNumberOfSession2(self):
+        self.textBox = tk.Entry(self)
+        self.textBox.pack(side='bottom')
+        self.TOEPercentageButton1.destroy()
+        self.a = Button(self, text='Enter Number of Sessions', command=self.getE2)
+        self.a.pack(side='bottom')
+
+    def getE2(self):
+        self.e = self.textBox.get()
+        self.e = int(self.e)
+        self.TOEPercentageButton = Button(self, text='Type of Error Percentage',
+                                     command=lambda: self.typeOfErrorPercentage(self.i, self.e, "TypeOfError"))
+        self.TOEPercentageButton.pack(side='bottom')
+
     def AnalyticsFunction(self):
         self.startButton.destroy()
         self.mainPageExit.destroy()
@@ -439,7 +538,17 @@ class GUI(tk.Frame):
         self.LOETOESpecificButton1 = Button(self, text='Type and Location of Error Specific', command=self.getLetter1)
         self.LOETOESpecificButton1.pack(side='bottom')
 
+        self.TypeOfErrorButton1 = Button(self, text='Type of Error', command=self.getFile2)
+        self.TypeOfErrorButton1.pack(side='bottom')
 
+        self.TOEWithCorrectButton1 = Button(self, text='Type of Error with Correct', command=self.getFile3)
+        self.TOEWithCorrectButton1.pack(side='bottom')
+
+        self.TypeOfErrorSpecificButton1 = Button(self, text='Type of Error Specific', command=self.getLetter2)
+        self.TypeOfErrorSpecificButton1.pack(side='bottom')
+
+        self.TOEPercentageButton1 = Button(self, text='Type of Error Percentage', command=self.getNumberOfSession2)
+        self.TOEPercentageButton1.pack(side='bottom')
 
     def typeOfError(self,error):
         if (error == "Addition"):
