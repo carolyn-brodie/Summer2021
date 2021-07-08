@@ -84,13 +84,13 @@ class GUI(tk.Frame):
         self.appleImage1 = PIL.Image.open("../summer_work/images/Apple.png")
         self.appleImage = self.appleImage1.resize((125, 100))
         self.cheeseImage1 = PIL.Image.open("../summer_work/images/Cheese.png")
-        self.cheeseImage = self.cheeseImage1.resize((100, 100))
+        self.cheeseImage = self.cheeseImage1.resize((135, 100))
         self.iceCreamImage1 = PIL.Image.open("../summer_work/images/IceCream.png")
         self.iceCreamImage = self.iceCreamImage1.resize((100, 100))
         self.mushroomImage1 = PIL.Image.open("../summer_work/images/Mushroom.png")
-        self.mushroomImage = self.mushroomImage1.resize((100, 100))
+        self.mushroomImage = self.mushroomImage1.resize((150, 100))
         self.orangeImage1 = PIL.Image.open("../summer_work/images/Orange.png")
-        self.orangeImage = self.orangeImage1.resize((100, 100))
+        self.orangeImage = self.orangeImage1.resize((125, 100))
         self.questionMarkImage1 = PIL.Image.open("../summer_work/images/QuestionMark.png")
         self.questionMarkImage = self.questionMarkImage1.resize((100, 100))
 
@@ -229,13 +229,13 @@ class GUI(tk.Frame):
 
     def printGoodJob(self):
         self.canvasGoodKeep.delete("all")
-        self.canvasGoodKeep.create_text(WIDTH / 8, 15, fill="black", font="Helvetica " + str((TEXT_SIZE * 2)) + " bold",
+        self.canvasGoodKeep.create_text(WIDTH/2, 25, fill="black", font="Helvetica " + str((TEXT_SIZE * 2)) + " bold",
                                         text="Good Job")
         self.canvasGoodKeep.update()
 
     def printKeepTrying(self):
         self.canvasGoodKeep.delete("all")
-        self.canvasGoodKeep.create_text(WIDTH/2, 15, fill="black", font="Helvetica " + str((TEXT_SIZE * 2)) + " bold",
+        self.canvasGoodKeep.create_text(WIDTH/2, 25, fill="black", font="Helvetica " + str((TEXT_SIZE * 2)) + " bold",
                                         text="Keep Trying")
         self.canvasGoodKeep.update()
 
