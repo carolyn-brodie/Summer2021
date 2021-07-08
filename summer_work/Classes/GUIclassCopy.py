@@ -314,8 +314,8 @@ class GUI(tk.Frame):
     def locationOfError(self, filename):
 
         r = ro.r
-        print(self.path1 + "BME.R")
-        r.source(self.path1 + "BME.R")
+        print(self.path1 + "BMEAll.R")
+        r.source(self.path1 + "BMEAll.R")
         r.plotBME(filename)
         img = PIL.Image.open(
             "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/BME"+self.latest_file+".png")
@@ -365,8 +365,8 @@ class GUI(tk.Frame):
     def typeOfErrorLOE(self, filename):
 
         r = ro.r
-        print(self.path1 + "BMETypeOfError.R")
-        r.source(self.path1 + "BMETypeOfError.R")
+        print(self.path1 + "BMETypeOfErrorAll.R")
+        r.source(self.path1 + "BMETypeOfErrorAll.R")
         r.plotWhereError(filename)
         img = PIL.Image.open(
             "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/BMETypeOfError"+self.latest_file+".png")
@@ -416,8 +416,8 @@ class GUI(tk.Frame):
     def typeOfErrorAll(self, filename):
 
         r = ro.r
-        print(self.path1 + "TypeOfError.R")
-        r.source(self.path1 + "TypeOfError.R")
+        print(self.path1 + "TypeOfErrorAll.R")
+        r.source(self.path1 + "TypeOfErrorAll.R")
         r.plotLetter(filename)
         img = PIL.Image.open(
             "/Users/zachg/PycharmProjects/Summer2021a/summer_work/Classes/TypeOfError"+self.latest_file+".png")
