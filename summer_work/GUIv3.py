@@ -16,6 +16,7 @@ WINDOW_STARTING_SIZE = str(WIDTH) + "x" + str(HEIGHT)
 # Title
 WINDOW_NAME = "Window"
 
+
 def main():
     root = tk.Tk()
     root.title(WINDOW_NAME)
@@ -24,17 +25,18 @@ def main():
     app = GUI(root)
     root.mainloop()
 
+
 class GUI(tk.Frame):
-    def __init__(self,master):
+    def __init__(self, master):
         # List of wrong, right, unheard words.
         now = datetime.datetime.now()
-        self.fileAppend = str(str(now.month)+"-"+str(now.day)+"_"+str(now.hour)+"-"+str(now.minute))
+        self.fileAppend = str(str(now.month) + "-" + str(now.day) + "_" + str(now.hour) + "-" + str(now.minute))
         print(self.fileAppend)
         self.wrongList = []
         self.rightList = []
         self.unHeardList = []
 
-        self.outCSVFile = "./outData/ErrorFile_"+self.fileAppend+".csv"
+        self.outCSVFile = "./outData/ErrorFile_" + self.fileAppend + ".csv"
         self.readPercPercentFile = "./outData/RightWrongUnheard.csv"
         self.readPercErrorFile = "./outData/TypeOfError.csv"
 
@@ -82,15 +84,18 @@ class GUI(tk.Frame):
         self.appleImage1 = PIL.Image.open("/Users/zachg/PycharmProjects/Summer2021a/summer_work/images/Apple.png")
         self.appleImage = self.appleImage1.resize((125, 100))
         self.cheeseImage1 = PIL.Image.open("/Users/zachg/PycharmProjects/Summer2021a/summer_work/images/Cheese.png")
-        self.cheeseImage = self.cheeseImage1.resize((100,100))
+        self.cheeseImage = self.cheeseImage1.resize((100, 100))
         self.iceCreamImage1 = PIL.Image.open("/Users/zachg/PycharmProjects/Summer2021a/summer_work/images/IceCream.png")
-        self.iceCreamImage = self.iceCreamImage1.resize((100,100))
+        self.iceCreamImage = self.iceCreamImage1.resize((100, 100))
         self.mushroomImage1 = PIL.Image.open("/Users/zachg/PycharmProjects/Summer2021a/summer_work/images/Mushroom.png")
-        self.mushroomImage = self.mushroomImage1.resize((100,100))
+        self.mushroomImage = self.mushroomImage1.resize((100, 100))
         self.orangeImage1 = PIL.Image.open("/Users/zachg/PycharmProjects/Summer2021a/summer_work/images/Orange.png")
-        self.orangeImage = self.orangeImage1.resize((100,100))
-        self.questionMarkImage1 = PIL.Image.open("/Users/zachg/PycharmProjects/Summer2021a/summer_work/images/QuestionMark.png")
+        self.orangeImage = self.orangeImage1.resize((100, 100))
+        self.questionMarkImage1 = PIL.Image.open(
+            "/Users/zachg/PycharmProjects/Summer2021a/summer_work/images/QuestionMark.png")
         self.questionMarkImage = self.questionMarkImage1.resize((100, 100))
+
+        self.exampleDict = {"apple": self.appleImage, "cheese": self.cheeseImage}
 
 
         # Creates the starting front page:
@@ -104,17 +109,18 @@ class GUI(tk.Frame):
     def create_widgets(self):
 
         # Creates the start button which then calls the start function.
-        self.testButton = tk.Button(self,text = "testButton",command = self.testFunction)
-        self.testButton.grid(row = 4)
-        self.startButton = tk.Button(self,text = "Start",command = self.startFunction)
-        self.startButton.grid(row = 1,column = 0)
+        self.testButton = tk.Button(self, text="testButton", command=self.testFunction)
+        self.testButton.grid(row=4)
+        self.startButton = tk.Button(self, text="Start", command=self.startFunction)
+        self.startButton.grid(row=1, column=0)
 
-        self.analyticsButton = tk.Button(self,text = "Analytics",command = self.AnalyticsFunction)
-        self.analyticsButton.grid(row = 3,column = 0)
+        self.analyticsButton = tk.Button(self, text="Analytics", command=self.AnalyticsFunction)
+        self.analyticsButton.grid(row=3, column=0)
 
         # Exits the programs but does not call the write to file function.
-        self.mainPageExit = tk.Button(self,text = "Exit",command =lambda :self.master.quit())
-        self.mainPageExit.grid(row = 2,column = 0)
+        self.mainPageExit = tk.Button(self, text="Exit", command=lambda: self.master.quit())
+        self.mainPageExit.grid(row=2, column=0)
+
     # Is called on press of the start function
     def startFunction(self):
         # Destroys the startButton and the MainPageExit
@@ -122,30 +128,44 @@ class GUI(tk.Frame):
         self.mainPageExit.destroy()
         self.analyticsButton.destroy()
 
-        self.audioButton = tk.Button(self,text = "Record Audio", command = self.audioFunction)
-        self.audioButton.grid(row = 1,column = 0)
+        self.audioButton = tk.Button(self, text="Record Audio", command=self.audioFunction)
+        self.audioButton.grid(row=1, column=0)
 
         self.nextButton = tk.Button(self, text="Next", command=self.nextFunction)
         self.nextButton.grid(row=2, column=0)
 
-        self.exitButton = tk.Button(self,text = "Exit",command = self.exitFunction)
-        self.exitButton.grid(row = 3,column = 0)
+        self.exitButton = tk.Button(self, text="Exit", command=self.exitFunction)
+        self.exitButton.grid(row=3, column=0)
 
-        self.labelGivenWord = tk.Label(self,text = "Say the Given Word")
-        self.labelGivenWord.grid(row = 5)
+        self.labelGivenWord = tk.Label(self, text="Say the Given Word")
+        self.labelGivenWord.grid(row=5)
         # Creates a canvas for the given word
-        self.canvasGivenWord = tk.Canvas(self.master, width=WIDTH / 4,height=40)
-        self.canvasGivenWord.pack(side = "top")
+        self.canvasGivenWord = tk.Canvas(self.master, width=WIDTH / 4, height=40)
+        self.canvasGivenWord.pack(side="top")
 
         # Creates a canvas for the said word
-        self.canvasSaidWord = tk.Canvas(self.master, width=WIDTH / 4,height=40)
-        self.canvasSaidWord.pack(side = "top")
+        self.canvasSaidWord = tk.Canvas(self.master, width=WIDTH / 4, height=40)
+        self.canvasSaidWord.pack(side="top")
 
         self.newGivenWord()
         self.printGivenWord()
         self.images()
 
     def images(self):
+        try:
+            self.img = ImageTk.PhotoImage(self.exampleDict.get(self.givenWord))
+            self.label1 = tkinter.Label(image=self.img)
+            self.label1.image = self.img
+            self.label1.place(x=10, y=10)
+            self.label1.pack()
+        except KeyError:
+            self.img = ImageTk.PhotoImage(self.questionMarkImage)
+            self.label1 = tkinter.Label(image=self.img)
+            self.label1.image = self.img
+            self.label1.place(x=10, y=10)
+            self.label1.pack()
+
+
         if self.givenWord == "apple":
             self.img = ImageTk.PhotoImage(self.appleImage)
             self.label1 = tkinter.Label(image=self.img)
@@ -183,7 +203,6 @@ class GUI(tk.Frame):
             self.label1.place(x=10, y=10)
             self.label1.pack()
 
-
     # Is called on the audioButton being pressed, starts the audio
     def audioFunction(self):
         with self.mic as source:
@@ -198,8 +217,8 @@ class GUI(tk.Frame):
         except sr.UnknownValueError:
             self.saidWord = ""
             self.canvasSaidWord.create_text(WIDTH / 8, 15, fill="black",
-                                             font="Times " + str(TEXT_SIZE) + " italic bold",
-                                             text="Unheard")
+                                            font="Times " + str(TEXT_SIZE) + " italic bold",
+                                            text="Unheard")
             self.canvasSaidWord.update()
 
     # Is called on the nextButton being pressed, clears the current word and then creates a new word.
@@ -217,6 +236,7 @@ class GUI(tk.Frame):
         self.writeFilePerc()
         self.writePercOfError()
         self.master.quit()
+
     def writePercOfError(self):
         self.calcPercOfError()
         self.fileCreated1 = True
@@ -245,18 +265,19 @@ class GUI(tk.Frame):
         self.fileHandle1.write(str(self.percOfSubstitution))
         self.fileHandle1.write("\n")
         self.fileHandle1.close()
+
     def calcPercOfError(self):
         try:
             self.percOfDeletion = (self.deletion) / (self.substitution + self.deletion + self.addition)
             self.percOfAddition = (self.addition) / (self.addition + self.deletion + self.substitution)
-            self.percOfSubstitution = (self.substitution) / (self.addition+self.substitution+self.deletion)
+            self.percOfSubstitution = (self.substitution) / (self.addition + self.substitution + self.deletion)
         except ZeroDivisionError:
             return 0
 
     def checkWord(self):
         if self.saidWord == self.givenWord:
             self.rightList.append(self.givenWord)
-            self.numRight+= 1
+            self.numRight += 1
         elif self.saidWord == "":
             self.unHeardList.append(self.givenWord)
             self.numUnSaid += 1
@@ -266,7 +287,7 @@ class GUI(tk.Frame):
 
     def readOutCSV(self):
 
-        self.comparingWords.constructor(self.givenWord,self.saidWord)
+        self.comparingWords.constructor(self.givenWord, self.saidWord)
         self.comparingWords.controller()
 
         self.fileCreated2 = True
@@ -283,7 +304,8 @@ class GUI(tk.Frame):
 
         self.fileHandle2 = open(self.outCSVFile, "a")
         if self.fileCreated2 == False:
-            self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError" + "\n")
+            self.fileHandle2.write(
+                "NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError" + "\n")
             self.fileCreated2 = True
 
         self.fileHandle2.write(str(self.sessionNumber2))
@@ -312,7 +334,7 @@ class GUI(tk.Frame):
         img = Image.open("./Graphs/BME.png")
         img.show()
 
-    def typeOfError(self,error):
+    def typeOfError(self, error):
         if (error == "Addition"):
             self.addition += 1
         elif (error == "Substitution"):
@@ -326,15 +348,17 @@ class GUI(tk.Frame):
     def resetWords(self):
         self.givenWord = ""
         self.saidWord = ""
+
     def printGivenWord(self):
         self.canvasGivenWord.delete("all")
-        self.canvasGivenWord.create_text(WIDTH / 8, 15, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold", text=self.givenWord)
+        self.canvasGivenWord.create_text(WIDTH / 8, 15, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold",
+                                         text=self.givenWord)
         self.canvasGivenWord.update
 
     def printSaidWord(self):
         self.canvasSaidWord.delete("all")
         self.canvasSaidWord.create_text(WIDTH / 8, 15, fill="black", font="Times " + str(TEXT_SIZE) + " italic bold",
-                                         text=self.saidWord)
+                                        text=self.saidWord)
         self.canvasSaidWord.update
 
     def writeFilePerc(self):
@@ -382,7 +406,7 @@ class GUI(tk.Frame):
         # patientName = input("File Name:")
         # path  = "./data/"+patientName+".txt"
         path = "patient3.csv"
-        file1 = open(path,"r")
+        file1 = open(path, "r")
 
         for line in file1:
             line = line.strip()
@@ -392,5 +416,6 @@ class GUI(tk.Frame):
             self.saidWord = line1[1]
             self.checkWord()
             self.readOutCSV()
+
 
 main()
