@@ -57,7 +57,7 @@ class GUI(tk.Frame):
         self.recognizer = sr.Recognizer()
 
         # The devices index that we use, change the index if theres a error
-        self.mic = sr.Microphone(device_index=1)
+        self.mic = sr.Microphone(device_index=0)
 
         # The file name that we use
         self.fileName = "foodtextv2"
@@ -181,7 +181,7 @@ class GUI(tk.Frame):
         self.canvasSaidWord = tk.Canvas(self.master, width=WIDTH / 4, height=40)
         self.canvasSaidWord.pack(side="top")
 
-        self.canvasGoodKeep = tk.Canvas(self.master, width=WIDTH / 4, height=50)
+        self.canvasGoodKeep = tk.Canvas(self.master, width=WIDTH, height=50, bg="#EB7DF5")
         self.canvasGoodKeep.pack(side="top")
 
         self.newGivenWord()
@@ -235,7 +235,7 @@ class GUI(tk.Frame):
 
     def printKeepTrying(self):
         self.canvasGoodKeep.delete("all")
-        self.canvasGoodKeep.create_text(WIDTH / 8, 15, fill="black", font="Helvetica " + str((TEXT_SIZE * 2)) + " bold",
+        self.canvasGoodKeep.create_text(WIDTH/2, 15, fill="black", font="Helvetica " + str((TEXT_SIZE * 2)) + " bold",
                                         text="Keep Trying")
         self.canvasGoodKeep.update()
 
