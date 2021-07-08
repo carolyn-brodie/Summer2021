@@ -10,7 +10,7 @@ import PIL.Image
 
 WIDTH = 600
 HEIGHT = 600
-TEXT_SIZE = 10
+TEXT_SIZE = 15
 # Window Size
 WINDOW_STARTING_SIZE = str(WIDTH) + "x" + str(HEIGHT)
 # Title
@@ -229,13 +229,13 @@ class GUI(tk.Frame):
 
     def printGoodJob(self):
         self.canvasGoodKeep.delete("all")
-        self.canvasGoodKeep.create_text(WIDTH / 8, 15, fill="black", font="Helvetica " + str(TEXT_SIZE) + " italic bold",
+        self.canvasGoodKeep.create_text(WIDTH / 8, 15, fill="black", font="Helvetica " + str((TEXT_SIZE * 2)) + " bold",
                                         text="Good Job")
         self.canvasGoodKeep.update()
 
     def printKeepTrying(self):
         self.canvasGoodKeep.delete("all")
-        self.canvasGoodKeep.create_text(WIDTH / 8, 15, fill="black", font="Helvetica " + str(TEXT_SIZE) + " italic bold",
+        self.canvasGoodKeep.create_text(WIDTH / 8, 15, fill="black", font="Helvetica " + str((TEXT_SIZE * 2)) + " bold",
                                         text="Keep Trying")
         self.canvasGoodKeep.update()
 
