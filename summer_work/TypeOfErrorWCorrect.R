@@ -6,7 +6,7 @@ plotBar <- function(file) {
    library(ggeasy)
 
    fileName <- file
-   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName2 <- paste("../Classes/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("TypeOfErrorWCorrect", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
@@ -29,7 +29,5 @@ words <- read.csv(fileNamecsv, sep = ';')
 print(Bar)
 dev.off()
 
-ggsave(addpng, path = "summer_work/Graphs", scale = 1)
+ggsave(addpng, path = "../Graphs", scale = 1)
 }
-
-plotBar("ErrorFile3")

@@ -6,9 +6,9 @@ plotBME <- function(sound, file) {
   library(ggeasy)
 
    fileName <- file
-   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName2 <- paste("../Classes/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
-   pngName <- paste("BME", fileName, sep = "")
+   pngName <- paste("BMESpecific", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
    png(addpng)
 
@@ -36,4 +36,3 @@ dev.off()
 ggsave(addpng, path = "summer_work/Graphs", scale = 1)
 }
 
-plotBME("l", "ErrorFile2")

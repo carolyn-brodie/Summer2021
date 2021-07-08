@@ -33,7 +33,7 @@ class GUI(tk.Frame):
         self.unHeardList = []
 
         self.outCSVFile = "ErrorFile_"+self.fileAppend+".csv"
-        self.readPercPercentFile = "RightWrongUnheard.csv"
+        self.readPercPercentFile = "RightWrongUnheard1.csv"
         self.readPercErrorFile = "TypeOfError.csv"
 
         # Percentages
@@ -322,7 +322,7 @@ class GUI(tk.Frame):
     def testFunction(self):
         # patientName = input("File Name:")
         # path  = "./data/"+patientName+".txt"
-        path = "./inData/patient4.csv"
+        path = "patient3.csv"
         file1 = open(path,"r")
 
         for line in file1:

@@ -2,7 +2,7 @@ import random
 import rpy2.robjects as ro
 import os
 import matplotlib.pyplot as plt
-numberOfWords = 5
+numberOfWords = 1
 # path = "/Users/zachg/PycharmProjects/BryanResearchProgram/Rough Stuff/"
 path = ""
 
@@ -125,17 +125,23 @@ def main():
     #     fileHandle.write("\n")
     # fileHandle.close()
 
-    a = function1(1, 2, "RightWrongUnheard")
+    letterInput = input("Type Letter: ")
+
+    a = function1(str(letterInput), "ErrorFile_7-6_9-55")
     print(a)
 
-def function1(input, output, filename):
+def function1(letter, filename):
     p = 0
     r = ro.r
     # print(path+"r_To_Python.R")
     # r.source(path + "r_To_Python.R")
-    print(path + "PieChart.R")
-    r.source(path + "PieChart.R")
-    p = r.percent_Of_Sessions(input, output, filename)
+    print(path + "BMESpecific.R")
+    r.source(path + "BMESpecific.R")
+    try:
+        p = r.plotBME(letter, filename)
+    except:
+        print(1)
+    print(2)
     return p
 
 # a = function1(1, 3)
