@@ -60,7 +60,7 @@ class GUI(tk.Frame):
         self.mic = sr.Microphone(device_index=0)
 
         # The file name that we use
-        self.fileName = "foodtextv2"
+        self.fileName = "foodtextv3"
 
         # Opening the file
         self.file = open(self.fileName, "r")
@@ -93,6 +93,16 @@ class GUI(tk.Frame):
         self.orangeImage = self.orangeImage1.resize((125, 100))
         self.questionMarkImage1 = PIL.Image.open("../summer_work/images/QuestionMark.png")
         self.questionMarkImage = self.questionMarkImage1.resize((100, 100))
+        self.breadImage1 = PIL.Image.open("../summer_work/images/Bread.png")
+        self.breadImage = self.breadImage1.resize((150, 100))
+        self.chickenImage1 = PIL.Image.open("../summer_work/images/Chicken.png")
+        self.chickenImage = self.chickenImage1.resize((180, 100))
+        self.eggImage1 = PIL.Image.open("../summer_work/images/Egg.png")
+        self.eggImage = self.eggImage1.resize((130, 100))
+        self.milkImage1 = PIL.Image.open("../summer_work/images/Milk.png")
+        self.milkImage = self.milkImage1.resize((130, 100))
+        self.waffleImage1 = PIL.Image.open("../summer_work/images/Waffle.png")
+        self.waffleImage = self.waffleImage1.resize((100, 100))
 
         self.noRightImage1 = PIL.Image.open("../summer_work/images/noneRight.png")
         self.noRightImage = self.noRightImage1.resize((75, 150))
@@ -119,6 +129,10 @@ class GUI(tk.Frame):
 
         self.wordImageDict = {"apple": self.appleImage, "cheese": self.cheeseImage, "ice cream":self.iceCreamImage,
                             "mushroom":self.mushroomImage, "orange":self.orangeImage}
+
+        self.wordImageDict2 = {"apple": self.appleImage, "cheese": self.cheeseImage, "ice cream":self.iceCreamImage,
+                            "mushroom":self.mushroomImage, "orange":self.orangeImage, "bread":self.breadImage,
+                               "chicken":self.chickenImage, "egg":self.eggImage, "milk":self.milkImage, "waffle":self.waffleImage}
 
         self.rightWrongImageList = [self.noRightImage, self.oneRightImage, self.twoRightImage, self.threeRightImage,
                                     self.fourRightImage, self.fiveRightImage]
@@ -191,7 +205,7 @@ class GUI(tk.Frame):
 
     def images(self):
         try:
-            self.img = ImageTk.PhotoImage(self.wordImageDict.get(self.givenWord))
+            self.img = ImageTk.PhotoImage(self.wordImageDict2.get(self.givenWord))
             self.label1 = tkinter.Label(image=self.img)
             self.label1.image = self.img
             self.label1.place(x=10, y=10)
