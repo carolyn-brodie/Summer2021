@@ -33,7 +33,7 @@ class GUI(tk.Frame):
         self.unHeardList = []
 
         self.outCSVFile = "ErrorFile_"+self.fileAppend+".csv"
-        self.readPercPercentFile = "RightWrongUnheard.csv"
+        self.readPercPercentFile = "RightWrongUnheard1.csv"
         self.readPercErrorFile = "TypeOfError.csv"
 
         # Percentages
@@ -114,7 +114,7 @@ class GUI(tk.Frame):
         self.exitButton = tk.Button(self,text = "Exit",command = self.exitFunction)
         self.exitButton.grid(row = 3,column = 0)
 
-        self.labelGivenWord = tk.Label(self,text = "Say the Give Word")
+        self.labelGivenWord = tk.Label(self,text = "Say the Given Word")
         self.labelGivenWord.grid(row = 5)
         # Creates a canvas for the given word
         self.canvasGivenWord = tk.Canvas(self.master, width=WIDTH / 4,height=40)
@@ -322,7 +322,7 @@ class GUI(tk.Frame):
     def testFunction(self):
         # patientName = input("File Name:")
         # path  = "./data/"+patientName+".txt"
-        path = "./inData/patient4.csv"
+        path = "patient3.csv"
         file1 = open(path,"r")
 
         for line in file1:

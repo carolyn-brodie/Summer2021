@@ -1,11 +1,11 @@
-plotLetter <- function(sound, file) {
+plotLetter <- function(file) {
   library(dplyr)
   library(ggplot2)
   library(stringr)
   library(ggeasy)
 
    fileName <- file
-   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName2 <- paste("../Classes/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("TypeOfError", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
@@ -17,10 +17,7 @@ number_of_lines <- nrow(read.csv(fileNamecsv, sep=';'))
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
-  s <- paste("^", sound, sep="")
-   Words <- errorWords %>%
-     filter(str_detect(Word, s))
-   TypeOfError <- ggplot(Words, aes(x=TypeOfError, fill=Word)) +
+   TypeOfError <- ggplot(errorWords, aes(x=TypeOfError, fill=Word)) +
      geom_bar(stat="count") +
      scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
       ggtitle(label="Session Feedback") +
@@ -28,12 +25,11 @@ errorWords <-incorrectData %>%
       ylab(label="# of Words") +
       ggeasy:: easy_center_title() +
       labs(fill="Expected Word")
+      # theme(legend.position = "none")
 
 print(TypeOfError)
 dev.off()
 
-ggsave(addpng, path = "summer_work/Graphs", scale = 1)
+ggsave(addpng, path = "../Graphs", scale = 1)
 }
-
-plotLetter("r|c", "ExcelFile2")
 

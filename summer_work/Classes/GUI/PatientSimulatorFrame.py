@@ -1,8 +1,8 @@
 import tkinter as tk
-import WordQuizer
+import WordQuizerFrame
 from summer_work.Classes import comparingWordsClass
 from summer_work.Classes import LetterToCharactersClass
-import summer_work.Classes.GUI.MainMenu as MainMenu
+import summer_work.Classes.GUI.MainMenuFrame as MainMenu
 
 
 class PatientSimulator(tk.Frame):
@@ -81,8 +81,8 @@ class PatientSimulator(tk.Frame):
         self.fileHandle2.close()
 
     def backFunction(self,controller):
-        from summer_work.Classes.GUI.MainMenu import MainMenu1
-        controller.show_frame(MainMenu1)
+        from summer_work.Classes.GUI.MainMenuFrame import MainMenu
+        controller.show_frame(MainMenu)
 
 
 

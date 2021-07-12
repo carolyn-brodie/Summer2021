@@ -4,7 +4,7 @@ plotErrorPercents <- function(f1, f2, file) {
   library(ggeasy)
 
    fileName <- file
-   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName2 <- paste("/Users/zachg/PycharmProjects/Summer2021a/summer_work/outData/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("TypeOfErrorPercent", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
@@ -38,7 +38,5 @@ plotErrorPercents <- function(f1, f2, file) {
   print(PercentOfError)
 dev.off()
 
-ggsave(addpng, path = "summer_work/Graphs", scale = 1)
+ggsave(addpng, path = "../Graphs", scale = 1)
 }
-
-plotErrorPercents(1,2, "percentOfError")

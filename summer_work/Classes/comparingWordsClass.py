@@ -3,6 +3,7 @@ from summer_work.Classes import LetterToCharactersClass as LCT
 class ComparingWordsC():
     def __init__(self):
         self.lct = LCT.LetterToCharacters()
+        self.cTl = LCT.LetterToCharacters()
         self.givenWord = ""
         self.saidWord = ""
 
@@ -62,6 +63,14 @@ class ComparingWordsC():
             self.whereErrorOccurs()
             self.calcLetters()
             self.typeOfError()
+
+        for index in range(len(self.wrongLetterListInput)):
+            change = self.cTl.charactersToLetters(self.wrongLetterListInput[index])
+            self.wrongLetterListInput[index] = change
+
+        for index in range(len(self.wrongLetterListOutput)):
+            change = self.cTl.charactersToLetters(self.wrongLetterListOutput[index])
+            self.wrongLetterListOutput[index] = change
 
 
     def equalSizedWordFunction(self):

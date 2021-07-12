@@ -3,7 +3,7 @@ percent_Of_Sessions <- function(f1, f2, file) {
 library(ggplot2)
 
    fileName <- file
-   fileName2 <- paste("C:\\Users\\somet\\Desktop\\Summer2021\\summer_work\\", fileName, sep ="")
+   fileName2 <- paste("../summer_work/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("PieChart", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
@@ -31,5 +31,5 @@ pie_Chart <- bar_Plot + coord_polar("y", start = 0) + theme_void() +
 print(pie_Chart)
 dev.off()
 
-ggsave(addpng, path = "summer_work/Graphs", scale =1)
+ggsave(addpng, path = "../Graphs", scale =1)
 }

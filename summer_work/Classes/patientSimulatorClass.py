@@ -153,4 +153,4 @@ def listToString(s):
 
 
 lol = PatientSimulatorClass()
-lol.constructor(5, 5, 5, 5, 5)
+lol.constructor(80, 80, 80, 80, 80)

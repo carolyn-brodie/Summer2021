@@ -3,7 +3,7 @@ plotSessions <- function(f1, f2, file) {
   library(ggeasy)
 
    fileName <- file
-   fileName2 <- paste("./summer_work/", fileName, sep ="")
+   fileName2 <- paste("../summer_work/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
    pngName <- paste("LineGraph", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
@@ -46,7 +46,6 @@ plotSessions <- function(f1, f2, file) {
 print(LineGraph)
 dev.off()
 
-ggsave(addpng, path = "summer_work/Graphs", scale = 1)
+ggsave(addpng, path = "../Graphs", scale = 1)
 }
-plotSessions(8,14, "statsForExcels")
 

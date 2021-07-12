@@ -1,13 +1,13 @@
-plotLetter <- function(file) {
+plotLetter <- function(sound, file) {
   library(dplyr)
   library(ggplot2)
   library(stringr)
   library(ggeasy)
 
    fileName <- file
-   fileName2 <- paste("./summer_work/outData/", fileName, sep ="")
+   fileName2 <- paste("../Classes/", fileName, sep ="")
    fileNamecsv <- paste(fileName2, ".csv", sep ="")
-   pngName <- paste("TypeOfErrorAll", fileName, sep = "")
+   pngName <- paste("TypeOfErrorSpecific", fileName, sep = "")
    addpng <- paste(pngName, ".png", sep ="")
    png(addpng)
 
@@ -17,18 +17,21 @@ number_of_lines <- nrow(read.csv(fileNamecsv, sep=';'))
 errorWords <-incorrectData %>%
   filter(str_detect(WhereErrorOccurred, "Beginning|Middle|End"))
 
-   TypeOfError <- ggplot(errorWords, aes(x=TypeOfError, fill=Word)) +
+  s <- paste("^", sound, sep="")
+   Words <- errorWords %>%
+     filter(str_detect(Word, s))
+   TypeOfError <- ggplot(Words, aes(x=TypeOfError, fill=Word)) +
      geom_bar(stat="count") +
      scale_y_continuous(breaks=seq(0,number_of_lines,1)) +
       ggtitle(label="Session Feedback") +
       xlab(label="Type of Error") +
       ylab(label="# of Words") +
       ggeasy:: easy_center_title() +
-      labs(fill="Expected Word") +
-      # theme(legend.position = "none")
+      labs(fill="Expected Word")
 
 print(TypeOfError)
 dev.off()
 
-ggsave(addpng, path = "summer_work/Graphs", scale = 0.15)
+ggsave(addpng, path = "../Graphs", scale = 1)
 }
+
