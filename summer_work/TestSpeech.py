@@ -14,4 +14,7 @@ mic = sr.Microphone(device_index=0)
 print("Say a word or phrase: ")
 with mic as source:
      audio = recognizer.listen(source)
-print(recognizer.recognize_google(audio))
+     var = recognizer.recognize_google(audio, show_all=True)
+
+     for index in range(len(var.get("alternative"))):
+          print(var.get("alternative")[index].get("transcript"))
