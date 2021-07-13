@@ -1,7 +1,9 @@
-import LettersToCharactersTest as LCT
+from Classes import LetterToCharactersClass as LCT
 
-class ComparingWordsV2():
+class ComparingWordsC():
     def __init__(self):
+        self.lct = LCT.LetterToCharacters()
+        self.cTl = LCT.LetterToCharacters()
         self.givenWord = ""
         self.saidWord = ""
 
@@ -21,21 +23,17 @@ class ComparingWordsV2():
         self.totalList = []
         self.changedGivenWord = ""
         self.changedSaidWord = ""
-
     # Constructor, take the givenWord and the saidWord, have this be called first!!
     def constructor(self,givenWord,saidWord):
         self.givenWord = givenWord.lower()
         self.saidWord = saidWord.lower()
-        self.givenWord.strip()
-        self.saidWord.strip()
-        self.changedGivenWord = LCT.lettersToCharacters(self.givenWord)
-        self.changedSaidWord = LCT.lettersToCharacters(self.saidWord)
+        self.changedGivenWord = self.lct.lettersToCharacters(self.givenWord)
+        self.changedSaidWord = self.lct.lettersToCharacters(self.saidWord)
 
         self.saidList = list(self.changedSaidWord)
         self.givenList = list(self.changedSaidWord)
     def controller(self):
         if len(self.changedSaidWord) == len(self.changedGivenWord):
-            print("Here")
             self.equalSizedWordFunction()
 
             self.calcWrongListInputLess()
@@ -49,26 +47,30 @@ class ComparingWordsV2():
 
         elif len(self.changedSaidWord) > len(self.changedGivenWord):
             self.inputGreaterLCS()
-            print("Here1")
-            if len(self.LCS) != 0:
-                self.calcWrongListInputGreater()
-                self.shiftGiven()
-                self.equalShiftedGivenFunction()
-                self.whereErrorOccurs()
-                self.calcLetters()
-                self.typeOfError()
+            self.calcWrongListInputGreater()
+            self.shiftGiven()
+            self.equalShiftedGivenFunction()
+            self.whereErrorOccurs()
+            self.calcLetters()
+            self.typeOfError()
 
 
         else:
             self.inputLessLCS()
-            print("Here2")
-            if len(self.LCS) != 0:
-                self.calcWrongListInputLess()
-                self.shiftInput()
-                self.equalShiftedInputFunction()
-                self.whereErrorOccurs()
-                self.calcLetters()
-                self.typeOfError()
+            self.calcWrongListInputLess()
+            self.shiftInput()
+            self.equalShiftedInputFunction()
+            self.whereErrorOccurs()
+            self.calcLetters()
+            self.typeOfError()
+
+        for index in range(len(self.wrongLetterListInput)):
+            change = self.cTl.charactersToLetters(self.wrongLetterListInput[index])
+            self.wrongLetterListInput[index] = change
+
+        for index in range(len(self.wrongLetterListOutput)):
+            change = self.cTl.charactersToLetters(self.wrongLetterListOutput[index])
+            self.wrongLetterListOutput[index] = change
 
 
     def equalSizedWordFunction(self):
@@ -89,9 +91,6 @@ class ComparingWordsV2():
         inputList = list(self.shiftedWord)
         givenList = list(self.changedGivenWord)
         for index in range(0, len(inputList)):
-            print(index)
-            print(inputList)
-            print(givenList)
             if inputList[index] != givenList[index]:
                 self.revisedWrongIndexList.append(index)
 
@@ -186,21 +185,21 @@ class ComparingWordsV2():
 
     def calcWrongListInputLess(self):
         startIndexInput = self.changedSaidWord.index(self.LCS)
-        endIndexInput = startIndexInput + len(self.LCS)
+        endIndexInput = startIndexInput + len(self.LCS) - 1
         self.returnList.append([startIndexInput, endIndexInput])
 
         startIndexOutput = self.changedGivenWord.index(self.LCS)
-        endIndexOutput = startIndexOutput + len(self.LCS)
+        endIndexOutput = startIndexOutput + len(self.LCS) - 1
         self.returnList.append([startIndexOutput, endIndexOutput])
 
     def calcWrongListInputGreater(self):
 
         startIndexInput = self.changedSaidWord.index(self.LCS)
-        endIndexInput = startIndexInput + len(self.LCS)
+        endIndexInput = startIndexInput + len(self.LCS) - 1
         self.returnList.append([startIndexInput, endIndexInput])
 
         startIndexOutput = self.changedGivenWord.index(self.LCS)
-        endIndexOutput = startIndexOutput + len(self.LCS)
+        endIndexOutput = startIndexOutput + len(self.LCS) - 1
         self.returnList.append([startIndexOutput, endIndexOutput])
     def whereErrorOccurs(self):
         for index in self.revisedWrongIndexList:
@@ -228,7 +227,7 @@ class ComparingWordsV2():
                 self.wrongLetterListOutput.append(self.changedGivenWord[index])
 
     def typeOfError(self):
-        if (self.changedSaidWord== self.changedGivenWord):
+        if (self.changedSaidWord == self.changedGivenWord):
             self.typeOfErrors = "None"
         else:
             if(len(self.changedSaidWord) == len(self.changedGivenWord)):
@@ -244,8 +243,8 @@ class ComparingWordsV2():
         self.changedGivenWord = ""
         self.changedSaidWord = ""
 
-        self.givenWord = ""
-        self.saidWord = ""
+        self.saidList = list(self.changedSaidWord)
+        self.GivenWord = list(self.changedGivenWord)
 
         self.wrongIndexList = []
         self.revisedWrongIndexList = []
@@ -262,3 +261,5 @@ class ComparingWordsV2():
         self.whereErrorOccurred = []
 
         self.totalList = []
+
+

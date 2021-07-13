@@ -1,0 +1,9 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+1;research;stretched;End;Deletion;[0, 2, 3, 4, 5, 6];['r', 's', 'e', 'a', 'r', 'ch'];['str', 't', 'ch', 'e', 'd', '_']
+2;never;never;[];None;[];[];[]
+3;personal;personally;End;Addition;[8, 9];['_', '_'];['l', 'y']
+4;small;smaller;End;Addition;[5, 6];['_', '_'];['e', 'r']
+5;challenge;challenged;End;Addition;[7];['_'];['d']
+6;sense;census;End;Addition;[0, 4, 5];['s', 'e', '_'];['c', 'u', 's']
+7;majority;majority majority;End;Addition;[8, 9, 10, 11, 12, 13, 14, 15, 16];['_', '_', '_', '_', '_', '_', '_', '_', '_'];[' ', 'm', 'a', 'j', 'o', 'r', 'i', 't', 'y']
+8;disease;repeat;End;Deletion;[0, 1, 2, 5, 6];['d', 'i', 's', 's', 'e'];['r', 'e', 'p', 't', '_']
