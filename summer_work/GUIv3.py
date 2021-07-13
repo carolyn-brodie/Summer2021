@@ -57,7 +57,7 @@ class GUI(tk.Frame):
         self.recognizer = sr.Recognizer()
 
         # The devices index that we use, change the index if theres a error
-        self.mic = sr.Microphone(device_index=0)
+        self.mic = sr.Microphone(device_index=1)
 
         # The file name that we use
         self.fileName = "foodtextv3"
@@ -232,7 +232,7 @@ class GUI(tk.Frame):
 
     def updateImageScale(self):
         if self.saidWord == self.givenWord:
-            if self.finishedIndex < 5:
+            if self.finishedIndex < 4:
                 self.finishedIndex += 1
             else:
                 # Bar will restart and one star will light up
