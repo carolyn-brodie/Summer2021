@@ -1,4 +1,14 @@
 import tkinter as tk
+from GUIpackage.R_Frames.TypeOfErrorWCorrect import TypeOfErrorWCorrectClass
+from GUIpackage.R_Frames.TypeOfErrorSpecific import typeOfErrorSpecifics
+from GUIpackage.R_Frames.TypeOfErrorPercents import TypeOfErrorPercents
+from GUIpackage.R_Frames.TypeOfErrorAll import TypeOfErrorAllClass
+from GUIpackage.R_Frames.Sessions import SessionsClass
+from GUIpackage.R_Frames.PieChartFrame import PieChartClass
+from GUIpackage.R_Frames.BMETypeOfErrorSpecific import bmeTypeOfErrorSpecificClass
+from GUIpackage.R_Frames.BMETypeOfErrorAll import BMEtypeOfErrorAllClass
+from GUIpackage.R_Frames.bmeSpecific import bmeSpecificClass
+from GUIpackage.R_Frames.bmeAll import bmeAllClass
 import rpy2.robjects as ro
 
 
@@ -42,43 +52,33 @@ class Analytics(tk.Frame):
         self.backButton.pack(side="top")
 
     def bmeAllFunction(self, controler):
-        from R_Frames.bmeAll import bmeAllClass
         controler.show_frame(bmeAllClass)
 
     def bmeSpecificFunction(self, controller):
-        from R_Frames.bmeSpecific import bmeSpecificClass
         controller.show_frame(bmeSpecificClass)
 
     def bmeTypeOfErrorAllFunction(self, controller):
-        from R_Frames.BMETypeOfErrorAll import BMEtypeOfErrorAllClass
         controller.show_frame(BMEtypeOfErrorAllClass)
 
     def bmeTypeOfErrorSpecificFunction(self, controller):
-        from R_Frames.BMETypeOfErrorSpecific import bmeTypeOfErrorSpecificClass
         controller.show_frame(bmeTypeOfErrorSpecificClass)
 
     def pieChartFunction(self, controller):
-        from R_Frames.PieChartFrame import PieChartClass
         controller.show_frame(PieChartClass)
 
     def sessionFunction(self, controller):
-        from R_Frames.Sessions import SessionsClass
         controller.show_frame(SessionsClass)
 
     def TypeOfErrorAllFunction(self, controller):
-        from R_Frames.TypeOfErrorAll import TypeOfErrorAllClass
         controller.show_frame(TypeOfErrorAllClass)
 
     def TypeOfErrorPercentFunction(self, controller):
-        from R_Frames.TypeOfErrorPercents import TypeOfErrorPercents
         controller.show_frame(TypeOfErrorPercents)
 
     def TypeOfErrorSpecificFunction(self, controller):
-        from R_Frames.TypeOfErrorSpecific import typeOfErrorSpecifics
         controller.show_frame(typeOfErrorSpecifics)
 
     def TypeOfErrorWCorrectFunction(self, controller):
-        from R_Frames.TypeOfErrorWCorrect import TypeOfErrorWCorrectClass
         controller.show_frame(TypeOfErrorWCorrectClass)
 
     def backFunction(self, controller):

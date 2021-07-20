@@ -2,7 +2,7 @@ import tkinter as tk
 import os
 import PIL.Image
 import rpy2.robjects as ro
-
+from GUIpackage.sysVar import application_path
 class SessionsClass(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -11,7 +11,7 @@ class SessionsClass(tk.Frame):
         self.fileSelected = "percentFile"
         numberSelected = []
         total = 0
-        filereader = open("~/../outData/"+self.fileSelected+".csv","r")
+        filereader = open(application_path+"\\outData\\"+self.fileSelected+".csv","r")
         for line in filereader:
             numberSelected.append(total)
             total += 1
@@ -45,10 +45,10 @@ class SessionsClass(tk.Frame):
         self.selectionOne = self.selection.get()
         self.selectionTwo = self.selection1.get()
 
-        r.source("~/../RScripts/Sessions.R")
+        r.source(application_path+"\\RScripts\\Sessions.R")
 
         r.plotSessions(self.selectionOne,self.selectionTwo,self.fileSelected)
         img = PIL.Image.open(
-            "~/../Graphs/Sessions" + self.fileSelected + ".png")
+            application_path+"\\Graphs\\Sessions" + self.fileSelected + ".png")
         img.show()
         img.close()

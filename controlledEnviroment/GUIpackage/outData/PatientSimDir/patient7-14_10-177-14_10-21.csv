@@ -1,0 +1,10 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+guy;goay;End;Addition;[1, 2, 3];['u', 'y', '_'];['o', 'a', 'y']
+necessary;neycessary;Middle;Addition;[0, 1, 2];['_', 'n', 'e'];['n', 'e', 'y']
+top;tuip;End;Addition;[1, 2, 3];['o', 'p', '_'];['u', 'i', 'p']
+leg;leag;End;Addition;[2, 3];['g', '_'];['a', 'g']
+large;learge;Middle;Addition;[0, 1];['_', 'l'];['l', 'e']
+end;eynd;Middle;Addition;[0, 1];['_', 'e'];['e', 'y']
+piece;peaece;Middle;Addition;[0, 1, 2];['_', 'p', 'i'];['p', 'e', 'a']
+build;bieild;Middle;Addition;[0, 1, 2];['_', 'b', 'u'];['b', 'i', 'e']
+throughout;thraughout;Middle;Substitution;[2];['o'];['a']

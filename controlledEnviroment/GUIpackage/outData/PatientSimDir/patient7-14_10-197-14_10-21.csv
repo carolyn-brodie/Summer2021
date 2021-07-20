@@ -1,0 +1,10 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+probably;proabbly;Middle;Substitution;[2, 3];['b', 'a'];['a', 'b']
+decide;edcide;Middle;Substitution;[0, 1];['d', 'e'];['e', 'd']
+argue;argue;[];None;[];[];[]
+little;tiltle;Middle;Substitution;[0, 2];['l', 't'];['t', 'l']
+enter;enter;[];None;[];[];[]
+dog;dog;[];None;[];[];[]
+inside;idsine;Middle;Substitution;[1, 4];['n', 'd'];['d', 'n']
+learn;aelrn;Middle;Substitution;[0, 2];['l', 'a'];['a', 'l']
+student;stndeut;Middle;Substitution;[1, 4];['u', 'n'];['n', 'u']

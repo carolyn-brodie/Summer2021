@@ -3,15 +3,19 @@ import os
 import rpy2.robjects as ro
 import PIL.Image
 
-
+from GUIpackage.sysVar import application_path
 class bmeTypeOfErrorSpecificClass(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
-        self.fileList = os.listdir("~/../outData/ErrorFileDir/")
+        self.fileList = os.listdir(application_path + "\\outData\\ErrorFileDir\\")
         self.fileListRev = []
         for files in self.fileList:
+            self.fileListRev.append(os.path.splitext(files)[0])
+
+        self.fileList2 = os.listdir(application_path + "\\outData\\PatientSimDir\\")
+        for files in self.fileList2:
             self.fileListRev.append(os.path.splitext(files)[0])
         self.selection = tk.StringVar(self)
         self.selection.set(self.fileListRev[0])  # default value
@@ -45,10 +49,10 @@ class bmeTypeOfErrorSpecificClass(tk.Frame):
         selection = self.selection.get()
         r = ro.r
 
-        r.source("~/../RScripts/BMETypeOfErrorSpecific.R")
+        r.source(application_path+"\\RScripts\\BMETypeOfErrorSpecific.R")
 
         r.plotWhereError(self.soundSelection,selection)
         img = PIL.Image.open(
-            "~/../Graphs/BMETypeOfErrorSpecific" + selection + ".png")
+           application_path+ "\\Graphs\\BMETypeOfErrorSpecific" + selection + ".png")
         img.show()
         img.close()

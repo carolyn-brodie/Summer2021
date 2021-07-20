@@ -1,0 +1,3 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+1;weight;wait;End;Deletion;[1, 3, 4, 5];['e', 'g', 'h', 't'];['a', 't', '_', '_']
+2;about;about;[];None;[];[];[]

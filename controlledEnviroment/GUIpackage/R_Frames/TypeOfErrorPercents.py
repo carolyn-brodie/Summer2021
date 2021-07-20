@@ -2,7 +2,7 @@ import tkinter as tk
 import os
 import PIL.Image
 import rpy2.robjects as ro
-
+from GUIpackage.sysVar import application_path
 class TypeOfErrorPercents(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -10,7 +10,7 @@ class TypeOfErrorPercents(tk.Frame):
         self.fileSelected = "TypeOfError"
         numberSelected = []
         total = 0
-        filereader = open("~/../outData/" + self.fileSelected + ".csv", "r")
+        filereader = open(application_path+"\\outData\\" + self.fileSelected + ".csv", "r")
         for line in filereader:
             numberSelected.append(total)
             total += 1
@@ -42,11 +42,9 @@ class TypeOfErrorPercents(tk.Frame):
         self.selectionOne = self.selection.get()
         self.selectionTwo = self.selection1.get()
 
-        print("../RScripts/TypeOfErrorPercents.R")
-        r.source("~/../RScripts/TypeOfErrorPercents.R")
-        print("../Graphs/TypeOfErrorPercents.R" + self.fileSelected + ".png")
+        r.source(application_path+"\\RScripts\\TypeOfErrorPercents.R")
         r.plotErrorPercents(self.selectionOne,self.selectionTwo,self.fileSelected)
         img = PIL.Image.open(
-            "~/../Graphs/TypeOfErrorPercent" + self.fileSelected + ".png")
+            application_path+"\\Graphs\\TypeOfErrorPercent" + self.fileSelected + ".png")
         img.show()
         img.close()

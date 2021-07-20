@@ -1,0 +1,10 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+anything;nything;Beginning;Deletion;[0];['a'];['_']
+recently;recenly;End;Deletion;[5, 6, 7];['t', 'l', 'y'];['l', 'y', '_']
+can;cn;End;Deletion;[1, 2];['a', 'n'];['n', '_']
+suggest;sugest;End;Deletion;[3, 4, 5];['g', 'e', 'st'];['e', 'st', '_']
+culture;clture;Middle;Deletion;[0, 1, 2];['c', 'u', 'l'];['_', '_', 'cl']
+see;se;End;Deletion;[2];['e'];['_']
+despite;dspite;Middle;Deletion;[0, 1];['d', 'e'];['_', 'd']
+both;oth;Beginning;Deletion;[0];['b'];['_']
+democratic;democrtic;End;Deletion;[5, 6, 7, 8];['a', 't', 'i', 'c'];['t', 'i', 'c', '_']
