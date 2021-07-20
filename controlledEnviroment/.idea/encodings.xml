@@ -1,16 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/Classes/ErrorFileProb.py" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Classes/LetterToCharactersClass.py" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Classes/comparingWordsClass.py" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/Classes/patientSimulatorClass.py" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/GUIpackage/AnalyticsFrame.py" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/GUIpackage/ApplicationClass.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Classes/ErrorFileProb.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Classes/LetterToCharactersClass.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Classes/comparingWordsClass.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Classes/patientSimulatorClass.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Apple.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Apple.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Bread.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Bread.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Cheese.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Cheese.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Chicken.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Chicken.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Egg.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Egg.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Milk.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Milk.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Mushroom.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Mushroom.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Orange.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Orange.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/QuestionMark.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/QuestionMark.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Waffle.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/DisplayImages/Waffle.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right0.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right0.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right1.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right1.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right2.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right2.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right3.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right3.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right4.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right4.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right5.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/right5.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/stars0.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/stars0.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/stars1.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/stars1.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/stars2.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/stars2.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/stars3.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/GUIimages/stars3.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/Images/images" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/GUIpackage/MainMenuFrame.py" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/GUIpackage/PatientSimulatorFrame.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/BMEAll.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/BMESpecific.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/BMETypeOfErrorAll.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/BMETypeOfErrorSpecific.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/PieChart.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/Sessions.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/TypeOfErrorAll.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/TypeOfErrorPercents.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/TypeOfErrorSpecific.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/RScripts/TypeOfErrorWCorrect.R" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/GUIpackage/R_Frames/PieChartFrame.py" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/GUIpackage/WordQuizerFrame.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/inData/WordFiles/ThousandWords.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/inData/WordFiles/foodtextv3.txt" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Images/DisplayImages/IceCream.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Images/DisplayImages/IceCream.png" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/RScripts/BME.R" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/RScripts/BMEAll.R" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/RScripts/BMESpecific.R" charset="windows-1252" />
@@ -27,6 +82,5 @@
     <file url="file://$PROJECT_DIR$/RScripts/TypeOfErrorWCorrect.R" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/RScripts/addNum.R" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/RScripts/comparingPatients.R" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/inData/WordFiles/ThousandWords.txt" charset="windows-1252" />
   </component>
 </project>

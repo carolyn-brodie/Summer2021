@@ -1,0 +1,2 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+1;available;available;;None;[];[];[]

@@ -1,6 +1,7 @@
 import tkinter as tk
 import rpy2.robjects as ro
 import PIL.Image
+from GUIpackage.sysVar import application_path
 class PieChartClass(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -9,7 +10,7 @@ class PieChartClass(tk.Frame):
         self.fileSelected = "percentFile"
         numberSelected = []
         total = 0
-        filereader = open("~/../outData/"+self.fileSelected+".csv","r")
+        filereader = open(application_path+"\\outData\\"+self.fileSelected+".csv","r")
         for line in filereader:
             numberSelected.append(total)
             total += 1
@@ -44,10 +45,10 @@ class PieChartClass(tk.Frame):
         self.selectionTwo = self.selection1.get()
 
 
-        r.source("~/../RScripts/PieChart.R")
+        r.source(application_path+"\\RScripts\\PieChart.R")
 
         r.percent_Of_Sessions(self.selectionOne,self.selectionTwo,self.fileSelected)
         img = PIL.Image.open(
-            "~/../Graphs/PieChart" + self.fileSelected + ".png")
+            application_path+"\\Graphs\\PieChart" + self.fileSelected + ".png")
         img.show()
         img.close()

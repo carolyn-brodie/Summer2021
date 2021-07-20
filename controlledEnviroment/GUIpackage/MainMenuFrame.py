@@ -15,7 +15,7 @@ class MainMenu(tk.Frame):
         self.mainMenuLabel = tk.Label(self, text="Main Menu")
         self.mainMenuLabel.grid(row=1)
 
-        self.Start = tk.Button(self, text="Word Quizzer", command=lambda: controller.show_frame(
+        self.Start = tk.Button(self, text="Well Spoken", command=lambda: controller.show_frame(
             WordQuizer))
         self.Start.grid(row=2)
 

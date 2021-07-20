@@ -1,0 +1,6 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+1;traditional;traditional;;None;[];[];[]
+2;open;open;[];None;[];[];[]
+3;media;media;[];None;[];[];[]
+4;orange;orange;[];None;[];[];[]
+5;waffle;waffle;[];None;[];[];[]

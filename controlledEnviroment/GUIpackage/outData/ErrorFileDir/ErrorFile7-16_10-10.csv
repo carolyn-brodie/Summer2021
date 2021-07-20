@@ -1,0 +1,5 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+1;cheese;cheese;[];None;[];[];[]
+2;cheese;cheese;[];None;[];[];[]
+3;often;often;[];None;[];[];[]
+4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution4;trouble;bubble;Middle;Substitution

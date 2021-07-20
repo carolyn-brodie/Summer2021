@@ -1,0 +1,10 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+cancer;cancers;End;Addition;[6];['_'];['s']
+one;ones;End;Addition;[3];['_'];['s']
+style;styles;End;Addition;[4];['_'];['s']
+store;stores;End;Addition;[4];['_'];['s']
+risk;risks;End;Addition;[3];['_'];['s']
+view;views;End;Addition;[4];['_'];['s']
+computer;computers;End;Addition;[8];['_'];['s']
+per;pers;End;Addition;[3];['_'];['s']
+memory;memorys;End;Addition;[6];['_'];['s']

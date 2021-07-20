@@ -1,0 +1,10 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+source;brource;Beginning;Substitution;[0];['s'];['br']
+effort;skffort;Beginning;Substitution;[0];['e'];['sk']
+material;waterial;Beginning;Substitution;[0];['m'];['w']
+official;wrfficial;Beginning;Substitution;[0];['o'];['wr']
+challenge;tallenge;Beginning;Substitution;[0];['ch'];['t']
+political;slolitical;Beginning;Substitution;[0];['p'];['sl']
+government;shovernment;Beginning;Substitution;[0];['g'];['sh']
+pain;swain;Beginning;Substitution;[0];['p'];['sw']
+disease;eeisease;Middle;Addition;[0, 1];['_', 'd'];['e', 'e']

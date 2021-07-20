@@ -1,0 +1,6 @@
+NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError
+1;physical;circle;End;Deletion;[0, 1, 2, 3, 4, 6, 7, 8, 9];['p', 'h', 'y', 's', 'i', 'a', 'l', '_', '_'];['_', '_', '_', '_', '_', 'i', 'r', 'cl', 'e']
+2;enough;enough;[];None;[];[];[]
+3;bread;had;Middle;Deletion;[0, 1];['br', 'e'];['_', 'h']
+4;mushroom;mushroom;[];None;[];[];[]
+5;apple;apple;[];None;[];[];[]

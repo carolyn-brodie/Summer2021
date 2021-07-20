@@ -1,13 +1,15 @@
 import tkinter as tk
-from Classes.ErrorFileProb import ErrorFileDict
+from GUIpackage.Classes.ErrorFileProb import ErrorFileDict
+from GUIpackage.Classes.LetterToCharactersClass import LetterToCharacters
 import os
+from GUIpackage.sysVar import application_path
 
 class ErrorFileProbabilityClass(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
-        self.fileList = os.listdir("~/../outData/ErrorFileDir/")
+        self.fileList = os.listdir(application_path+"\\outData\\ErrorFileDir\\")
         self.fileListRev = []
         for files in self.fileList:
             self.fileListRev.append(os.path.splitext(files)[0])
@@ -21,12 +23,9 @@ class ErrorFileProbabilityClass(tk.Frame):
         self.occursButton.pack(side = "top")
     def occursFunction(self):
         self.thisSelection = self.selection.get()
-        self.path = "~/../outData/ErrorFileDir/"+self.thisSelection+".csv"
+        self.path = application_path+"\\outData\\ErrorFileDir\\" +self.thisSelection+".csv"
         self.errorFile = ErrorFileDict()
         self.errorFile.occursController(self.path)
-        print(self.errorFile.getOccursList())
-        print(self.errorFile.createHighestOccurence())
-        print(self.errorFile.createHighestOccurenceList())
 
     def backFunction(self, controller):
         from GUIpackage.MainMenuFrame import MainMenu

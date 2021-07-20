@@ -1,9 +1,8 @@
 import tkinter as tk
-from Classes import comparingWordsClass
-from Classes import LetterToCharactersClass
+from GUIpackage.Classes import comparingWordsClass
 import datetime
 import os
-
+from GUIpackage.sysVar import application_path
 class PatientSimulator(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -21,7 +20,7 @@ class PatientSimulator(tk.Frame):
         self.runTest = tk.Button(self,text = "Run Test",command = lambda : self.runTestFunc())
         self.runTest.pack(side = "top")
 
-        self.fileList = os.listdir("~/../inData/PatientFiles/")
+        self.fileList = os.listdir(application_path+"\\inData\PatientFiles\\")
         self.fileListRev = []
         for files in self.fileList:
             self.fileListRev.append(os.path.splitext(files)[0])
@@ -36,8 +35,8 @@ class PatientSimulator(tk.Frame):
 
     def runTestFunc(self):
         self.patient = self.selection.get()
-        self.inPath = "../inData/PatientFiles/"+self.patient+".csv"
-        self.outPath = "~/../outData/PatientSimDir/"+self.patient+self.fileAppend+".csv"
+        self.inPath = application_path+"\\inData\\PatientFiles\\"+self.patient+".csv"
+        self.outPath = application_path+"\\outData\\ErrorFileDir\\"+self.patient+"ErrorFile"+".csv"
         file1 = open(self.inPath, "r")
 
         for line in file1:
@@ -66,18 +65,22 @@ class PatientSimulator(tk.Frame):
             self.sessions2.close()
 
             self.sessionNumber2 = len(self.fileList2) - 1
-
+            self.fileHandle2 = open(self.outPath, "a")
         except:
             self.sessionNumber2 = 1
             self.fileCreated2 = False
 
-        self.fileHandle2 = open(self.outPath, "a")
+            self.fileHandle2 = open(self.outPath, "w")
         if self.fileCreated2 == False:
             self.fileHandle2.write("NumberOfWords;Word;WordSaid;WhereErrorOccurred;TypeOfError;LocationOfError;ExpectedLetterError;SaidLetterError" + "\n")
             self.fileCreated2 = True
 
         self.fileHandle2 = open(self.outPath,"a")
+        self.fileHandle2.write(str(self.sessionNumber2))
+        self.fileHandle2.write(";")
         self.fileHandle2.write(str(self.comparingWords.givenWord))
+        print(self.comparingWords.givenWord)
+        print(self.comparingWords.saidWord)
         self.fileHandle2.write(";")
         self.fileHandle2.write(str(self.comparingWords.saidWord))
         self.fileHandle2.write(";")
