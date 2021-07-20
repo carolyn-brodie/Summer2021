@@ -57,7 +57,7 @@ class GUI(tk.Frame):
         self.recognizer = sr.Recognizer()
 
         # The devices index that we use, change the index if theres a error
-        self.mic = sr.Microphone(device_index=0)
+        self.mic = sr.Microphone(device_index=1)
 
         # The file name that we use
         self.fileName = "foodtextv3"
@@ -105,17 +105,17 @@ class GUI(tk.Frame):
         self.waffleImage = self.waffleImage1.resize((100, 100))
 
         self.noRightImage1 = PIL.Image.open("../summer_work/images/noneRight.png")
-        self.noRightImage = self.noRightImage1.resize((75, 150))
+        self.noRightImage = self.noRightImage1.resize((50, 150))
         self.oneRightImage1 = PIL.Image.open("../summer_work/images/oneRight.png")
-        self.oneRightImage = self.oneRightImage1.resize((75, 150))
+        self.oneRightImage = self.oneRightImage1.resize((50, 150))
         self.twoRightImage1 = PIL.Image.open("../summer_work/images/twoRight.png")
-        self.twoRightImage = self.twoRightImage1.resize((75, 150))
+        self.twoRightImage = self.twoRightImage1.resize((50, 150))
         self.threeRightImage1 = PIL.Image.open("../summer_work/images/threeRight.png")
-        self.threeRightImage = self.threeRightImage1.resize((75, 150))
+        self.threeRightImage = self.threeRightImage1.resize((50, 150))
         self.fourRightImage1 = PIL.Image.open("../summer_work/images/fourRight.png")
-        self.fourRightImage = self.fourRightImage1.resize((75, 150))
-        self.fiveRightImage1 = PIL.Image.open("../summer_work/images/fiveRight.png")
-        self.fiveRightImage = self.fiveRightImage1.resize((75, 150))
+        self.fourRightImage = self.fourRightImage1.resize((50, 150))
+        # self.fiveRightImage1 = PIL.Image.open("../summer_work/images/fiveRight.png")
+        # self.fiveRightImage = self.fiveRightImage1.resize((75, 150))
 
         self.noStarsImage1 = PIL.Image.open("../summer_work/images/zeroStars.png")
         self.noStarsImage = self.noStarsImage1.resize((500, 150))
@@ -135,7 +135,7 @@ class GUI(tk.Frame):
                                "chicken":self.chickenImage, "egg":self.eggImage, "milk":self.milkImage, "waffle":self.waffleImage}
 
         self.rightWrongImageList = [self.noRightImage, self.oneRightImage, self.twoRightImage, self.threeRightImage,
-                                    self.fourRightImage, self.fiveRightImage]
+                                    self.fourRightImage]
 
         self.starImageList = [self.noStarsImage, self.oneStarImage, self.twoStarsImage, self.threeStarsImage]
 
@@ -232,7 +232,7 @@ class GUI(tk.Frame):
 
     def updateImageScale(self):
         if self.saidWord == self.givenWord:
-            if self.finishedIndex < 5:
+            if self.finishedIndex < 4:
                 self.finishedIndex += 1
             else:
                 # Bar will restart and one star will light up

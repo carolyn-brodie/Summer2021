@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Classes/ErrorFileProb.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Classes/LetterToCharactersClass.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Classes/comparingWordsClass.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Classes/patientSimulatorClass.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/AnalyticsFrame.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/ApplicationClass.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/MainMenuFrame.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/PatientSimulatorFrame.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/R_Frames/PieChartFrame.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/GUIpackage/WordQuizerFrame.py" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/BME.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/BMEAll.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/BMESpecific.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/BMETypeOfError.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/BMETypeOfErrorAll.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/BMETypeOfErrorSpecific.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/FindingSimilarErrors.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/PieChart.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/Sessions.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/TypeOfError.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/TypeOfErrorAll.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/TypeOfErrorPercents.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/TypeOfErrorSpecific.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/TypeOfErrorWCorrect.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/addNum.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/RScripts/comparingPatients.R" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/inData/WordFiles/ThousandWords.txt" charset="windows-1252" />
+  </component>
+</project>
